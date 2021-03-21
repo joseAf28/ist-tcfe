@@ -24,6 +24,7 @@ bm = [-Va; 0]
 Ym = inv(Am)*bm
 %[Ib Ic Vk]
 
+
 Ia = (Kb*R3 - 1)*Ym(1)/(Kb*R3)
 Ib = Ym(1)
 Ic = Ym(2)
@@ -31,22 +32,48 @@ Id = Id;
 
 printf("\n\n")
 
-I3 = Ym(1) - Ia
-I4 = Ym(2) - Ia
-I5 = Ym(1) - Id
-I6 = Ym(2)
-I7 = Ym(2)
+veci = [0, 0, 0, 0, 0];
+
+veci(1) = Ym(1) - Ia;%3
+veci(2) = Ym(2) - Ia;%4
+veci(3) = Ym(1) - Id;%5
+veci(4) = Ym(2);%6
+veci(5) = Ym(2);%7
+
+Vector = veci(1)
 
 printf("\n\n")
 
-V1 = Kc*Ic
-V2 = -I5*R5
-V3 = -R3*I3
-V4 = (Ia - Ic)*R4
-V5 = V4 - Ic*R6
-V6 = V3 - R2*Ib
-V7 = V3 + Ia*R1
-V8 = V4
+vecv = [0, 0, 0, 0, 0, 0, 0, 0];
+
+vecv(1) = Kc*Ic;
+vecv(2) = -veci(3)*R5;
+vecv(3) = -R3*veci(1);
+vecv(4) = (Ia - Ic)*R4;
+vecv(5) = vecv(4) - Ic*R6;
+vecv(6) = vecv(3) - R2*Ib;
+vecv(7) = vecv(3) + Ia*R1;
+vecv(8) = vecv(4);
+
+filename = "../doc/op_octave.tex";
+
+file = fopen(filename, 'w');
+exampleI = "I%d & %e\\\\ \\\hline\n";
+exampleV = "V%d & %e\\\\ \\\hline\n";
+
+for i = 1:5
+fprintf(file, exampleI, i, veci(i))
+end
+
+for i= 1:8
+fprintf(file, exampleV, i, vecv(i))
+end
+
+
+
+
+
+
 
 
 
