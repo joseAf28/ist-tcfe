@@ -55,9 +55,11 @@ vecv(6) = vecv(3) - R2*Ib;
 vecv(7) = vecv(3) + Ia*R1;
 vecv(8) = vecv(4);
 
+
 filename = "../doc/op_octave.tex";
 
 file = fopen(filename, 'w');
+
 exampleI = "I%d & %e\\\\ \\\hline\n";
 exampleV = "V%d & %e\\\\ \\\hline\n";
 
