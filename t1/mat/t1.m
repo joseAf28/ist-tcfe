@@ -60,7 +60,7 @@ filename = "../doc/op_octave.tex";
 
 file = fopen(filename, 'w');
 
-exampleI = "I%d & %e\\\\ \\\hline\n";
+exampleI = "IR%d & %e\\\\ \\\hline\n";
 exampleV = "V%d & %e\\\\ \\\hline\n";
 
 for i = 1:5
