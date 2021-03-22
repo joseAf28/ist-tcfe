@@ -2,20 +2,24 @@
 \label{sec:introduction}
 
 % state the learning objective 
-The objective of this laboratory assignment is to study a circuit containing a
-sinusoidal voltage source $V_I$ connected to a resistor $R$ and a capacitor $C$
-in series. The circuit can be seen if Figure~\ref{fig:rc}.
+In this laboratory assignment we study the purely resistive circuit 
+shown in Figure~\ref{fig:circuit}.
 
-%\lipsum[1-1]
+We started with the theoretical analysis of the circuit, 
+firslty using the nodal method and secondly mesh analysis. 
+This procedure is explored in section ~\ref{sec:analysis};
+We used the software \textit{Octave} to solve the derived systems of equations.
 
-In Section~\ref{sec:analysis}, a theoretical analysis of the circuit is
-presented. In Section~\ref{sec:simulation}, the circuit is analysed by
-simulation, and the results are compared to the theoretical results obtained in
-Section~\ref{sec:analysis}. The conclusions of this study are outlined in
+Following this, we simulated the circuit using the software \textit{Ngspice}. 
+Subsequently we compared the results of the simulation with the theoretical
+results. This is described in section ~\ref{sec:simulation}.
+
+Finally, the conclusions of this study are indicated in
 Section~\ref{sec:conclusion}.
 
 \begin{figure}[ht] \centering
     \includegraphics[width=0.4\linewidth]{circuito_tcfe.pdf}
-    \caption{circuit.}
+    \caption{Circuit}
     \label{fig:circuit}
 \end{figure}
+
