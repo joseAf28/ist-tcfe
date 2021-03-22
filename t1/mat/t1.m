@@ -23,7 +23,7 @@ bn = [Id; -Va/R1; Va/R1; Id]
 
 Xn = An\bn
 
-filename = "../doc/op_octave_nodal.tex";
+filename = "../doc/op_nodal_tab.tex";
 
 file = fopen(filename, 'w');
 
@@ -78,7 +78,7 @@ vecv(7) = vecv(3) + Ia*R1;
 vecv(8) = vecv(4);
 
 
-filename = "../doc/op_octave.tex";
+filename = "../doc/op_mesh_tab.tex";
 
 file = fopen(filename, 'w');
 
