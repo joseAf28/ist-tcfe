@@ -15,6 +15,28 @@ Kc = 8.22752594192e3
 
 format long
 
+printf("\nNodal Analysis------------------------------------------\n\n")
+
+An = [0, 1/R5, Kb, 0; 0, 0, Kb-1/R1-1/R3, 1/R1; 1/(R6+R7), 0, 1/R1, -1/R4-1/R1-1/(R6+R7); -1/Kc, 1/R5, 1/R3, 1/R4]
+
+bn = [Id; -Va/R1; Va/R1; Id]
+
+Xn = An\bn
+
+filename = "../doc/op_octave_nodal.tex";
+
+file = fopen(filename, 'w');
+
+exampleI = "I%d & %e\\\\ \\\hline\n";
+exampleV = "V%d & %e\\\\ \\\hline\n";
+
+for i = 1:5
+fprintf(file, exampleI, i, veci(i))
+end
+
+for i= 1:8
+fprintf(file, exampleV, i, vecv(i))
+end
 
 printf("\nMesh Analysis------------------------------------------\n\n")
 
