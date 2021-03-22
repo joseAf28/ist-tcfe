@@ -1,13 +1,13 @@
 \section{Theoretical Analysis}
 \label{sec:analysis}
 
-In this section, the circuit shown in Figure~\ref{fig:rc} is analysed
+In this section, the circuit shown in Figure~\ref{fig:circuit} is analysed
 theoretically, in terms of voltages and currents in each node and branches respectively.
 
 
 \section{Nodal Method}
 
-When using the nodal method, we started by defining the 5 essential nodes identified in Figure~\ref{fig:rc} as $V_0$-$V_5$. The central node $V_0$ was assumed to be the reference 0V, to simplify the expressions as most as possible.
+When using the nodal method, we started by defining the 5 essential nodes identified in Figure~\ref{fig:circuit} as $V_0$-$V_5$. The central node $V_0$ was assumed to be the reference 0V, to simplify the expressions as most as possible.
 Then we write four equations using KCL for the nodes and Ohm's Law, as well as the dependent sources definitions, so that we arrive at the following linear set of equations, in matrix form:
 
 %b = [Id; -Va/R1; Va/R1; Id]
@@ -48,20 +48,20 @@ An Octave script was prepared to solve this system numerically. The results are 
 
 \section{Mesh Method}
 
-By analysing the circuit in terms of the elementar meshes, we started by assuming that we have $4$ unknown quantities: $I_a, I_b, I_c, I_d$ (four meshes).
-With no effort, we realized that the current in the mesh of the lower right corner is defined by the current source $I_d$.
-Using the fact that the voltage-controlled current source presented in the mesh of $I_b$ only belongs to this elementar mesh and that $I_b = K_b V_b$ (formula developed in \ref{restrict1}), there is no need in writing an equation for the loop of current $I_b$.
+By analysing the circuit in terms of the meshes, we started by assuming that we have $4$ unknown quantities: $I_a, I_b, I_c, I_d$ (four meshes).
+Effortlessly, we realized that the current in the mesh of the lower right corner is defined by the current source $I_d$.
+Using the fact that the voltage-controlled current source presented in the mesh of $I_b$ only belongs to this mesh and that $I_b = K_b V_b$ (formula developed in \ref{restrict1}), there is no need in writing an equation for the loop of current $I_b$.
 As a result, we are left with 2 independent variables: $I_b$ and $I_c$ and the following equations:
 
 
 %equations
 \begin{equation}
-  (R_1 + R_2 + R_4) \frac{K_b R_3 -1}{K_b R_3}  - R_3  - R_4 = -Va
+  (R_1 + R_2 + R_4) \frac{K_b R_3 -1}{K_b R_3}I_b  - R_3I_b  - R_4I_c = -Va
   \label{mesh1}
 \end{equation}
 
 \begin{equation}
-  -R_4 \frac{K_b R_3 - 1}{K_b R3} R_4 + R_6 + R_7 - K_c = 0
+  -R_4 \frac{K_b R_3 - 1}{K_b R3}I_b + (R_4  + R_6 + R_7 - K_c)I_c = 0
   \label{mesh2}
 \end{equation}
 
@@ -79,7 +79,7 @@ During the derivation of the previous equations, the next restrition equations w
 
 By solving equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op_mesh_tab}
 
-From knowing the current of the meshes, we compute the currents and  potencial values in each branch and node respectively, by keeping in mind that was used the same reference node $V0$.
+From knowing the current of the meshes, we compute the currents and  potencial values in each branch and node respectively, by keeping in mind that was used the same reference node $V_0$.
 
 
 %signals-------------------->
