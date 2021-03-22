@@ -7,11 +7,39 @@ theoretically, in terms of voltages and currents in each node and branches respe
 
 \section{Nodal Method}
 
+When using the nodal method, we started by defining the 5 essential nodes identified in Figure~\ref{fig:rc} as $V_0$-$V_5$. The central node $V_0$ was assumed to be the reference 0V, to simplify the expressions as most as possible.
+Then we write four equations using KCL for the nodes and Ohm's Law, as well as the dependent sources definitions, so that we arrive at the following linear set of equations, in matrix form:
 
+%b = [Id; -Va/R1; Va/R1; Id]
 
+\[
+\begin{bmatrix}
+0 & \frac{1}{R_5} & K_b & 0 \\
+0 & 0 & K_b - \frac{1}{R_1} - \frac{1}{R_3} & \frac{1}{R_1} \\
+\frac{1}{R_6 + R_7}  & 0  & \frac{1}{R_1}  & -\frac{1}{R_4}-\frac{1}{R_1}-\frac{1}{R_6+R_7}  \\
+-\frac{1}{K_c} & \frac{1}{R_5} & \frac{1}{R_3} & \frac{1}{R_4}  
+\end{bmatrix}
+\begin{bmatrix}
+V_1 \\ V_2 \\ V_3 \\ V_4 
+\end{bmatrix}
+=
+\begin{bmatrix}
+I_d \\ -\frac{V_a}{R_1} \\ \frac{V_a}{R_1} \\ I_d
+\end{bmatrix}
+\]
 
-%\lipsum[1-1]
+An Octave script was prepared to solve this system numerically. The results are shown in Table \ref{tab:op_octave}.
 
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{op_nodal_tab}
+  \end{tabular}
+  \caption{Results of Nodal Analysis}
+  \label{tab:op_nodal_tab}
+\end{table}
 
 \section{Mesh Method}
 
@@ -46,7 +74,7 @@ During the derivation of the previous equations, the next restrition equations w
 
 By solving equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op_octave}
 
-From knowing the currente of the meshes, we compute the currents and  potencial values in each branch and node respectively, by keeping in mind that we used the same node reference $V0$.
+From knowing the current of the meshes, we compute the currents and  potencial values in each branch and node respectively, by keeping in mind that we used the same node reference $V0$.
 
 
 %signals-------------------->
@@ -55,10 +83,10 @@ From knowing the currente of the meshes, we compute the currents and  potencial 
   \begin{tabular}{|l|r|}
     \hline
     {\bf Name} & {\bf Value [A or V]} \\ \hline
-    \input{op_octave}
+    \input{op_mesh_tab}
   \end{tabular}
   \caption{Results of Mesh Analysis}
-  \label{tab:op_octave}
+  \label{tab:op_mesh_tab}
 \end{table}
 
 
