@@ -1,0 +1,65 @@
+\section{Theoretical Analysis}
+\label{sec:analysis}
+
+In this section, the circuit shown in Figure~\ref{fig:rc} is analysed
+theoretically, in terms of voltages and currents in each node and branches respectively.
+
+
+\section{Nodal Method}
+
+
+
+
+%\lipsum[1-1]
+
+
+\section{Mesh Method}
+
+By analysing the circuit in terms of the elementar meshes, we started by assuming that we have $4$ unknown quantities: $I_a, I_b, I_c, I_d$ (four meshes).
+With no effort, we realized that the current in the mesh of the lower right corner is defined by the current source $I_d$.
+Using the fact that the voltage-controlled current source presented in the mesh of $I_b$ only belongs to this elementar mesh and that $I_b = K_b V_b$ (formula developed in \ref{restrict1}), there is no need in writing an equation for the loop of current $I_b$.
+As a result, we are left with 2 independent variables: $I_b$ and $I_c$ and the following equations:
+
+
+%equations
+\begin{equation}
+  (R_1 + R_2 + R_4) \frac{K_b R_3 -1}{K_b R_3}  - R_3  - R_4 = -Va
+  \label{mesh1}
+\end{equation}
+
+\begin{equation}
+  -R_4 \frac{K_b R_3 - 1}{K_b R3} R_4 + R_6 + R_7 - K_c = 0
+  \label{mesh2}
+\end{equation}
+
+During the derivation of the previous equations, the next restrition equations were used:
+
+\begin{equation}
+  I_a = \frac{K_b R_3 -1}{K_b R_3} I_b
+  \label{restrict1}
+\end{equation}
+
+\begin{equation}
+  V_c = K_c I_c
+\end{equation}
+
+By solving equations with a script of \textit{Octave}, we got following results presented in the table \ref{tab:op_octave_mesh}
+
+Explain the currents, signals 'nd voltages
+
+%signals-------------------->
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{op_octave}
+  \end{tabular}
+  \caption{Results of Mesh Analysis}
+  \label{tab:op_octave_mesh}
+\end{table}
+
+
+%\lipsum[1-1]
+
+
