@@ -105,14 +105,7 @@ filename = "../doc/op_mesh_tab.tex";
 
 file = fopen(filename, 'w');
 
-<<<<<<< HEAD
-exampleI = "IR%d & %e\\\\ \\\hline\n";
-exampleV = "V%d & %e\\\\ \\\hline\n";
-
-for i = 1:5
-=======
 for i = 1:7
->>>>>>> f4ce71e2b7b9a5ce043caa77ec171bf04c0ff2d0
 fprintf(file, exampleI, i, veci(i))
 end
 
