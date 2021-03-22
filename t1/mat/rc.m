@@ -72,3 +72,4 @@ plot (t*1000, vo, "b");
 xlabel ("t[ms]");
 ylabel ("vi(t), vo(t) [V]");
 print (hf, "forced.eps", "-depsc");
+%print forced.eps
