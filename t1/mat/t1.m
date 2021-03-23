@@ -49,11 +49,14 @@ veci(5) = -vecv(2)/R5;
 veci(6) = (vecv(4) - vecv(5))/R6;
 veci(7) = (vecv(5) - vecv(1))/R7;
 
+IVc = Id - veci(7);
+
 
 for i = 1:7
 fprintf(file, exampleI, i, veci(i))
 end
 
+fprintf(file, "$I_{Vc}$ & %e\\\\ \\\hline\n", IVc)
 fprintf(file, "$I_d$ & %e\\\\ \\\hline\n", Id)
 
 fprintf(file, "$V_0$ & 0.0\\\\ \\\hline\n")
@@ -88,6 +91,8 @@ veci(5) = Ib - Id;%R5
 veci(6) = Ic;%R6
 veci(7) = Ic;%R7
 
+IVc = Id - Ic;
+
 printf("\n\n")
 
 vecv = [0, 0, 0, 0, 0, 0, 0];
@@ -109,6 +114,7 @@ for i = 1:7
 fprintf(file, exampleI, i, veci(i))
 end
 
+fprintf(file, "$I_{Vc}$ & %e\\\\ \\\hline\n", IVc)
 fprintf(file, "$I_d$ & %e\\\\ \\\hline\n", Id)
 
 fprintf(file, "$V_0$ & 0.0\\\\ \\\hline\n")
