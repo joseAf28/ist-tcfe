@@ -3,7 +3,7 @@
 *
 
 * forces current values to be saved
-*.options savecurrents
+.options savecurrents
 
 * voltage source
 Va 7 4 DC 5.18382634375

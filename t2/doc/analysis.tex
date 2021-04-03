@@ -1,0 +1,100 @@
+\section{Theoretical Analysis}
+\label{sec:analysis}
+
+In this section, the circuit shown in Figure~\ref{fig:circuit} is analysed
+theoretically, in terms of voltages and currents in each node and branches respectively.
+
+
+\section{Nodal Method}
+
+When using the nodal method, we started by defining the 5 essential nodes identified in Figure~\ref{fig:circuit} as $V_0$-$V_5$. The central node $V_0$ was assumed to be the reference 0V, to simplify the expressions as most as possible.
+Then we write four equations using KCL for the nodes and Ohm's Law, as well as the dependent sources definitions, so that we arrive at the following linear set of equations, in matrix form:
+
+%b = [Id; -Va/R1; Va/R1; Id]
+
+\[
+  \begin{bmatrix}
+    0                   & \frac{1}{R_5} & K_b                                 & 0                                              \\
+    0                   & 0             & K_b - \frac{1}{R_1} - \frac{1}{R_3} & \frac{1}{R_1}                                  \\
+    \frac{1}{R_6 + R_7} & 0             & \frac{1}{R_1}                       & -\frac{1}{R_4}-\frac{1}{R_1}-\frac{1}{R_6+R_7} \\
+    -\frac{1}{K_c}      & \frac{1}{R_5} & \frac{1}{R_3}                       & \frac{1}{R_4}
+  \end{bmatrix}
+  \begin{bmatrix}
+    V_1 \\ V_2 \\ V_3 \\ V_4
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    I_d \\ -\frac{V_a}{R_1} \\ \frac{V_a}{R_1} \\ I_d
+  \end{bmatrix}
+\]
+
+\hfill
+
+
+An Octave script was prepared to solve this system numerically. The results are shown in Table \ref{tab:op_nodal_tab}.
+
+\begin{table}[b]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{op_nodal_tab}
+  \end{tabular}
+  \caption{Results of Nodal Analysis. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+  \label{tab:op_nodal_tab}
+\end{table}
+
+
+
+\section{Mesh Method}
+
+By analysing the circuit in terms of the meshes, we started by assuming that we have $4$ unknown quantities: $I_a, I_b, I_c, I_d$ (four meshes).
+Effortlessly, we realized that the current in the mesh of the lower right corner is defined by the current source $I_d$.
+Using the fact that the voltage-controlled current source presented in the mesh of $I_b$ only belongs to this mesh and that $I_b = K_b V_b$ (formula developed in \ref{restrict1}), there is no need in writing an equation for the loop of current $I_b$.
+As a result, we are left with 2 independent variables: $I_b$ and $I_c$ and the following equations:
+
+
+%equations
+\begin{equation}
+  (R_1 + R_2 + R_4) \frac{K_b R_3 -1}{K_b R_3}I_b  - R_3I_b  - R_4I_c = -Va
+  \label{mesh1}
+\end{equation}
+
+\begin{equation}
+  -R_4 \frac{K_b R_3 - 1}{K_b R3}I_b + (R_4  + R_6 + R_7 - K_c)I_c = 0
+  \label{mesh2}
+\end{equation}
+
+During the derivation of the previous equations, the next restrition equations were used:
+
+\begin{equation}
+  I_a = \frac{K_b R_3 -1}{K_b R_3} I_b
+  \label{restrict1}
+\end{equation}
+
+\begin{equation}
+  V_c = K_c I_c
+  \label{restrict2}
+\end{equation}
+
+By solving equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op_mesh_tab}
+
+From knowing the current of the meshes, we compute the currents and  potencial values in each branch and node respectively, by keeping in mind that was used the same reference node $V_0$.
+
+
+%signals-------------------->
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{op_mesh_tab}
+  \end{tabular}
+  \caption{Results of Mesh Analysis. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt}}
+  \label{tab:op_mesh_tab}
+\end{table}
+
+
+%\lipsum[1-1]
+
+
