@@ -1,13 +1,8 @@
-*
-* NGSPICE simulation script
-*
-
-* forces current values to be saved
 .options savecurrents
 
 *voltage source
-Vs 1 0 DC 5.18382634375
-*Vc 6 8 DC 8.768729
+Vs 1 0 DC 0.0
+Vc 6 8 DC 8.76872906071375 
 Vsource 0 9 DC 0.0
 
 
@@ -29,7 +24,6 @@ Gib 6 3 2 5 7.2865951329m
 * Linear Current-Controlled Voltage Source
 Hvc 5 8 Vsource 8.22752594192k
 
-*Vd 5 8 DC 2
 
 .control
 
@@ -47,9 +41,3 @@ quit
 .endc
 
 .end
-
-*alinea 2
-
-
-
-

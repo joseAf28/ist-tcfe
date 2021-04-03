@@ -37,18 +37,18 @@ Xn = An\bn
 
 bVa = Xn(5) - Xn(7)
 
-#{
+
 printf("\n alinea b)-------------------------------------------\n\n")
 
-bVa = Xn(5) - Xn(7)
+#{
 
-bline10 = [-1/R1, 0, -1/R4, 0, -1/R6, 0]
-bline2 = [1/R1+1/R2+1/R3, -1/R2, -1/R3, 0, 0, 0]
+bline10 = [-1/R1, 0, -1/R4, 0, -1/R6, 0];
+bline2 = [1/R1+1/R2+1/R3, -1/R2, -1/R3, 0, 0, 0];
 #bline2 = [0, 0, -1, 0, Kd/R6, 1]
-bline3 = [-Kb-1/R2, 1/R2, Kb, 0, 0, 0]
+bline3 = [-Kb-1/R2, 1/R2, Kb, 0, 0, 0];
 #bline7 = [d, 0, 1/R7, -1/Kd - 1/R7]
-bline7 = [0, 0, 0, 0, Kd/R6+1/R7, -1/R8]
-bline586 = [-1/R3 + Kb, 0, 1/R4 + 1/R3 - Kb, 0, -1/R7, 1/R7]
+bline7 = [0, 0, 0, 0, Kd/R6+1/R7, -1/R8];
+bline586 = [-1/R3 + Kb, 0, 1/R4 + 1/R3 - Kb, 0, -1/R7, 1/R7];
 #bline586 = [0, 0, -1, 0, Kd/R6, 1]
 blineV = [0, 0, 0, 1, 0, -1]
 
@@ -74,27 +74,41 @@ meshb = [0; 0; 0; -R5]
 
 meshIn = meshA\meshb
 
-
 #}
 
+#evaluate equivalen resistance equals R5
+
+print("\n\n alinea c)------------------------------------------")
+
+time = 0:1e-2:20;
+
+v6n = bVa*exp(-t/(R5*C));
+
+hf = figure();
+plot(time, v6n, "b");
+xlabel ("t");
+ylabel("v6n(t)");
+
+print(hf, "v6n.eps", "-depsc");
 
 
 
 
+hf = figure()
 
 
-#{
+
 printf("\n\nalinea d)-------------------------------------------------")
 
 omega = 2*pi*2*10e3 #rad/s
 
-dline1 = [1, 0, 0, 0, 0, 0, 0]
-dline2 = [0, 1/R2 + 1/R3+1/R2, -1/R2, -1/R3, 0, 0, 0]
-dline58 = [0, -1/R3, 0, 1/R3+1/R4+1/R5, -i*omega*C-1/R5, -1/R7, 1/R7+i*omega*C]
-dline3 = [0, Kb+1/R2, -1/R2, -Kb, 0, 0, 0]
-dline6 = [0, Kb, 0, -1/R5-Kb, 1/R5+i*omega*C, 0, -i*omega*C]
-dline7 = [0, 0, 0, 0, 0, -1/R6-1/R7, 1/R7]
-dlineVd = [0, 0, 0, 1, 0, Kd/R6, -1]
+dline1 = [1, 0, 0, 0, 0, 0, 0];
+dline2 = [0, 1/R2 + 1/R3+1/R2, -1/R2, -1/R3, 0, 0, 0];
+dline58 = [0, -1/R3, 0, 1/R3+1/R4+1/R5, -i*omega*C-1/R5, -1/R7, 1/R7+i*omega*C];
+dline3 = [0, Kb+1/R2, -1/R2, -Kb, 0, 0, 0];
+dline6 = [0, Kb, 0, -1/R5-Kb, 1/R5+i*omega*C, 0, -i*omega*C];
+dline7 = [0, 0, 0, 0, 0, -1/R6-1/R7, 1/R7];
+dlineVd = [0, 0, 0, 1, 0, Kd/R6, -1];
 
 dAn = [dline1; dline2; dline58; dline3; dline6; dline7; dlineVd]
 
@@ -103,13 +117,6 @@ dbn = [1; 1/R1; 0; 0; 0; 0; 0] #parte imaginaria
 determinante = det (dAn)
 
 dXn = dAn\dbn
-
-
-#}
-
-
-
-
 
 
 #{
