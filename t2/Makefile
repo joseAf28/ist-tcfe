@@ -8,6 +8,9 @@ all:
 	make -C doc
 	cp doc/report.pdf .
 
+dataset:
+	python2.7 t2_datagen.py > data.txt
+
 clean:
 	make -C doc clean
 
