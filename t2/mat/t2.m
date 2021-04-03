@@ -1,17 +1,17 @@
 close all
 clear all
 
-R1 = 1.04408633697 
-R2 = 2.04051610808 
-R3 = 3.07566747417 
-R4 = 4.05936218175 
-R5 = 3.05878343538 
-R6 = 2.0603640429 
-R7 = 1.04299566201 
+R1 = 1.04408633697e3
+R2 = 2.04051610808e3
+R3 = 3.07566747417e3
+R4 = 4.05936218175e3 
+R5 = 3.05878343538e3
+R6 = 2.0603640429e3
+R7 = 1.04299566201e3
 Vs = 5.18382634375 
-C = 1.02590436129 
-Kb = 7.2865951329 
-Kd = 8.22752594192 
+C = 1.02590436129e-6
+Kb = 7.28659513293e-3
+Kd = 8.22752594192e3
 
 format long
 
@@ -57,7 +57,7 @@ Req = Vx/Ix
 
 printf("\n\n alinea 3)------------------------------------------\n\n")
 
-time = 0:1e-2:20;
+time = 0:1e-6:20e-3;
 
 v6n = Xn(5)*exp(-time/(Req*C));
 
@@ -72,7 +72,7 @@ print(hf, "v6n.eps", "-depsc");
 
 printf("\n\nalinea 4)-------------------------------------------------\n\n")
 
-omega = 2*pi*10e3 #rad/s
+omega = 2*pi*1000 #rad/s
 
 dlineVs = [1, 0, 0, 0, 0, 0, 0];
 dline2 = [-1/R1, 1/R1 + 1/R3+1/R2, -1/R2, -1/R3, 0, 0, 0];
@@ -84,7 +84,7 @@ dlineVd = [0, 0, 0, 1, 0, Kd/R6, -1];
 
 dAn = [dline2; dline3; dline6; dline7; dlineVs; dlineVd; dline58]
 
-dbn = [1; 0; 0; 0; 0; 0; 0] #parte imaginaria
+dbn = [0; 0; 0; 0; -i; 0; 0] #parte real
 
 determinante = det (dAn)
 
@@ -93,8 +93,35 @@ dXn = dAn\dbn
 fase = arg(dXn(5))
 amplitude = abs(dXn(5))
 
-printf("\n\nalinea 5)-------------------------------------------------\n\n") #corrigir unidades de tempo
-initial_time = time = -5:1e-2:0-1e-2;
-final_time = 0:1e-2:20;
+printf("\n\nalinea 5)-------------------------------------------------\n\n")
 
-v6 = 0*initial_time+Xn(5);
+stepDt = fase/omega
+
+initial_time  = -5e-3:1e-6:0;
+final_time = 0:1e-6:20e-3;
+
+v6i = 0*initial_time+Xn(5);
+vsi = 0*initial_time + Vs;
+
+v6f = v6n + amplitude*cos(omega*final_time - fase);
+vsf = sin(final_time*omega);
+
+hf2 = figure();
+plot(initial_time, v6i, "b;v6(t);");
+hold on
+plot(final_time, v6f, "b");
+plot(initial_time, vsi, "g;vs(t);");
+plot(final_time, vsf, "g");
+
+legend();
+
+xlabel("time (s)");
+ylabel("potencial(t) (V)");
+
+print(hf2, "v6_vs.eps", "-depsc");
+
+printf("\n\nalinea 6)-----------------------------------------------------\n\n")
+
+
+
+
