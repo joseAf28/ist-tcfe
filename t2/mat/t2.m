@@ -93,6 +93,23 @@ dXn = dAn\dbn
 fase = arg(dXn(5))
 amplitude = abs(dXn(5))
 
+printf("\n plot solução forçada \n")
+
+time = 0:1e-6:20e-3;
+
+v6force = amplitude*cos(omega*time - fase);
+
+hf2 = figure();
+plot(time, v6force, "b;v6(t);");
+
+legend();
+
+xlabel("time (s)");
+ylabel("potencial(t) (V)");
+
+print(hf2, "v6_force.eps", "-depsc");
+
+
 printf("\n\nalinea 5)-------------------------------------------------\n\n")
 
 stepDt = fase/omega
