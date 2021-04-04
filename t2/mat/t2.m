@@ -35,19 +35,10 @@ Kd = str2double(Kd(3))*1e3
 fclose(fid);
 
 
-<<<<<<< HEAD
-file = fopen("../sim/data2spice.txt", "w");
-
-for i = 1:10
-fprintf(file, "%d \n", vec(i))
-end
-
-=======
 file = fopen("../sim/data2spice_Vs1.txt", "w");
 text = "*voltage source \n"
 text2 = ["Vs 1 0 DC ", mat2str(Vs), "\n"]
 fprintf(file, [text, text2]);
->>>>>>> 75fd3c786e5b833b7b370c5674ea08ef1b7f20af
 fclose(file);
 
 file = fopen("../sim/data2spice_R.txt", "w");
