@@ -1,0 +1,2 @@
+*voltage source 
+Vc 6 8 DC 8.76872906071375
