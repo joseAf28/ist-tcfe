@@ -1,17 +1,48 @@
 close all
 clear all
 
-R1 = 1.04408633697e3
-R2 = 2.04051610808e3
-R3 = 3.07566747417e3
-R4 = 4.05936218175e3 
-R5 = 3.05878343538e3
-R6 = 2.0603640429e3
-R7 = 1.04299566201e3
-Vs = 5.18382634375 
-C = 1.02590436129e-6
-Kb = 7.28659513293e-3
-Kd = 8.22752594192e3
+fid = fopen('../data.txt','r');
+for i = 1:8
+fskipl(fid);
+end
+
+vec = 1:1:10;
+#format long
+
+R1 = strsplit(fgetl(fid));
+vec(1) = R1 = str2double(R1(4));
+R2 = strsplit(fgetl(fid))
+vec(2) = R2 = str2double(R2(3))
+R3 = strsplit(fgetl(fid))
+vec(3) = R3 = str2double(R3(3))
+R4 = strsplit(fgetl(fid))
+vec(4) = R4 = str2double(R4(3))
+R5 = strsplit(fgetl(fid))
+vec(5) = R5 = str2double(R5(3))
+R6 = strsplit(fgetl(fid))
+vec(6) = R6 = str2double(R6(3))
+R7 = strsplit(fgetl(fid))
+vec(7) = R7 = str2double(R7(3))
+Vs = strsplit(fgetl(fid))
+vec(8) = Vs = str2double(Vs(3))
+Kb = strsplit(fgetl(fid))
+vec(9) = Kb = str2double(Kb(3));
+Kd = strsplit(fgetl(fid))
+vec(10) = Kd = str2double(Kd(3))
+
+fclose(fid);
+
+
+file = fopen("../sim/data2spice.txt", "w");
+
+for i = 1:10
+fprintf(file, "%d \n", vec(i));
+end
+
+fclose(file);
+
+
+#{
 
 format long
 
@@ -92,6 +123,23 @@ dXn = dAn\dbn
 
 fase = arg(dXn(5))
 amplitude = abs(dXn(5))
+
+printf("\n plot solução forçada \n")
+
+time = 0:1e-6:20e-3;
+
+v6force = amplitude*cos(omega*time - fase);
+
+hf2 = figure();
+plot(time, v6force, "b;v6(t);");
+
+legend();
+
+xlabel("time (s)");
+ylabel("potencial(t) (V)");
+
+print(hf2, "v6_force.eps", "-depsc");
+
 
 printf("\n\nalinea 5)-------------------------------------------------\n\n")
 
@@ -245,7 +293,7 @@ plot(vecfreq2, absSol62, "b");
 print(hf6, "absV6.eps", "-depsc");
 
 
-
+#}
 
 
 
