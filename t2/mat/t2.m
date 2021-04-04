@@ -6,43 +6,71 @@ for i = 1:8
 fskipl(fid);
 end
 
-vec = 1:1:10;
+
 #format long
 
 R1 = strsplit(fgetl(fid));
-vec(1) = R1 = str2double(R1(4));
+R1 = str2double(R1(4))*1e3
 R2 = strsplit(fgetl(fid))
-vec(2) = R2 = str2double(R2(3))
+R2 = str2double(R2(3))*1e3
 R3 = strsplit(fgetl(fid))
-vec(3) = R3 = str2double(R3(3))
+R3 = str2double(R3(3))*1e3
 R4 = strsplit(fgetl(fid))
-vec(4) = R4 = str2double(R4(3))
+R4 = str2double(R4(3))*1e3
 R5 = strsplit(fgetl(fid))
-vec(5) = R5 = str2double(R5(3))
+R5 = str2double(R5(3))*1e3
 R6 = strsplit(fgetl(fid))
-vec(6) = R6 = str2double(R6(3))
+R6 = str2double(R6(3))*1e3
 R7 = strsplit(fgetl(fid))
-vec(7) = R7 = str2double(R7(3))
+R7 = str2double(R7(3))*1e3
 Vs = strsplit(fgetl(fid))
-vec(8) = Vs = str2double(Vs(3))
+Vs = str2double(Vs(3))
+C = strsplit(fgetl(fid))
+C = str2double(C(3))*1e-6
 Kb = strsplit(fgetl(fid))
-vec(9) = Kb = str2double(Kb(3));
+Kb = str2double(Kb(3))*1e-3
 Kd = strsplit(fgetl(fid))
-vec(10) = Kd = str2double(Kd(3))
+Kd = str2double(Kd(3))*1e3
 
 fclose(fid);
 
 
+<<<<<<< HEAD
 file = fopen("../sim/data2spice.txt", "w");
 
 for i = 1:10
 fprintf(file, "%d \n", vec(i))
 end
 
+=======
+file = fopen("../sim/data2spice_Vs1.txt", "w");
+text = "*voltage source \n"
+text2 = ["Vs 1 0 DC ", mat2str(Vs), "\n"]
+fprintf(file, [text, text2]);
+>>>>>>> 75fd3c786e5b833b7b370c5674ea08ef1b7f20af
 fclose(file);
 
+file = fopen("../sim/data2spice_R.txt", "w");
+text = "*Resistances \n";
+text2 = ["R1 1 2", ' ', mat2str(R1), "\n"];
+text3 = ["R2 2 3", ' ',mat2str(R2), "\n"];
+text4 = ["R3 2 5", ' ',mat2str(R3), "\n"];
+text5 = ["R4 0 5", ' ',mat2str(R4), "\n"];
+text6 = ["R5 5 6", ' ',mat2str(R5), "\n"];
+text7 = ["R6 9 7", ' ',mat2str(R6), "\n"];
+text8 = ["R7 7 8", ' ',mat2str(R7), "\n"];
+text9 = "* Linear Voltage-Controlled Current Source \n";
+text10 = ["Gib 6 3 2 5",' ', mat2str(Kb), "\n"];
+text11 = "* Linear Current-Controlled Voltage Source \n";
+text12 = ["Hvc 5 8 Vsource",' ', mat2str(Kd), "\n"];
+fprintf(file, [text, text2, text3, text4, text5, text6, text7, text8, text9, text10, text11, text12]);
+fclose(file);
 
-#{
+file = fopen("../sim/data2spice_C.txt", "w");
+text = "*capacitor \n";
+text2 = ["C 6 8", ' ', mat2str(C), "\n"];
+fprintf(file, [text, text2]);
+fclose(file);
 
 format long
 
@@ -67,6 +95,12 @@ Xn = An\bn
 
 
 Vx = Xn(5) - Xn(7)
+
+file = fopen("../sim/data2spice_Vx.txt", "w");
+text = "*voltage source \n";
+text2 = ["Vc 6 8 DC ", mat2str(Vx), "\n"];
+fprintf(file, [text, text2]);
+fclose(file);
 
 
 printf("\n alinea 2)-------------------------------------------\n\n")
@@ -279,7 +313,7 @@ ylabel("Phase (degrees)")
 print(hf4, "argT.eps", "-depsc");
 
 hf5 = figure();
-plot(vecfreq1, argsSolV61, "g");
+plot(vecfreq1, argsSol61, "g");
 hold on
 plot(vecfreq2, argsSol62, "g");
 
@@ -293,7 +327,6 @@ plot(vecfreq2, absSol62, "b");
 print(hf6, "absV6.eps", "-depsc");
 
 
-#}
 
 
 
