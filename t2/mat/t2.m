@@ -1,36 +1,35 @@
 close all
 clear all
 
-fid = fopen('../data.txt','r');
-for i = 1:8
-fskipl(fid);
-end
 
+fid = fopen('../data.txt','r');
+fskipl(fid, 8);
 
 #format long
 
 R1 = strsplit(fgetl(fid));
 R1 = str2double(R1(4))*1e3
-R2 = strsplit(fgetl(fid))
+R2 = strsplit(fgetl(fid));
 R2 = str2double(R2(3))*1e3
-R3 = strsplit(fgetl(fid))
+R3 = strsplit(fgetl(fid));
 R3 = str2double(R3(3))*1e3
-R4 = strsplit(fgetl(fid))
+R4 = strsplit(fgetl(fid));
 R4 = str2double(R4(3))*1e3
-R5 = strsplit(fgetl(fid))
+R5 = strsplit(fgetl(fid));
 R5 = str2double(R5(3))*1e3
-R6 = strsplit(fgetl(fid))
+R6 = strsplit(fgetl(fid));
 R6 = str2double(R6(3))*1e3
-R7 = strsplit(fgetl(fid))
+R7 = strsplit(fgetl(fid));
 R7 = str2double(R7(3))*1e3
-Vs = strsplit(fgetl(fid))
+Vs = strsplit(fgetl(fid));
 Vs = str2double(Vs(3))
-C = strsplit(fgetl(fid))
+C = strsplit(fgetl(fid));
 C = str2double(C(3))*1e-6
-Kb = strsplit(fgetl(fid))
+Kb = strsplit(fgetl(fid));
 Kb = str2double(Kb(3))*1e-3
-Kd = strsplit(fgetl(fid))
+Kd = strsplit(fgetl(fid));
 Kd = str2double(Kd(3))*1e3
+
 
 fclose(fid);
 
@@ -62,6 +61,7 @@ text = "*capacitor \n";
 text2 = ["C 6 8", ' ', mat2str(C), "\n"];
 fprintf(file, [text, text2]);
 fclose(file);
+
 
 format long
 
@@ -109,7 +109,11 @@ Xn2 = A\b
 Ix = -(Xn2(4)-Xn2(5))/R5 + Kb*(Xn2(2)-Xn2(4));
 Req = Vx/Ix
 
-
+file = fopen("../sim/data2spice_ic.txt", "w");
+text = "*initial conditions \n";
+text2 = [".ic v(6)= ", mat2str(Xn2(5)), " v(8)= ", mat2str(Xn2(7)), "\n"];
+fprintf(file, [text, text2]);
+fclose(file);
 
 printf("\n\n alinea 3)------------------------------------------\n\n")
 
