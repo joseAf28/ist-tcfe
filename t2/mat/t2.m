@@ -59,7 +59,7 @@ printf("\n\n alinea 3)------------------------------------------\n\n")
 
 time = 0:1e-6:20e-3;
 
-v6n = Xn(5)*exp(-time/(Req*C));
+v6n = Xn2(5)*exp(-time/(Req*C));
 
 hf = figure();
 plot(time, v6n, "b");
@@ -120,7 +120,52 @@ ylabel("potencial(t) (V)");
 
 print(hf2, "v6_vs.eps", "-depsc");
 
+#{
 printf("\n\nalinea 6)-----------------------------------------------------\n\n")
+
+solution6 = 0.1:1:1e4;
+kk = 1
+
+for freq = 0.1:1:1e4
+omega = 2*pi*freq; #rad/s
+
+dlineVs = [1, 0, 0, 0, 0, 0, 0];
+dline2 = [-1/R1, 1/R1 + 1/R3+1/R2, -1/R2, -1/R3, 0, 0, 0];
+dline58 = [0, -1/R3, 0, 1/R3+1/R4+1/R5, -i*omega*C-1/R5, -1/R7, 1/R7+i*omega*C];
+dline3 = [0, Kb+1/R2, -1/R2, -Kb, 0, 0, 0];
+dline6 = [0, Kb, 0, -1/R5-Kb, 1/R5+i*omega*C, 0, -i*omega*C];
+dline7 = [0, 0, 0, 0, 0, -1/R6-1/R7, 1/R7];
+dlineVd = [0, 0, 0, 1, 0, Kd/R6, -1];
+
+dAn = [dline2; dline3; dline6; dline7; dlineVs; dlineVd; dline58];
+
+dbn = [0; 0; 0; 0; -i; 0; 0]; #parte real
+
+dXn = dAn\dbn;
+solution6(kk) = dXn(5) - dXn(7);
+kk = kk +1;
+
+end 
+
+solution6 = solution6/(-i);
+argsSol6 = arg(solution6)*(180/pi);
+
+vecfreq = 10*log10(0.1:1:1e4);
+absSol6 = 20*log10(abs(solution6));
+
+hf3 = figure();
+plot(vecfreq, absSol6, "b;absFrq(t);");
+print(hf3, "absv6.eps", "-depsc");
+
+hf4 = figure();
+plot(vecfreq, argsSol6, "b;argV6;");
+print(hf4, "argvc.eps", "-depsc");
+
+
+#}
+
+
+
 
 
 
