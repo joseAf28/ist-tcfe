@@ -1,6 +1,40 @@
 close all
 clear all
 
+fid = fopen('../data.txt','r');
+for i = 1:8
+fskipl(fid);
+end
+
+#format long
+
+R1 = strsplit(fgetl(fid))
+R1 = str2double(R1(4))
+R2 = strsplit(fgetl(fid))
+R2 = str2double(R2(3))
+R3 = strsplit(fgetl(fid))
+R3 = str2double(R2(3))
+R4 = strsplit(fgetl(fid))
+R4 = str2double(R2(3))
+R5 = strsplit(fgetl(fid))
+R5 = str2double(R2(3))
+R6 = strsplit(fgetl(fid))
+R6 = str2double(R2(3))
+R7 = strsplit(fgetl(fid))
+R7 = str2double(R2(3))
+Vs = strsplit(fgetl(fid))
+Vs = str2double(R2(3))
+Kb = strsplit(fgetl(fid))
+Kb = str2double(R2(3))
+Kd = strsplit(fgetl(fid))
+Kd = str2double(R2(3))
+
+fclose(fid);
+
+
+
+#{
+
 R1 = 1.04408633697e3
 R2 = 2.04051610808e3
 R3 = 3.07566747417e3
@@ -262,7 +296,7 @@ plot(vecfreq2, absSol62, "b");
 print(hf6, "absV6.eps", "-depsc");
 
 
-
+#}
 
 
 
