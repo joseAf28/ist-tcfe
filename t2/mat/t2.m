@@ -63,7 +63,7 @@ v6n = Xn2(5)*exp(-time/(Req*C));
 
 hf = figure();
 plot(time, v6n, "b");
-xlabel("time (ms)");
+xlabel("time (s)");
 ylabel("v6n(t) (V)");
 
 print(hf, "v6n.eps", "-depsc");
@@ -103,7 +103,7 @@ final_time = 0:1e-6:20e-3;
 v6i = 0*initial_time+Xn(5);
 vsi = 0*initial_time + Vs;
 
-v6f = v6n + amplitude*cos(omega*final_time - fase);
+v6f = v6n + amplitude*cos(omega*final_time + fase);
 vsf = sin(final_time*omega);
 
 hf2 = figure();
@@ -120,13 +120,17 @@ ylabel("potencial(t) (V)");
 
 print(hf2, "v6_vs.eps", "-depsc");
 
-#{
+
 printf("\n\nalinea 6)-----------------------------------------------------\n\n")
 
-solution6 = 0.1:1:1e4;
+solution61 = 0.1:2:1e4;
+solution62 = 1e4:100:1e6;
+
+solutionVc1 = 0.1:2:1e4;
+solutionVc2 = 1e4:100:1e6;
 kk = 1
 
-for freq = 0.1:1:1e4
+for freq = 0.1:2:1e4
 omega = 2*pi*freq; #rad/s
 
 dlineVs = [1, 0, 0, 0, 0, 0, 0];
@@ -142,27 +146,73 @@ dAn = [dline2; dline3; dline6; dline7; dlineVs; dlineVd; dline58];
 dbn = [0; 0; 0; 0; -i; 0; 0]; #parte real
 
 dXn = dAn\dbn;
-solution6(kk) = dXn(5) - dXn(7);
+solution61(kk) = dXn(5);
+solutionVc1(kk) = dXn(5) - dXn(7);
 kk = kk +1;
 
 end 
 
-solution6 = solution6/(-i);
-argsSol6 = arg(solution6)*(180/pi);
+kk = 1;
 
-vecfreq = 10*log10(0.1:1:1e4);
-absSol6 = 20*log10(abs(solution6));
+for freq = 1e4:100:1e6
+omega = 2*pi*freq; #rad/s
+
+dlineVs = [1, 0, 0, 0, 0, 0, 0];
+dline2 = [-1/R1, 1/R1 + 1/R3+1/R2, -1/R2, -1/R3, 0, 0, 0];
+dline58 = [0, -1/R3, 0, 1/R3+1/R4+1/R5, -i*omega*C-1/R5, -1/R7, 1/R7+i*omega*C];
+dline3 = [0, Kb+1/R2, -1/R2, -Kb, 0, 0, 0];
+dline6 = [0, Kb, 0, -1/R5-Kb, 1/R5+i*omega*C, 0, -i*omega*C];
+dline7 = [0, 0, 0, 0, 0, -1/R6-1/R7, 1/R7];
+dlineVd = [0, 0, 0, 1, 0, Kd/R6, -1];
+
+dAn = [dline2; dline3; dline6; dline7; dlineVs; dlineVd; dline58];
+
+dbn = [0; 0; 0; 0; -i; 0; 0]; #parte real
+
+dXn = dAn\dbn;
+solution62(kk) = dXn(5);
+solutionVc2(kk) = dXn(5) - dXn(7);
+kk = kk +1;
+
+end 
+
+solution61 = solution61/(-i);
+solution62 = solution62/(-i);
+argsSol61 = arg(solution61)*(180/pi);
+argsSol62 = arg(solution62)*(180/pi);
+
+solutionVc1 = solutionVc1/(-i);
+solutionVc2 = solutionVc2/(-i);
+argsSolVc1 = arg(solutionVc1)*(180/pi);
+argsSolVc2 = arg(solutionVc2)*(180/pi);
+
+vecfreq1 = 20*log10(0.1:2:1e4);
+vecfreq2 = 20*log10(1e4:100:1e6);
+
+absSol61 = 20*log10(abs(solution61));
+absSol62 = 20*log10(abs(solution62));
+
+absSolVc1 = 20*log10(abs(solutionVc1));
+absSolVc2 = 20*log10(abs(solutionVc2));
 
 hf3 = figure();
-plot(vecfreq, absSol6, "b;absFrq(t);");
-print(hf3, "absv6.eps", "-depsc");
+plot(vecfreq1, absSol61, "b;abs(T_{v6});");
+hold on
+plot(vecfreq2, absSol62, "b");
+plot(vecfreq1, absSolVc1, "g;abs(T_{vc});");
+plot(vecfreq2, absSolVc2, "g");
+print(hf3, "absT.eps", "-depsc");
 
 hf4 = figure();
-plot(vecfreq, argsSol6, "b;argV6;");
+plot(vecfreq1, argsSol61, "b;arg(T_{v6});");
+hold on
+plot(vecfreq2, argsSol62, "b");
+plot(vecfreq1, argsSolVc1, "g;arg(T_{vc});");
+plot(vecfreq2, argsSolVc2, "g");
 print(hf4, "argvc.eps", "-depsc");
 
 
-#}
+
 
 
 

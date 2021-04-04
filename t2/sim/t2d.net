@@ -57,6 +57,17 @@ tran 1e-5 20e-3
 hardcopy solution.ps v(6) v(1)
 echo trans_FIG
 
+echo "********************************************"
+echo  "Frequency analysis"
+echo "********************************************"
+
+ac dec 100 0.1 1MEG
+
+hardcopy acm.ps db(v(6)) db(v(1))
+echo acm_FIG
+
+hardcopy acp.ps phase(v(6)) phase(v(1))
+echo acp_FIG
 
 
 quit
