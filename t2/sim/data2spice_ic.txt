@@ -1,0 +1,2 @@
+*initial conditions 
+.ic v(6)= 8.76872906071375 v(8)= -0

@@ -3,10 +3,10 @@
 
 *voltage source
 Vs 1 0 DC 0.0
-Vc 6 8 DC 8.76872906071375 
+.include data2spice_Vx.txt
 Vsource 0 9 DC 0.0
 
-.include data2spice_R
+.include data2spice_R.txt
 
 .control
 
