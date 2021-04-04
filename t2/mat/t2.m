@@ -36,7 +36,7 @@ fclose(fid);
 file = fopen("../sim/data2spice.txt", "w");
 
 for i = 1:10
-fprintf(file, "%d \n", vec(i));
+fprintf(file, "%d \n", vec(i))
 end
 
 fclose(file);

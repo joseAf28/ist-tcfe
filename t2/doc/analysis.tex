@@ -2,13 +2,13 @@
 \label{sec:analysis}
 
 In this section, the circuit shown in Figure~\ref{fig:circuit} is analysed
-theoretically, in terms of voltages and currents in each node and branches respectively.
+theoretically.
 
 
-\section{Nodal Method}
+\subsection{Nodal Method}
 
-When using the nodal method, we started by defining the 5 essential nodes identified in Figure~\ref{fig:circuit} as $V_0$-$V_5$. The central node $V_0$ was assumed to be the reference 0V, to simplify the expressions as most as possible.
-Then we write four equations using KCL for the nodes and Ohm's Law, as well as the dependent sources definitions, so that we arrive at the following linear set of equations, in matrix form:
+We start by doing the nodal analysis of the circuit in order to find out the potentials and currents for all nodes and branches respectively for $t < 0$, where there was a steady state for the circuit.
+
 
 %b = [Id; -Va/R1; Va/R1; Id]
 
@@ -33,6 +33,8 @@ Then we write four equations using KCL for the nodes and Ohm's Law, as well as t
 
 An Octave script was prepared to solve this system numerically. The results are shown in Table \ref{tab:op_nodal_tab}.
 
+
+%meter as tabelas juntas
 \begin{table}[b]
   \centering
   \begin{tabular}{|l|r|}
@@ -46,14 +48,12 @@ An Octave script was prepared to solve this system numerically. The results are 
 
 
 
-\section{Mesh Method}
+\subsection{Determination of the Equivalemt Resistance seen by the Capacitor}
 
-By analysing the circuit in terms of the meshes, we started by assuming that we have $4$ unknown quantities: $I_a, I_b, I_c, I_d$ (four meshes).
-Effortlessly, we realized that the current in the mesh of the lower right corner is defined by the current source $I_d$.
-Using the fact that the voltage-controlled current source presented in the mesh of $I_b$ only belongs to this mesh and that $I_b = K_b V_b$ (formula developed in \ref{restrict1}), there is no need in writing an equation for the loop of current $I_b$.
-As a result, we are left with 2 independent variables: $I_b$ and $I_c$ and the following equations:
+In order to determine the equivalent resistance, we apply the metheod used to find the start by switching off the independent source $V_s$ of the circuit. Due to the fact we can't switch off the dependent sources
+as done with the independent source, we replace the capacitor with an independent voltage source with a tension of $V6-V8$ (result of the previous section) and we use the nodal analysis, as used before, to determine the currents and voltages in every branch and node respectively.
 
-
+we get the following system of equations REFF:
 %equations
 \begin{equation}
   (R_1 + R_2 + R_4) \frac{K_b R_3 -1}{K_b R_3}I_b  - R_3I_b  - R_4I_c = -Va
@@ -65,21 +65,20 @@ As a result, we are left with 2 independent variables: $I_b$ and $I_c$ and the f
   \label{mesh2}
 \end{equation}
 
-During the derivation of the previous equations, the next restrition equations were used:
 
-\begin{equation}
-  I_a = \frac{K_b R_3 -1}{K_b R_3} I_b
-  \label{restrict1}
-\end{equation}
 
-\begin{equation}
-  V_c = K_c I_c
-  \label{restrict2}
-\end{equation}
+By solving equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op_mesh_tab}.
 
-By solving equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op_mesh_tab}
+By looking at first glance, the results we get seem not right. So we use an alternative method to find the equivalent resistance: we replace the capacitor with the an indepent voltage source of $1 A$, in order to make the calculation the equivalent resistance easier,
+and we run mesh analysis in the circuit. The results are shown in the following system of equations: REFF
 
-From knowing the current of the meshes, we compute the currents and  potencial values in each branch and node respectively, by keeping in mind that was used the same reference node $V_0$.
+
+EQUATIONS OF meshes
+
+
+
+As we can easily see, the first three equations are linearly independent of each other and the last equations is disconnect from the other ones. As result, from the last equation, it can be easily seen that
+the equivalent resistance is equal to $R_5$
 
 
 %signals-------------------->
@@ -96,5 +95,67 @@ From knowing the current of the meshes, we compute the currents and  potencial v
 
 
 %\lipsum[1-1]
+
+\subsection{Natural solution of V_{6n}(t)}
+
+By noticing that at $t = 0$ the voltage source changes its behaviour and that the potential difference across the capacitor must changes in a continuous way (the electric potential is a contiuous funcion, even  if the electric field is discontinuous)
+we get the following results:
+
+From the general natural solution of an RC circuit:
+
+blabla equation
+
+By noticing from nown on the independent source is switched off and that as $t \rightarrow \infty$ and that the energy of the circuit is dissipated by the resistors, the $V_c(\infty) = 0$
+At $t = 0$, we get that $V_6$ put value.. as seen in the Section~\ref{sec:Determination of the equivalent resistance}
+
+So, we have as natural solution of the system:
+
+blbal equation
+
+
+\subsection{Forced solution f V_{6f}(t)}
+
+In order to find the forced solution, we start by transforming the AC voltage of the source to a phasor.
+
+blabla equation
+
+As a result of using phasor, we have to use the impedance of each element, qunatity that relates the phasor voltage and the current phasor: (equation)
+
+As a result, we know that impedance of the resistor is just real number equal to its resistance. The capacitor impedance is given by the following impedance.
+The fact the it is just an imaginary number, it tells that the capacitor does not dissipate energy out of the circuit.
+
+
+By using the nodal analysis in a similar way as in the Section~\ref{sec:} we get the following system of equations:
+
+blabla equations
+
+
+The results of the compex amplitudes are shwon in the following table:
+
+
+
+
+
+
+
+
+From the previous calculations, we have as forced solution in $v_6$:
+
+equations...\dots
+
+
+\subsection{General Solution of v_6(t)}
+
+By doing a linear combination of the natural and the forced solutions found in the previous sections, we have as general solution the following function:
+
+
+plot...........
+
+
+Octave blabal......................
+
+
+\subsection{Frequency response}
+
 
 
