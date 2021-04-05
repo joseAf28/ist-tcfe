@@ -203,25 +203,37 @@ The results of the compex amplitudes are shwon in the following table:
     {\bf Name} & {\bf Value [A or V]} \\ \hline
     \input{op_nodal2_tab}
   \end{tabular}
-  \caption{Results of Nodal Analysis. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+  \caption{Complex amplitudes}
   \label{tab:op_tabNodal}
 \end{table}
 
 
 From the previous calculations, we have as forced solution in $v_6$:
 
-equations...\dots
+\begin{equation}
+  v_{6f} = \Re (\tilde{V_6} e^{j 2\pi f t}) = V_{6forced} cos(2 \pi f t + \phi)
+  \label{forcedSolution}
+\end{equation}
 
 
 \subsection{General Solution of v_6(t)}
 
 By doing a linear combination of the natural and the forced solutions found in the previous sections, we have as general solution the following function:
 
+\begin{equation}
+  v_6(t) = V _6(0)e^{-\frac{t}{R_{eq}C}} + V_{6forced} cos(2 \pi f t + \phi)
+  \label{finalSolution}
+\end{equation}
 
-plot...........
+By using \textit[Octave] to plot this function, we get the following plot:
 
+\begin{figure}[h] \centering
+  \includegraphics[width=0.6\linewidth]{v6_vs.eps}
+  \caption{General solution of v_6(t) }
+  \label{fig:finalSolution}
+\end{figure}
 
-Octave blabal......................
+%talk about discontinuty...............
 
 
 \subsection{Frequency response}
