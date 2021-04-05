@@ -1,2 +1,0 @@
-*voltage source 
-Vs 1 0 DC 5.18382634375
