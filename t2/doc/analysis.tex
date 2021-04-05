@@ -25,7 +25,7 @@ where there was a steady state for the circuit and $V_s = 5.18382634375 V$ . By 
     1               & 0                                             & 0              & 0                                             & 0              & 0                              & 0             \\
   \end{bmatrix}
   \begin{bmatrix}
-    V_1 \\ V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
+    V_1 \\ V_2  \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
   \end{bmatrix}
   =
   \begin{bmatrix}
@@ -69,7 +69,7 @@ An Octave script was prepared to solve this system numerically. The results are 
 \subsection{Determination of the Equivalent Resistance seen by the Capacitor}
 
 In order to determine the equivalent resistance, we start by switching off the independent source $V_s$ of the circuit. If only there was independent sources, we could calculate the equivalent resistance
-as an association of resistores. However, due to the fact we have the dependent sources, we can't switch them off as done with the independent source, so we have to replace the capacitor with an independent voltage source with a tension of $V6-V8 = V_{68} = 8.768729 V$ (result of the previous section)
+as an association of resistors. However, due to the fact we have the dependent sources, we can't switch them off as done with the independent source, so we have to replace the capacitor with an independent voltage source with a tension of $V6-V8 = V_{68} = 8.768729 V$ (result of the previous section)
 and run the nodal analysis, as used before,
 to determine the currents and voltages in every branch and node respectively. As a consequence, the potential in node $1$ and node $0$ are $V_0 = V_1 = 0 V$
 
@@ -77,12 +77,12 @@ We get the following system of equations:
 
 \[
   \begin{bmatrix}
-    -\frac{1}{R_1}                                & 0              & -\frac{1}{R_4} & 0 & -\frac{1}{R_6}                & 0                    \\
-    \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3} & 0 & 0                             & 0                    \\
-    -K_b - \frac{1}{R_2}                          & \frac{1}{R_2}  & K_b            & 0 & 0                             & 0                    \\
-    0                                             & 0              & 0              & 0 & \frac{1}{K_d} + \frac{1}{R_7} & -\frac{1}{R_7}       \\
-    0                                             & 0              & 0              & 1 & 0                             & \frac{K_d}{R_6} & -1 \\
-    0                                             & 0              & 0              & 0 & 1                             & 0               & -1 \\
+    -\frac{1}{R_1}                                & 0              & -\frac{1}{R_4} & 0 & -\frac{1}{R_6}                & 0              \\
+    \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3} & 0 & 0                             & 0              \\
+    -K_b - \frac{1}{R_2}                          & \frac{1}{R_2}  & K_b            & 0 & 0                             & 0              \\
+    0                                             & 0              & 0              & 0 & \frac{1}{K_d} + \frac{1}{R_7} & -\frac{1}{R_7} \\
+    0                                             & 0              & 1              & 0 & \frac{K_d}{R_6}               & -1             \\
+    0                                             & 0              & 0              & 1 & 0                             & -1             \\
   \end{bmatrix}
   \begin{bmatrix}
     V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
@@ -123,8 +123,8 @@ We get the following system of equations:
 By solving these equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op_tabReqTeo}.
 
 
-By looking at first glance, the results do not seem right. So we use an alternative method to find the equivalent resistance: we replace the capacitor with the an indepent voltage source of $1 A$, in order to do the calculation of the equivalent resistance easier,
-and we run mesh analysis in the circuit with the elementar currents shown in \ref{fig:circuit}. The results are shown in the following system of equations: REFF
+By looking at first glance, the results do not seem right. So we use an alternative method to find the equivalent resistance: we replace the capacitor with the an indepent voltage source of $1 A$ in order to do the calculation of the equivalent resistance easier.
+We run mesh analysis in the circuit with the elementar currents shown in \ref{fig:circuit}. The results are shown in the following system of equations:
 
 \[
   \begin{bmatrix}
@@ -134,7 +134,7 @@ and we run mesh analysis in the circuit with the elementar currents shown in \re
     1 & 0        & 0               & 0                     \\
   \end{bmatrix}
   \begin{bmatrix}
-    I_b \\ I_a \\ I_d \\ I_{c'}
+    I_{c'} \\ I_b \\ I_a \\ I_d
   \end{bmatrix}
   =
   \begin{bmatrix}
@@ -145,8 +145,8 @@ and we run mesh analysis in the circuit with the elementar currents shown in \re
 \hfill
 
 
-As can be senn easily, the first three equations are linearly independent of each other and the last equations is disconnect from the other ones. So, $I_2 = I_3 = I_4 = 0$. As result, from the last equation, we know that
-the equivalent resistance is equal to $R_5$
+As can be easily seen, the first three equations are linearly independent of each other and the last equations is disconnect from the other ones. So, $I_2 = I_3 = I_4 = 0$. As result, from the last equation, we know that
+the equivalent resistance is equal to $R_5$.
 
 
 
@@ -168,10 +168,10 @@ From the general natural solution of an RC circuit:
 By noticing from now on the independent source is switched off and that as $t \rightarrow \infty$, the energy of the circuit is dissipated by the resistors, the $V_c(\infty) = 0$
 At $t = 0$, we get that $V_6 = 8.768729V$, as seen in the previous section.
 
-So, we have as natural solution of the system:
+So, we have as natural solution of the system in volts:
 
 \begin{equation}
-  v6 (t) = v_6(0)e^{-\frac{t}{R_{eq}C}}
+  v6 (t) = 8.768729*e^{-\frac{t}{R_{eq}C}}
   \label{eqNaturalSol}
 \end{equation}
 
@@ -214,7 +214,7 @@ By using the nodal analysis in a similar way as used before, we get the followin
   \end{bmatrix}
   =
   \begin{bmatrix}
-    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\ -1
+    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\ -j
   \end{bmatrix}
 \]
 
@@ -238,7 +238,7 @@ The results of the complex amplitudes are shwon in the following table:
 From the previous calculations, we have as forced solution in $v_6$:
 
 \begin{equation}
-  v_{6f} = \Re (\tilde{V_6} e^{j 2\pi f t}) = V_{6f} cos(2 \pi f t + \phi)
+  v_{6f} = \Re (\tilde{V_6} e^{j 2\pi f t}) = 0.5809432*cos(2 \pi f t - 1.718634)
   \label{forcedSolution}
 \end{equation}
 
@@ -248,7 +248,7 @@ From the previous calculations, we have as forced solution in $v_6$:
 By doing a linear combination of the natural and the forced solutions found in the previous sections, we have as general solution the following function:
 
 \begin{equation}
-  v_6(t) = V _6(0)e^{-\frac{t}{R_{eq}C}} + V_{6f} cos(2 \pi f t + \phi)
+  v_6(t) = 8.768729*e^{-\frac{t}{R_{eq}C}} + 0.5809432*cos(2 \pi f t - 1.718634)
   \label{finalSolution}
 \end{equation}
 
