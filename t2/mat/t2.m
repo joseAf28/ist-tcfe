@@ -84,6 +84,49 @@ bn = [Vs; Vs/R1; 0; 0; 0; 0; 0]
 
 Xn = An\bn
 
+filename = "../doc/op_nodal1_tab.tex";
+
+file = fopen(filename, 'w');
+
+exampleI = "$I_{R%d}$ & %e\\\\ \\\hline\n";
+exampleV = "$V_%d$ & %e\\\\ \\\hline\n";
+
+veci = [0, 0, 0, 0, 0, 0, 0];
+vecv = [0, 0, 0, 0, 0, 0, 0];
+
+vecv(1) = Xn(1);
+vecv(2) = Xn(2);
+vecv(3) = Xn(3);
+vecv(4) = Xn(4);
+vecv(5) = Xn(5);
+vecv(6) = Xn(6);
+vecv(7) = Xn(7);
+
+veci(1) = (vecv(1) - vecv(2))/R1;
+veci(2) = (vecv(2) - vecv(3))/R2;
+veci(3) = (vecv(2) - vecv(4))/R3;
+veci(4) = -vecv(4)/R4;
+veci(5) = (vecv(4)-vecv(5))/R5;
+veci(6) = -vecv(6)/R6;
+veci(7) = (vecv(6) - vecv(7))/R7;
+
+Ib = -veci(2);
+
+
+for i = 1:7
+fprintf(file, exampleI, i, veci(i))
+end
+
+fprintf(file, "$I_b$ & %e\\\\ \\\hline\n", Ib)
+
+for i= 1:3
+fprintf(file, exampleV, i, vecv(i))
+end
+
+for i= 5:8
+fprintf(file, exampleV, i, vecv(i-1))
+end
+fclose(file)
 
 Vx = Xn(5) - Xn(7)
 
@@ -108,6 +151,54 @@ Xn2 = A\b
 
 Ix = -(Xn2(4)-Xn2(5))/R5 + Kb*(Xn2(2)-Xn2(4));
 Req = Vx/Ix
+
+filename = "../doc/op_nodal2_tab.tex";
+
+file = fopen(filename, 'w');
+
+exampleI = "$I_{R%d}$ & %e\\\\ \\\hline\n";
+exampleV = "$V_%d$ & %e\\\\ \\\hline\n";
+
+veci = [0, 0, 0, 0, 0, 0, 0];
+vecv = [0, 0, 0, 0, 0, 0, 0];
+
+vecv(1) = Xn2(1);
+vecv(2) = Xn2(2);
+vecv(3) = Xn2(3);
+vecv(4) = Xn2(4);
+vecv(5) = Xn2(5);
+vecv(6) = Xn2(6);
+vecv(7) = Xn2(7);
+
+veci(1) = (vecv(1) - vecv(2))/R1;
+veci(2) = (vecv(2) - vecv(3))/R2;
+veci(3) = (vecv(2) - vecv(4))/R3;
+veci(4) = -vecv(4)/R4;
+veci(5) = (vecv(4)-vecv(5))/R5;
+veci(6) = -vecv(6)/R6;
+veci(7) = (vecv(6) - vecv(7))/R7;
+
+Ib = -veci(2);
+
+
+for i = 1:7
+fprintf(file, exampleI, i, veci(i))
+end
+
+fprintf(file, "$I_b$ & %e\\\\ \\\hline\n", Ib)
+fprintf(file, "$I_x$ & %e\\\\ \\\hline\n", Ix)
+
+for i= 1:3
+fprintf(file, exampleV, i, vecv(i))
+end
+
+for i= 5:8
+fprintf(file, exampleV, i, vecv(i-1))
+end
+
+fprintf(file, "$R_eq$ & %e\\\\ \\\hline\n", Req)
+
+fclose(file)
 
 file = fopen("../sim/data2spice_ic.txt", "w");
 text = "*initial conditions \n";
@@ -169,6 +260,31 @@ ylabel("potencial(t) (V)");
 
 print(hf2, "v6_force.eps", "-depsc");
 
+filename = "../doc/op_nodal2_tab.tex";
+
+file = fopen(filename, 'w');
+
+examplePhasor = "$V_{%d}$ & %e e^{%e}\\\\ \\\hline\n";
+
+vecv = [0, 0, 0, 0, 0, 0, 0];
+
+vecv(1) = dXn(1);
+vecv(2) = dXn(2);
+vecv(3) = dXn(3);
+vecv(4) = dXn(4);
+vecv(5) = dXn(5);
+vecv(6) = dXn(6);
+vecv(7) = dXn(7);
+
+for i= 1:3
+fprintf(file, exampleV, i, abs(vecv(i)), arg(vecv(i)))
+end
+
+for i= 5:8
+fprintf(file, exampleV, i, abs(vecv(i-1)), arg(vecv(i-1)))
+end
+
+fclose(file)
 
 printf("\n\nalinea 5)-------------------------------------------------\n\n")
 

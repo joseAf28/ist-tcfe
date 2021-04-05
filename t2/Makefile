@@ -15,5 +15,3 @@ clean:
 	make -C doc clean
 
 .PHONY: all clean
-
-
