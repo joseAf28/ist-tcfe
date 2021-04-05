@@ -1,14 +1,19 @@
 \section{Simulation Analysis}
 \label{sec:simulation}
 
+In this section the circuit in figure \ref{fig:circuit} is simulated
+using the software \textit{Ngspice}.
+
 \subsection{Operating Point Analysis}
 
-By creating a script of \textit{Ngspice}, we got the voltages and currents in each node and branch of
-the circuit \ref{fig:circuit} respectively. Table~\ref{tab:op_tab} shows the simulated operating point results for the circuit
-under analysis.
+We started by simulating the static circuit for  $time (t) < 0$ and 
+got the voltages and currents in each node and branch of the circuit.
+Table~\ref{tab:op_tab} shows the simulated operating 
+point results for the circuit under analysis.
+Note that, because at $t<0$ the voltage is constant, the current through
+the capacitor is zero, i.e., it can be replaced by an open circuit.
+
 \hfill
-As can be seen, by comparing the results of the tables \ref{tab:op_nodal_tab} (nodal analysis) and \ref{tab:op_mesh_tab} (mesh analysis)
-with the table \ref{tab:op_tab}, we got the same results.
 
 \begin{table}[ht]
   \centering
@@ -17,11 +22,44 @@ with the table \ref{tab:op_tab}, we got the same results.
     {\bf Name} & {\bf Value [A or V]} \\ \hline
     \input{op_tab}
   \end{tabular}
-  \caption{Operating point. A variable preceded by @ is of type {\em current}
-    and expressed in Ampere; other variables are of type {\it voltage} and expressed in
-    Volt. Note that r8 was a fictitous resistance used so that Ngspice would show the value of the current $I_{Vc}$}
+  \caption{Operating point for $t<0$. A variable preceded by @ is 
+  of type {\em current} and expressed in Ampere; other variables 
+  are of type {\it voltage} and expressed in Volt.}
   \label{tab:op_tab}
 \end{table}
+
+Following this we replaced $V_s$ with a short circuit and substituted
+the capacitor with a voltage source $Vx = V_8-V_6$, $V_8$ and $V_6$
+being the potencial at nodes 8 and 6 previously calculated.
+From this we obtained the values in table **INSERIR TABELA AJUDA**.
+
+**EXPLICAR PQ FIZEMOS ISTO, IMPORTANTE**
+
+
+\subsection{Transient Analysis}
+
+In this section we analysed the response of the circuit for several
+conditions.
+
+We started with the natural response of the circuit, that is, 
+with $V_s=0$, to a boundary condition ($V_6$ and $V_8$ as determined 
+in the previous section).
+Using ngspice's transient analysis we were able to simulate the response. 
+The value of $V_6$ is plotted in \ref{} **INSERIR FIGURA**.
+
+Afterwards, we simulated the total response of the full circuit (natural 
++ forced) by assuming $V_s = sin(\omega t)$ (as explained in figure \ref{fig:circuit}), 
+for a frequency of 1kHz.
+The voltage in node 6 ($V_6$) and the input voltage ($V_s$) are plotted 
+in figure \ref{}
+
+**inserir figura
+
+
+Finally, with the goal of observing the high-frequency ??filter?? nature 
+of the capacitor, we simulated the circuit for various frequencies of 
+$V_s$ (0.1Hz to 1MHz)
+
 
 
 %\lipsum[1-1]
