@@ -7,31 +7,36 @@ theoretically.
 
 \subsection{Nodal Method}
 
-We start by doing the nodal analysis of the circuit in order to find out the potentials and currents for all nodes and branches respectively for $t < 0$, where there was a steady state for the circuit.
+We start by doing the nodal analysis of the circuit in order to find out the potentials and currents for all nodes and branches respectively for $t < 0$,
+where there was a steady state for the circuit. By noticing that the node 0 is used as the $0 volts$ reference node, we get the following system of equations:
+
 
 
 %b = [Id; -Va/R1; Va/R1; Id]
 
 \[
   \begin{bmatrix}
-    0                   & \frac{1}{R_5} & K_b                                 & 0                                              \\
-    0                   & 0             & K_b - \frac{1}{R_1} - \frac{1}{R_3} & \frac{1}{R_1}                                  \\
-    \frac{1}{R_6 + R_7} & 0             & \frac{1}{R_1}                       & -\frac{1}{R_4}-\frac{1}{R_1}-\frac{1}{R_6+R_7} \\
-    -\frac{1}{K_c}      & \frac{1}{R_5} & \frac{1}{R_3}                       & \frac{1}{R_4}
+    - \frac{1}{R_1} & \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3}                                & 0              & 0                              & 0             \\
+    0               & K_b + \frac{1}{R_2}                           & -\frac{1}{R_3} & - K_b                                         & 0              & 0                              & 0             \\
+    0               & 0                                             & 0              & 0                                             & 0              & -\frac{1}{R_6} - \frac{1}{R_7} & \frac{1}{R_7} \\
+    0               & K_b                                           & 0              & -K_b - \frac{1}{R_5}                          & \frac{1}{R_5}  & 0                              & 0             \\
+    0               & -\frac{1}{R_3}                                & 0              & \frac{1}{R_3} + \frac{1}{R_4} + \frac{1}{R_5} & -\frac{1}{R_5} & -\frac{1}{R_7}                 & \frac{1}{R_7} \\
+    0               & 0                                             & 0              & 1                                             & 0              & \frac{K_d}{R_6}                & -1            \\
+    1               & 0                                             & 0              & 0                                             & 0              & 0                              & 0             \\
   \end{bmatrix}
   \begin{bmatrix}
-    V_1 \\ V_2 \\ V_3 \\ V_4
+    V_1 \\ V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
   \end{bmatrix}
   =
   \begin{bmatrix}
-    I_d \\ -\frac{V_a}{R_1} \\ \frac{V_a}{R_1} \\ I_d
+    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\
   \end{bmatrix}
 \]
 
 \hfill
 
 
-An Octave script was prepared to solve this system numerically. The results are shown in Table \ref{tab:op_nodal_tab}.
+An Octave script was prepared to solve this system numerically. The results are shown in Table \ref{tab:op_tabNodal}.
 
 
 %meter as tabelas juntas
@@ -40,103 +45,167 @@ An Octave script was prepared to solve this system numerically. The results are 
   \begin{tabular}{|l|r|}
     \hline
     {\bf Name} & {\bf Value [A or V]} \\ \hline
-    \input{op_nodal_tab}
+    \input{op_nodal2_tab}
   \end{tabular}
   \caption{Results of Nodal Analysis. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
-  \label{tab:op_nodal_tab}
+  \label{tab:op_tabNodal}
 \end{table}
 
 
 
 \subsection{Determination of the Equivalemt Resistance seen by the Capacitor}
 
-In order to determine the equivalent resistance, we apply the metheod used to find the start by switching off the independent source $V_s$ of the circuit. Due to the fact we can't switch off the dependent sources
-as done with the independent source, we replace the capacitor with an independent voltage source with a tension of $V6-V8$ (result of the previous section) and we use the nodal analysis, as used before, to determine the currents and voltages in every branch and node respectively.
+In order to determine the equivalent resistance, we start by switching off the independent source $V_s$ of the circuit. Due to the fact we can't switch off the dependent sources
+as done with the independent source, we replace the capacitor with an independent voltage source with a tension of $V6-V8 = V_a$ (result of the previous section) and we use the nodal analysis, as used before,
+to determine the currents and voltages in every branch and node respectively. As a consequence, the potential in node $1$ and node $0$ are $V_1 = V_2 = 0 V$
 
-we get the following system of equations REFF:
-%equations
-\begin{equation}
-  (R_1 + R_2 + R_4) \frac{K_b R_3 -1}{K_b R_3}I_b  - R_3I_b  - R_4I_c = -Va
-  \label{mesh1}
-\end{equation}
+we get the following system of equations:
 
-\begin{equation}
-  -R_4 \frac{K_b R_3 - 1}{K_b R3}I_b + (R_4  + R_6 + R_7 - K_c)I_c = 0
-  \label{mesh2}
-\end{equation}
+\[
+  \begin{bmatrix}
+    -\frac{1}{R_1}                                & 0              & -\frac{1}{R_4} & 0 & -\frac{1}{R_6}                & 0                    \\
+    \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3} & 0 & 0                             & 0                    \\
+    -K_b - \frac{1}{R_2}                          & \frac{1}{R_2}  & K_b            & 0 & 0                             & 0                    \\
+    0                                             & 0              & 0              & 0 & \frac{1}{K_d} + \frac{1}{R_7} & -\frac{1}{R_7}       \\
+    0                                             & 0              & 0              & 1 & 0                             & \frac{K_d}{R_6} & -1 \\
+    0                                             & 0              & 0              & 0 & 1                             & 0               & -1 \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\ V_a
+  \end{bmatrix}
+\]
 
+\hfill
 
+By solving equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op__tabReq}.
 
-By solving equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op_mesh_tab}.
-
-By looking at first glance, the results we get seem not right. So we use an alternative method to find the equivalent resistance: we replace the capacitor with the an indepent voltage source of $1 A$, in order to make the calculation the equivalent resistance easier,
-and we run mesh analysis in the circuit. The results are shown in the following system of equations: REFF
-
-
-EQUATIONS OF meshes
-
-
-
-As we can easily see, the first three equations are linearly independent of each other and the last equations is disconnect from the other ones. As result, from the last equation, it can be easily seen that
-the equivalent resistance is equal to $R_5$
-
-
-%signals-------------------->
-\begin{table}[h]
+\begin{table}[b]
   \centering
   \begin{tabular}{|l|r|}
     \hline
     {\bf Name} & {\bf Value [A or V]} \\ \hline
-    \input{op_mesh_tab}
+    \input{op_nodal2_tab}
   \end{tabular}
-  \caption{Results of Mesh Analysis. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt}}
-  \label{tab:op_mesh_tab}
+  \caption{Results of Nodal Analysis. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+  \label{tab:op_tabReq}
 \end{table}
+
+By looking at first glance, the results we get do not seem right. So we use an alternative method to find the equivalent resistance: we replace the capacitor with the an indepent voltage source of $1 A$, in order to make the calculation the equivalent resistance easier,
+and we run mesh analysis in the circuit with the elementar currents shown in \ref{fig:circuit}. The results are shown in the following system of equations: REFF
+
+\[
+  \begin{bmatrix}
+    0 & 1-K_b R3 & K_b R_3         & 0                     \\
+    0 & 0        & -R_4            & R_6 + R_7 - K_d + R_4 \\
+    0 & 0        & R_1 + R_3 + R_4 & -R_4                  \\
+    1 & 0        & 0               & 0                     \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    I_2 \\ I_3 \\ I_4 \\ I_{c'}
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0 \\ 0 \\ 0 \\ 1
+  \end{bmatrix}
+\]
+
+\hfill
+
+
+As we can easily see, the first three equations are linearly independent of each other and the last equations is disconnect from the other ones. So, $I_2 = I_3 = I_4 = 0$. As result, from the last equation, it can be easily seen that
+the equivalent resistance is equal to $R_5$
+
 
 
 %\lipsum[1-1]
 
-\subsection{Natural solution of V_{6n}(t)}
+\subsection{Natural solution of v_{6n}(t)}
 
 By noticing that at $t = 0$ the voltage source changes its behaviour and that the potential difference across the capacitor must changes in a continuous way (the electric potential is a contiuous funcion, even  if the electric field is discontinuous)
 we get the following results:
 
+The time constant is given by $\tau = R_{eq}C$.
 From the general natural solution of an RC circuit:
 
-blabla equation
+\begin{equation}
 
-By noticing from nown on the independent source is switched off and that as $t \rightarrow \infty$ and that the energy of the circuit is dissipated by the resistors, the $V_c(\infty) = 0$
-At $t = 0$, we get that $V_6$ put value.. as seen in the Section~\ref{sec:Determination of the equivalent resistance}
+  v_6 (t) = v_6(\infty) + (v_6(0) - v_6(\infty)) e^{-\frac{t}{R_{eq}C}}
+\end{equation}
+
+
+By noticing from now on the independent source is switched off and that as $t \rightarrow \infty$, the energy of the circuit is dissipated by the resistors, the $V_c(\infty) = 0$
+At $t = 0$, we get that $V_6$ VALUE TAB----- as seen in the previous section.
 
 So, we have as natural solution of the system:
 
-blbal equation
+\begin{equation}
+
+  v_6 (t) = v_6(0)e^{-\frac{t}{R_{eq}C}}
+  \label{eqNaturalSol}
+\end{equation}
+
+By running this function in \textit{Octave}, we get the following plot \ref{eqNaturalSol}
+
+\begin{figure}[h] \centering
+  \includegraphics[width=0.6\linewidth]{v6n.eps}
+  \caption{Natural solution of v_6(t) }
+  \label{fig:naturalSolution}
+\end{figure}
 
 
 \subsection{Forced solution f V_{6f}(t)}
 
 In order to find the forced solution, we start by transforming the AC voltage of the source to a phasor.
 
-blabla equation
+\begin{equation}
+  V_s = sin(2\pi f t) = \Re (e^{j(2\pi f t - \frac{\pi}{2})}) \implies \tilde{V_s} = e^{-j \frac{\pi}{2}} = -j
+\end{equation}
 
-As a result of using phasor, we have to use the impedance of each element, qunatity that relates the phasor voltage and the current phasor: (equation)
+As a result of using phasor, we have to use the impedance of each element, quantity that relates the phasor voltage and the current phasor: $Z = \frac{\tilde{V}}{\tilde{I}} $
 
 As a result, we know that impedance of the resistor is just real number equal to its resistance. The capacitor impedance is given by the following impedance.
 The fact the it is just an imaginary number, it tells that the capacitor does not dissipate energy out of the circuit.
 
-
 By using the nodal analysis in a similar way as in the Section~\ref{sec:} we get the following system of equations:
 
-blabla equations
+\[
+  \begin{bmatrix}
+    - \frac{1}{R_1} & \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3}                                & 0                          & 0                              & 0                          \\
+    0               & K_b + \frac{1}{R_2}                           & -\frac{1}{R_3} & - K_b                                         & 0                          & 0                              & 0                          \\
+    0               & 0                                             & 0              & 0                                             & 0                          & -\frac{1}{R_6} - \frac{1}{R_7} & \frac{1}{R_7}              \\
+    0               & K_b                                           & 0              & -K_b - \frac{1}{R_5}                          & \frac{1}{R_5} + j\omega C  & 0                              & -j\omega C                 \\
+    0               & -\frac{1}{R_3}                                & 0              & \frac{1}{R_3} + \frac{1}{R_4} + \frac{1}{R_5} & -\frac{1}{R_5} - j\omega C & -\frac{1}{R_7}                 & \frac{1}{R_7} + j \omega C \\
+    0               & 0                                             & 0              & 1                                             & 0                          & \frac{K_d}{R_6}                & -1                         \\
+    1               & 0                                             & 0              & 0                                             & 0                          & 0                              & 0                          \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    V_1 \\ V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\ -1
+  \end{bmatrix}
+\]
+
+\hfill
 
 
 The results of the compex amplitudes are shwon in the following table:
 
-
-
-
-
-
+\begin{table}[b]
+  \centering
+  \begin{tabular}{|l|r|}
+    \hline
+    {\bf Name} & {\bf Value [A or V]} \\ \hline
+    \input{op_nodal2_tab}
+  \end{tabular}
+  \caption{Results of Nodal Analysis. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+  \label{tab:op_tabNodal}
+\end{table}
 
 
 From the previous calculations, we have as forced solution in $v_6$:
