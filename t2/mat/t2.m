@@ -391,11 +391,11 @@ solutionVc2 = solutionVc2/(-i);
 argsSolVc1 = arg(solutionVc1)*(180/pi);
 argsSolVc2 = arg(solutionVc2)*(180/pi);
 
-vecfreq1 = 20*log10(0.1:2:1e4);
-vecfreq2 = 20*log10(1e4:100:1e6);
+vecfreq1 = log10(0.1:2:1e4);
+vecfreq2 = log10(1e4:100:1e6);
 
-solutionVs1 = 0*vecfreq1 - i;
-solutionVs2 = 0*vecfreq2 -i;
+solutionVs1 = 0*vecfreq1  + 1;
+solutionVs2 = 0*vecfreq2 + 1;
 
 absSol61 = 20*log10(abs(solution61));
 absSol62 = 20*log10(abs(solution62));
@@ -418,7 +418,7 @@ plot(vecfreq2, absSolVc2, "g");
 plot(vecfreq1, absSolVs1, "r;abs(Vs);");
 plot(vecfreq2, absSolVs2, "r");
 
-xlabel("20*log(w) [rad/s]")
+xlabel("log(w) [rad/s]")
 ylabel("|T| dB");
 print(hf3, "absT.eps", "-depsc");
 
@@ -431,7 +431,7 @@ plot(vecfreq2, argsSolVc2, "g");
 plot(vecfreq1, argsSolVs1, "r;arg(Vs);");
 plot(vecfreq2, argsSolVs2, "r");
 
-xlabel("20*log(w) [rad/s]");
+xlabel("log(w) [rad/s]");
 ylabel("Phase (degrees)")
 print(hf4, "argT.eps", "-depsc");
 
