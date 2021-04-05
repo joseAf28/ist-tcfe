@@ -8,7 +8,7 @@ theoretically.
 \subsection{Nodal Method}
 
 We start by doing the nodal analysis of the circuit in order to find out the potentials and currents for all nodes and branches respectively for $t < 0$,
-where there was a steady state for the circuit. By noticing that the node 0 is used as the $0 volts$ reference node, we get the following system of equations:
+where there was a steady state for the circuit. By noticing that the node 0 is used as the $0 V$ reference node, we get the following system of equations:
 
 
 
@@ -29,26 +29,26 @@ where there was a steady state for the circuit. By noticing that the node 0 is u
   \end{bmatrix}
   =
   \begin{bmatrix}
-    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\
+    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\ V_s
   \end{bmatrix}
 \]
 
 \hfill
 
 
-An Octave script was prepared to solve this system numerically. The results are shown in Table \ref{tab:op_tabNodal}.
+An Octave script was prepared to solve this system numerically. The results are shown in Table \ref{tab:op_tabNodal2}.
 
 
 %meter as tabelas juntas
 \begin{table}[b]
   \centering
-  \begin{tabular}{|l|r|}
+  \begin{tabular}{|c|c}
     \hline
     {\bf Name} & {\bf Value [A or V]} \\ \hline
-    \input{op_nodal2_tab}
+    \input{op_nodal1_tab}
   \end{tabular}
   \caption{Results of Nodal Analysis. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
-  \label{tab:op_tabNodal}
+  \label{tab:op_tabNodal2}
 \end{table}
 
 
@@ -88,7 +88,7 @@ By solving equations with a script of \textit{Octave}, we got the following resu
   \begin{tabular}{|l|r|}
     \hline
     {\bf Name} & {\bf Value [A or V]} \\ \hline
-    \input{op_nodal2_tab}
+    \input{op_nodal5_tab}
   \end{tabular}
   \caption{Results of Nodal Analysis. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
   \label{tab:op_tabReq}
@@ -123,7 +123,7 @@ the equivalent resistance is equal to $R_5$
 
 %\lipsum[1-1]
 
-\subsection{Natural solution of v_{6n}(t)}
+\subsection{Natural solution of v6(t)}
 
 By noticing that at $t = 0$ the voltage source changes its behaviour and that the potential difference across the capacitor must changes in a continuous way (the electric potential is a contiuous funcion, even  if the electric field is discontinuous)
 we get the following results:
@@ -132,8 +132,7 @@ The time constant is given by $\tau = R_{eq}C$.
 From the general natural solution of an RC circuit:
 
 \begin{equation}
-
-  v_6 (t) = v_6(\infty) + (v_6(0) - v_6(\infty)) e^{-\frac{t}{R_{eq}C}}
+  v6 (t) = v_6(\infty) + (v_6(0) - v_6(\infty)) e^{-\frac{t}{R_{eq}C}}
 \end{equation}
 
 
@@ -143,8 +142,7 @@ At $t = 0$, we get that $V_6$ VALUE TAB----- as seen in the previous section.
 So, we have as natural solution of the system:
 
 \begin{equation}
-
-  v_6 (t) = v_6(0)e^{-\frac{t}{R_{eq}C}}
+  v6 (t) = v_6(0)e^{-\frac{t}{R_{eq}C}}
   \label{eqNaturalSol}
 \end{equation}
 
@@ -152,12 +150,12 @@ By running this function in \textit{Octave}, we get the following plot \ref{eqNa
 
 \begin{figure}[h] \centering
   \includegraphics[width=0.6\linewidth]{v6n.eps}
-  \caption{Natural solution of v_6(t) }
+  \caption{Natural solution of $v_6(t)$ }
   \label{fig:naturalSolution}
 \end{figure}
 
 
-\subsection{Forced solution f V_{6f}(t)}
+\subsection{Forced solution of v6(t)}
 
 In order to find the forced solution, we start by transforming the AC voltage of the source to a phasor.
 
@@ -216,7 +214,7 @@ From the previous calculations, we have as forced solution in $v_6$:
 \end{equation}
 
 
-\subsection{General Solution of v_6(t)}
+\subsection{General Solution of v6(t)}
 
 By doing a linear combination of the natural and the forced solutions found in the previous sections, we have as general solution the following function:
 
@@ -225,11 +223,11 @@ By doing a linear combination of the natural and the forced solutions found in t
   \label{finalSolution}
 \end{equation}
 
-By using \textit[Octave] to plot this function, we get the following plot:
+By using \textit{Octave} to plot this function, we get the following plot:
 
 \begin{figure}[h] \centering
   \includegraphics[width=0.6\linewidth]{v6_vs.eps}
-  \caption{General solution of v_6(t) }
+  \caption{General solution of $v_6(t)$ }
   \label{fig:finalSolution}
 \end{figure}
 

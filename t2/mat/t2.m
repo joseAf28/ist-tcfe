@@ -113,18 +113,18 @@ veci(7) = (vecv(6) - vecv(7))/R7;
 Ib = -veci(2);
 
 
-for i = 1:7
-fprintf(file, exampleI, i, veci(i))
+for j = 1:7
+fprintf(file, exampleI, j, veci(j))
 end
 
 fprintf(file, "$I_b$ & %e\\\\ \\\hline\n", Ib)
 
-for i= 1:3
-fprintf(file, exampleV, i, vecv(i))
+for j= 1:3
+fprintf(file, exampleV, j, vecv(j))
 end
 
-for i= 5:8
-fprintf(file, exampleV, i, vecv(i-1))
+for j= 5:8
+fprintf(file, exampleV, j, vecv(j-1))
 end
 fclose(file)
 
@@ -152,9 +152,9 @@ Xn2 = A\b
 Ix = -(Xn2(4)-Xn2(5))/R5 + Kb*(Xn2(2)-Xn2(4));
 Req = Vx/Ix
 
-filename = "../doc/op_nodal2_tab.tex";
+filename = "../doc/op_nodal5_tab.tex";
 
-file = fopen(filename, 'w');
+file2 = fopen(filename, 'w');
 
 exampleI = "$I_{R%d}$ & %e\\\\ \\\hline\n";
 exampleV = "$V_%d$ & %e\\\\ \\\hline\n";
@@ -180,25 +180,27 @@ veci(7) = (vecv(6) - vecv(7))/R7;
 
 Ib = -veci(2);
 
+veci
 
-for i = 1:7
-fprintf(file, exampleI, i, veci(i))
+
+for j = 1:7
+fprintf(file2, exampleI, j, veci(j))
 end
 
-fprintf(file, "$I_b$ & %e\\\\ \\\hline\n", Ib)
-fprintf(file, "$I_x$ & %e\\\\ \\\hline\n", Ix)
+fprintf(file2, "$I_b$ & %e\\\\ \\\hline\n", Ib)
+fprintf(file2, "$I_x$ & %e\\\\ \\\hline\n", Ix)
 
-for i= 1:3
-fprintf(file, exampleV, i, vecv(i))
+for j= 1:3
+fprintf(file2, exampleV, j, vecv(j))
 end
 
-for i= 5:8
-fprintf(file, exampleV, i, vecv(i-1))
+for j= 5:8
+fprintf(file2, exampleV, j, vecv(j-1))
 end
 
-fprintf(file, "$R_eq$ & %e\\\\ \\\hline\n", Req)
+fprintf(file2, "$R_eq$ & %e\\\\ \\\hline\n", Req)
 
-fclose(file)
+fclose(file2)
 
 file = fopen("../sim/data2spice_ic.txt", "w");
 text = "*initial conditions \n";
@@ -264,7 +266,7 @@ filename = "../doc/op_nodal2_tab.tex";
 
 file = fopen(filename, 'w');
 
-examplePhasor = "$V_{%d}$ & %e e^{-i%e}\\\\ \\\hline\n";
+examplePhasor = "$\\tilde{V_{%d}}$ & %e$e^{-i(%f)}$\\\\ \\\hline\n";
 
 vecv = [0, 0, 0, 0, 0, 0, 0];
 
@@ -276,12 +278,22 @@ vecv(5) = dXn(5);
 vecv(6) = dXn(6);
 vecv(7) = dXn(7);
 
-for i= 1:3
-fprintf(file, exampleV, i, abs(vecv(i)), arg(vecv(i)))
+
+
+printf("\n-----------------__> here\n")
+vecv
+
+absV = abs(vecv)
+
+
+argV = arg(vecv)
+
+for jj= 1:3
+fprintf(file, examplePhasor, jj, abs(vecv(jj)), arg(vecv(jj)))
 end
 
-for i= 5:8
-fprintf(file, exampleV, i, abs(vecv(i-1)), arg(vecv(i-1)))
+for jj= 5:8
+fprintf(file, examplePhasor, jj, abs(vecv(jj-1)), arg(vecv(jj-1)))
 end
 
 fclose(file)
