@@ -264,7 +264,7 @@ filename = "../doc/op_nodal2_tab.tex";
 
 file = fopen(filename, 'w');
 
-examplePhasor = "$V_{%d}$ & %e e^{%e}\\\\ \\\hline\n";
+examplePhasor = "$V_{%d}$ & %e e^{-i%e}\\\\ \\\hline\n";
 
 vecv = [0, 0, 0, 0, 0, 0, 0];
 
