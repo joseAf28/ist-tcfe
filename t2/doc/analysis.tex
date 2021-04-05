@@ -7,7 +7,7 @@ theoretically.
 
 \subsection{Nodal Method}
 
-We start by doing the nodal analysis of the circuit in order to find out the potentials and currents for all nodes and branches respectively for $t < 0$????,
+We start by doing the nodal analysis of the circuit in order to find out the potentials and currents for all nodes and branches respectively for $t < 0$,
 where there was a steady state for the circuit and $V_s = 5.18382634375 V$ . By noticing that the node 0 is used as the $0 V$ reference node, we get the following system of equations:
 
 
@@ -35,28 +35,42 @@ where there was a steady state for the circuit and $V_s = 5.18382634375 V$ . By 
 
 \hfill
 
-
-An Octave script was prepared to solve this system numerically. The results are shown in Table \ref{tab:op_tabNodal2}.
-
-
-%meter as tabelas juntas
-\begin{table}[b]
-  \centering
-  \begin{tabular}{|c|c|}
-    \hline
-    {\bf Name} & {\bf Value [A or V]} \\ \hline
-    \input{op_nodal1_tab}
-  \end{tabular}
-  \caption{Results of Nodal Analysis for $t < 0$. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
-  \label{tab:op_tabNodal2}
+\begin{table}
+  \parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{|c|c|}
+      \hline
+      {\bf Name} & {\bf Value [A or V]} \\ \hline
+      \input{op_nodal1_tab}
+    \end{tabular}
+    \label{tab:op_tabNodalTeo1}
+    \caption{Results of Nodal Analysis of the circuit for t < 0. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt}}
+  }
+  \hfill
+  \parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{|c|c|}
+      {\bf Name} & {\bf Value [A or V]} \\ \hline
+      \input{op_tab}
+      \hline
+    \end{tabular}
+    \label{tab:op_tabNodalSpice1}
+    \caption{Table with results from Ngspice to find out the voltages and currents in each node and branch. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+  }
 \end{table}
 
 
 
-\subsection{Determination of the Equivalemt Resistance seen by the Capacitor}
+An Octave script was prepared to solve this system numerically. The results are shown in Table \ref{tab:op_tabNodalTeo1}.
 
-In order to determine the equivalent resistance, we start by switching off the independent source $V_s$ of the circuit. Due to the fact we can't switch off the dependent sources
-as done with the independent source, we replace the capacitor with an independent voltage source with a tension of $V6-V8 = V_{68} = 8.768729 V$ (result of the previous section) and we use the nodal analysis, as used before,
+
+
+
+\subsection{Determination of the Equivalent Resistance seen by the Capacitor}
+
+In order to determine the equivalent resistance, we start by switching off the independent source $V_s$ of the circuit. If only there was independent sources, we could calculate the equivalent resistance
+as an association of resistores. However, due to the fact we have the dependent sources, we can't switch them off as done with the independent source, so we have to replace the capacitor with an independent voltage source with a tension of $V6-V8 = V_{68} = 8.768729 V$ (result of the previous section)
+and run the nodal analysis, as used before,
 to determine the currents and voltages in every branch and node respectively. As a consequence, the potential in node $1$ and node $0$ are $V_0 = V_1 = 0 V$
 
 We get the following system of equations:
@@ -81,19 +95,32 @@ We get the following system of equations:
 
 \hfill
 
-\begin{table}[b]
-  \centering
-  \begin{tabular}{|l|r|}
-    \hline
-    {\bf Name} & {\bf Value [A or V]} \\ \hline
-    \input{op_nodal5_tab}
-  \end{tabular}
-  \caption{Results of Nodal Analysis of the circuit used to determine the equivalent resistance seen by the capacitor. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
-  \label{tab:op_tabReq}
+
+\begin{table}
+  \parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{|c|c|}
+      \hline
+      {\bf Name} & {\bf Value [A or V]} \\ \hline
+      \input{op_nodal5_tab}
+    \end{tabular}
+    \label{tab:op_tabReqTeo}
+    \caption{Theoretical Results of Nodal Analysis of the circuit used to determine the equivalent resistance seen by the capacitor. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+  }
+  \hfill
+  \parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{|c|c|}
+      {\bf Name} & {\bf Value [A or V]} \\ \hline
+      \input{opb_tab}
+      \hline
+    \end{tabular}
+    \label{tab:op_tabReqSpice}
+    \caption{Ngspice results of Nodal Analysis of the circuit used to determine the equivalent resistance seen by the capacitor. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+  }
 \end{table}
 
-
-By solving these equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op__tabReq}.
+By solving these equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op_tabReqTeo}.
 
 
 By looking at first glance, the results do not seem right. So we use an alternative method to find the equivalent resistance: we replace the capacitor with the an indepent voltage source of $1 A$, in order to do the calculation of the equivalent resistance easier,
