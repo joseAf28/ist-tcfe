@@ -68,9 +68,9 @@ An Octave script was prepared to solve this system numerically. The results are 
 
 \subsection{Determination of the Equivalent Resistance seen by the Capacitor}
 
-In order to determine the equivalent resistance, we start by switching off the independent source $V_s$ of the circuit. If only there was independent sources, we could calculate the equivalent resistance
+In order to determine the equivalent resistance, we start by switching off the independent source $V_s$ of the circuit. If there were only independent sources, we could calculate the equivalent resistance
 as an association of resistors. However, due to the fact we have the dependent sources, we can't switch them off as done with the independent source, so we have to replace the capacitor with an independent voltage source with a tension of $V6-V8 = V_{68} = 8.768729 V$ (result of the previous section)
-and run the nodal analysis, as used before,
+and run nodal analysis, as used before,
 to determine the currents and voltages in every branch and node respectively. As a consequence, the potential in node $1$ and node $0$ are $V_0 = V_1 = 0 V$
 
 We get the following system of equations:
@@ -120,10 +120,10 @@ We get the following system of equations:
   }
 \end{table}
 
-By solving these equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op_tabReqTeo}.
+By solving these equations with a script of \textit{Octave}, we got the following results presented in table \ref{tab:op_tabReqTeo}.
 
 
-By looking at first glance, the results do not seem right. So we use an alternative method to find the equivalent resistance: we replace the capacitor with the an indepent voltage source of $1 A$ in order to do the calculation of the equivalent resistance easier.
+By looking at first glance, the results do not seem right. In order to try and get a better understading of what was going on, we used an alternative method to find the equivalent resistance: we replace the capacitor with an indepedent voltage source of $1 A$ in order to do the calculation of the equivalent resistance easier.
 We run mesh analysis in the circuit with the elementar currents shown in \ref{fig:circuit}. The results are shown in the following system of equations:
 
 \[
@@ -261,7 +261,7 @@ By using \textit{Octave} to plot this function, we get the plot \ref{fig:general
 \end{figure}
 
 
-As can be seen , the plot of $v_6(t)$ have a discontinuity at $t = 0$.
+As can be seen , the plot of $v_6(t)$ has a discontinuity at $t = 0$.
 This occurs to satisfy the restriction imposed by the conservation of the energy  of the electric field across the capacitor(seen here in the form of a potential difference).
 
 
@@ -300,7 +300,7 @@ From the plots of $T_{Vc}$, we see that the response of the capacitor for freque
 For frequencies much bigger than his natural frequency, the $V_{out} \rightarrow 0$, as seen  in \ref{fig:absT} and the signal is $-180$ degrees ou of phase.
 For frequencies in a near range of the natural frequency, we have an abrupt decline in $V_{out}$ and phase.
 
-In regard to $T_{V6}$, we have that the magnitude of its transfer function dcreases to a constant value, magnitude of the phasor in $v_8$, which is expected due to the fact that the impedance fo the capacitor drecreases in module as $\omega$ increases
+In regard to $T_{V6}$, we have that the magnitude of its transfer function dcreases to a constant value, magnitude of the phasor in $v_8$, which is expected due to the fact that the impedance fo the capacitor decreases in module as $\omega$ increases
 
 
 
