@@ -10,6 +10,10 @@ Vsource 0 9 DC 0.0
 
 .include data2spice_R.txt
 
+.op
+
+.end
+
 .control
 
 op
@@ -22,10 +26,10 @@ echo  "op_TAB"
 print all
 echo  "op_END"
 
-quit
+
 .endc
 
-.end
+
 
 *alinea 2
 

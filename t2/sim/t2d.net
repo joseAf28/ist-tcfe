@@ -32,6 +32,13 @@ set color6=rgb:4/0/0
 
 set units=degrees
 
+
+.op
+
+.end
+
+.control
+
 op
 
 echo "********************************************"
@@ -56,10 +63,9 @@ hardcopy acp.ps phase(v(6)) phase(v(1))
 echo acp_FIG
 
 
-quit
 .endc
 
-.end
+
 
 *alinea 2
 
