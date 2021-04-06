@@ -33,12 +33,6 @@ set color6=rgb:4/0/0
 set units=degrees
 
 
-.op
-
-.end
-
-.control
-
 op
 
 echo "********************************************"
