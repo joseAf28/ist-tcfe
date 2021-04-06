@@ -45,32 +45,37 @@ conditions.
 
 \subsubsection{Natural Response}
 
+\begin{figure}[h] \centering
+  \includegraphics[width=0.4\linewidth]{trans.pdf}
+  \caption{Natural solution for v(6)}
+  \label{fig:sol_nat_spice}
+\end{figure}
 
 We started with the natural response of the circuit, that is, 
 with $V_s=0$, to a boundary condition ($V_6$ and $V_8$ as determined 
 in the previous section).
 Using ngspice's transient analysis we were able to simulate the response. 
 The value of $V_6$ is plotted in figure \ref{fig:sol_nat_spice}.
-
-\begin{figure}[h] \centering
-  \includegraphics[width=0.4\linewidth]{trans.pdf}
-  \caption{Natural solution for v(6)}
-  \label{sol_nat_spice}
-\end{figure}
+We can hence see total agreement between the theoretical results, 
+from comparing the plots \ref{fig:naturalSolution} and 
+\ref{fig:sol_nat_spice}.
 
 \subsubsection{Total Responce}
+
+\begin{figure}[h] \centering
+  \includegraphics[width=0.4\linewidth]{solution.pdf}
+  \caption{Total solution for v(6) and $V_s$}
+  \label{fig:sol_tot_spice}
+\end{figure}
 
 Afterwards, we simulated the total response of the full circuit (natural 
 + forced) by assuming $V_s = sin(\omega t)$ (as explained in figure \ref{fig:circuit}), 
 for a frequency of 1kHz.
 The voltage in node 6 ($V_6$) and the input voltage ($V_s$) are plotted 
-in figure \ref{sol_tot_spice}
+in figure \ref{fig:sol_tot_spice}. 
+Once again the theoretical plot \ref{fig:sol_tot_spice} is 
+indistinguishable from figure \ref{generalFinal}.
 
-\begin{figure}[h] \centering
-  \includegraphics[width=0.4\linewidth]{solution.pdf}
-  \caption{Total solution for v(6) and $V_s$}
-  \label{sol_tot_spice}
-\end{figure}
 
 \subsubsection{Frequency Responce}
 
