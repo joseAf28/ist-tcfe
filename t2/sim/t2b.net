@@ -8,9 +8,14 @@ Vsource 0 9 DC 0.0
 
 .include data2spice_R.txt
 
+.op
+
+.end
+
 .control
 
 op
+
 
 echo "********************************************"
 echo  "Operating point"
@@ -20,7 +25,5 @@ echo  "opb_TAB"
 print all
 echo  "opb_END"
 
-quit
-.endc
 
-.end
+.endc

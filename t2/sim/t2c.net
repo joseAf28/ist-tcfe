@@ -42,11 +42,8 @@ hardcopy trans.ps v(6)
 echo trans_FIG
 
 
-
-quit
 .endc
 
-.end
 
 *alinea 2
 
