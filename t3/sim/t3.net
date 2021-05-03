@@ -20,6 +20,7 @@ Dp2 2 1 Default
 Dp3 1 3 Default
 Dp4 2 0 Default
 
+
 *pre source v(3) -v(2)
 
 R2 3 4 3k
@@ -55,7 +56,7 @@ Dp19 19 2 Default
 tran 5e-4 100e-3
 * tran 1e-5 10e-3
 
-*plot v(3)-v(2) v(1)
+plot v(3)-v(2) v(1)
 
 ******************************************
 hardcopy solution1.ps v(4)-v(2)
@@ -74,6 +75,10 @@ echo solution2_FIG
 
 .measure tran YavgDiff param='yavg4 - yavg2'
 
+.measure tran yavg3 AVG v(3) from=20m to=80m
+
+.measure tran YavgDiffRect param='yavg3 - yavg2'
+
 *nao serve
 .measure tran v4max MAX v(4) from=20m to=80m
 .measure tran v2max MAX v(2) from=20m to=80m
@@ -82,5 +87,4 @@ echo solution2_FIG
 
 .measure tran ripple1 param='v4max - v2min'
 .measure tran ripple2 param='v4min - v2max'
-
 
