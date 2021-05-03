@@ -23,25 +23,24 @@ Dp4 2 0 Default
 *pre source v(3) -v(2)
 
 R2 3 4 3k
+Dn4 4 2 Default
+Dn4 4 5 Default
+Dn5 5 6 Default
+Dn6 6 7 Default
+Dn7 7 8 Default
+Dn8 8 9 Default
+Dn9 9 10 Default
+Dn10 10 11 Default
+Dn11 11 12 Default
+Dn12 12 13 Default
+Dn13 13 14 Default
+Dn14 14 15 Default
+Dn15 15 16 Default
+Dn16 16 17 Default
+Dn17 17 18 Default
+Dn18 18 19 Default
+Dn19 19 2 Default
 
-Dp4 4 5 Default
-Dp5 5 6 Default
-Dp6 6 7 Default
-Dp7 7 8 Default
-Dp8 8 9 Default
-Dp9 9 10 Default
-Dp10 10 11 Default
-Dp11 11 12 Default
-Dp12 12 13 Default
-Dp13 13 14 Default
-Dp14 14 15 Default
-Dp15 15 16 Default
-Dp16 16 17 Default
-Dp17 17 18 Default
-Dp18 18 19 Default
-Dp19 19 2 Default
-*Dp20 20 2 Default
-*Dp21 21 22 Default
 
 
 .model Default D
@@ -55,7 +54,7 @@ Dp19 19 2 Default
 tran 5e-4 100e-3
 * tran 1e-5 10e-3
 
-*plot v(3)-v(2) v(1)
+* plot v(3)-v(2) v(1)
 
 ******************************************
 hardcopy solution1.ps v(4)-v(2)
@@ -67,20 +66,20 @@ echo solution12_FIG
 hardcopy solution2.ps v(3)-v(2)
 echo solution2_FIG
 
-.endc
+* .endc
 
-.measure tran yavg4 AVG v(4) from=20m to=80m
-.measure tran yavg2 AVG v(2) from=20m to=80m
+* .measure tran yavg4 AVG v(4) from=20m to=80m
+* .measure tran yavg2 AVG v(2) from=20m to=80m
 
-.measure tran YavgDiff param='yavg4 - yavg2'
+* .measure tran YavgDiff param='yavg4 - yavg2'
 
-*nao serve
-.measure tran v4max MAX v(4) from=20m to=80m
-.measure tran v2max MAX v(2) from=20m to=80m
-.measure tran v4min MIN v(4) from=50m to=80m
-.measure tran v2min MIN v(2) from=50m to=80m
+* *nao serve
+* .measure tran v4max MAX v(4) from=20m to=80m
+* .measure tran v2max MAX v(2) from=20m to=80m
+* .measure tran v4min MIN v(4) from=50m to=80m
+* .measure tran v2min MIN v(2) from=50m to=80m
 
-.measure tran ripple1 param='v4max - v2min'
-.measure tran ripple2 param='v4min - v2max'
+* .measure tran ripple1 param='v4max - v2min'
+* .measure tran ripple2 param='v4min - v2max'
 
 
