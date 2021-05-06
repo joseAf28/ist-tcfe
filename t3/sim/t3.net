@@ -1,0 +1,85 @@
+*
+* Low-Pass Filter + Limiter
+*
+
+* forces current values to be saveD
+.options savecurrents
+
+******************************************
+* input voltage source
+vS 0 1 0.0 sin(0 34.5 50)
+* vS 1 0 0 sin(0 5 400)
+
+
+Ci 2 3 8u
+Ri 2 3 5k
+
+* positive limiter
+Dp1 0 3 default
+Dp2 2 1 default
+Dp3 1 3 default
+Dp4 2 0 default
+
+
+*pre source v(3) -v(2)
+
+R2 3 4 3k
+Dn4 4 5 default
+Dn5 5 6 default
+Dn6 6 7 default
+Dn7 7 8 default
+Dn8 8 9 default
+Dn9 9 10 default
+Dn10 10 11 default
+Dn11 11 12 default
+Dn12 12 13 default
+Dn13 13 14 default
+Dn14 14 15 default
+Dn15 15 16 default
+Dn16 16 17 default
+Dn17 17 18 default
+Dn18 18 19 default
+Dn19 19 2 default
+
+
+
+.model Default D
+.op
+.enD
+
+.control
+
+******************************************
+* analise no tempo
+tran 5e-4 120e-3 20e-3
+* tran 1e-5 10e-3
+
+plot v(3)-v(2)
+
+******************************************
+hardcopy solution1.ps v(4)-v(2)
+echo solution1_FIG
+
+hardcopy solution12.ps (v(4)-v(2)-12)
+echo solution12_FIG
+
+hardcopy solution2.ps v(3)-v(2)
+echo solution2_FIG
+
+echo "Values (average and ripple)"
+print mean(v(4)-v(2))
+print mean(v(3)-v(2))
+print maximum(v(4)-v(2))-minimum(v(4)-v(2))
+print maximum(v(3)-v(2))-minimum(v(3)-v(2))
+echo "End"
+
+.endc
+
+
+* .measure tran yavg4 AVG v(4) from=20m to=120m
+* .measure tran yavg2 AVG v(2) from=20m to=120m
+
+* .measure tran YavgDiff param='yavg4 - yavg2'
+
+* .measure tran v4max MAX v(4, 2) from=20m to=120m
+
