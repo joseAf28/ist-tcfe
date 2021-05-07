@@ -1,37 +1,5 @@
+%Envelope detector
 
-
-%Envelope Detector
-
-% f=50; %Hz
-% w=2*pi*f;
-% R=1e3 %ohm
-% C=8e-6 %Farads
-
-
-% t=linspace(0, 5e-2, 10000);
-% A = 34.5; %Volt
-% vS=A*cos(w*t);
-% vO = abs(vS);
-
-% VON=0.75
-% vlim =3*VON
-
-% for i=1:length(t)
-%   if vO(i) > vlim
-%     vO(i) = vO(i)-vlim;
-%   else
-%     vO(i) = 0;
-%   endif
-% endfor
-
-% figure
-% plot(t*1000, vO)
-% title("Output voltage v_o(t)")
-% xlabel ("t[ms]")
-% ylabel ("v_o[V]")
-% print ("vo.eps", "-depsc");
-
-%envelope detector
 t=linspace(0, 10e-2, 10000);
 f=50; %Hz
 w=2*pi*f;
@@ -121,7 +89,7 @@ vri = 16*rd/(16*rd + Rvr)*vIncrement + 0.75*16; %amplitude: uses 16 diodes in se
 ripple = max(vri) - min(vri)
 
 vriaverage = mean(vri)
-
+figure
 plot(t*1000, vri)
 title("Output voltage v_o(t)")
 xlabel ("t[ms]")
