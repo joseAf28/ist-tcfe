@@ -61,17 +61,13 @@ At $t = t_{ON}$, the diodes goes ON again:
   v_o(t_{ON}) = A\cos(\omega t_{OFF}) e^{-\frac{t_{ON}-t_{OFF}}{RC}}
 \end{equation}
 
-We solve this equation with \textit{Octave} presented at t
+We solve this equation with \textit{Octave}.
 
 
 \section{Voltage Regulator}
 
-By analysing the circuit in terms of the meshes, we started by assuming that we have $4$ unknown quantities: $I_a, I_b, I_c, I_d$ (four meshes).
-Effortlessly, we realized that the current in the mesh of the lower right corner is defined by the current source $I_d$.
-Using the fact that the voltage-controlled current source presented in the mesh of $I_b$ only belongs to this mesh and that $I_b = K_b V_b$ (formula developed in \ref{restrict1}), there is no need in writing an equation for the loop of current $I_b$.
-As a result, we are left with 2 independent variables: $I_b$ and $I_c$ and the following equations:
-
-
+By using the non linear behaviour of the diodes, we create a voltage regulator that uses 18 diodes.
+We use the diode model with an ideal diode+ voltage source + resistor. we consider
 
 %\lipsum[1-1]
 
