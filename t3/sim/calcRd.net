@@ -48,4 +48,6 @@ print maximum(v(1))
 print maximum(v(2))
 print maximum(v(1)-v(2))
 
+print maximum(v(1)-v(2)) - mean(v(1)-v(2))
+
 .endc

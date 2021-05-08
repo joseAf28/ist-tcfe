@@ -65,14 +65,21 @@ hold off
 Vaverage = mean(vO)
 
 %Voltage regulator--------------
+% vii = 6.475163e+00;
+% iir = vii/3000;
+
+% rd = (1.610751/iir)/18 %ohm determinada a partir do voltage regulator do spice
+
 vii = 6.475163e+00;
-iir = vii/3000;
+iir = vii/3000; %Id
 
 rd = (1.610751/iir)/18 %ohm determinada a partir do voltage regulator do spice
 Rvr = 3000; %ohm
 
+%or 26mV/Id ??
+
 vIncrement = vO-Vaverage;
-vri = 18*rd/(18*rd + Rvr)*vIncrement + 18*VON; %amplitude: uses 16 diodes in series
+vri = 18*rd/(18*rd + Rvr)*vIncrement + 18*VON; %amplitude: uses 18 diodes in series
 
 ripple = max(vri) - min(vri)
 
