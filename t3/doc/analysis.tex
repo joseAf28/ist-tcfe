@@ -1,98 +1,76 @@
 \section{Theoretical Analysis}
 \label{sec:analysis}
 
-In this section, the circuit shown in Figure~\ref{fig:circuit} is analysed
-theoretically, in terms of voltages and currents in each node and branches respectively.
+In this section, we use two different simplified models that are able to describe the behaviour of the diode
+in order to study the AC/DC converter developed in the Simulation Analysis
 
 
-\section{Nodal Method}
+\section{Envelope Detector}
 
-When using the nodal method, we started by defining the 5 essential nodes identified in Figure~\ref{fig:circuit} as $V_0$-$V_5$. The central node $V_0$ was assumed to be the reference 0V, to simplify the expressions as most as possible.
-Then we write four equations using KCL for the nodes and Ohm's Law, as well as the dependent sources definitions, so that we arrive at the following linear set of equations, in matrix form:
+In order to maximize the usage of diodes, we create a full wave rectifier circuit. We use the Diode Model with ideal diode + voltage source.
+So we have that each diode works according to the following equation:
 
-%b = [Id; -Va/R1; Va/R1; Id]
 
 \[
-  \begin{bmatrix}
-    0                   & \frac{1}{R_5} & K_b                                 & 0                                              \\
-    0                   & 0             & K_b - \frac{1}{R_1} - \frac{1}{R_3} & \frac{1}{R_1}                                  \\
-    \frac{1}{R_6 + R_7} & 0             & \frac{1}{R_1}                       & -\frac{1}{R_4}-\frac{1}{R_1}-\frac{1}{R_6+R_7} \\
-    -\frac{1}{K_c}      & \frac{1}{R_5} & \frac{1}{R_3}                       & \frac{1}{R_4}
-  \end{bmatrix}
-  \begin{bmatrix}
-    V_1 \\ V_2 \\ V_3 \\ V_4
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    I_d \\ -\frac{V_a}{R_1} \\ \frac{V_a}{R_1} \\ I_d
-  \end{bmatrix}
+  \left\{
+  \begin{array}{ll}
+    i = 0, if v < V_{ON}   \\
+    v = V_{ON}, if  i \geq \\
+  \end{array}
+  \right.
 \]
 
-\hfill
+Due to the fact we have a full wave rectifier, we have two diodes in series either the voltage source be positive or negative.
+Moreover, the output voltage of this bridge, $V_o$:
+
+\[
+  \left\{
+  \begin{array}{ll}
+    V_o = 0,  if  |V_s| < 2V_{ON}               \\
+    v = |V_s| - 2 V_{ON}, if |V_s| \geq 2V_{ON} \\
+  \end{array}
+  \right.
+\] where $V_s$ is the voltage of the source
+
+In order to smooth the signal of the output voltage, we add a capacitor and a resistor in parallel
+WITH TERMINALS????????.
+
+So we have that initially the potential difference between the terminal of the capacitor is $V_o$. From the time instant $t_{OFF}$
+the capacitor starts to discharge through the resistor because is voltage is bigger than $V_o$ at this point, which smooths the output voltage.
+During this period, the diodes are inversely polarized and they do not enable to pass charge.
+
+So during this interval of time, we have:
+
+\begin{equation}
+  i_R = - i_C \Leftrightarrow \frac{v_s}{R} = -C\frac{dv_s}{dt} \Leftrightarrow \frac{A}{R}\cos(\omega t_{OFF}) = C A \omega \sin(\omega t_{OFF})
+\end{equation}
+
+\begin{equation}
+  t_{OFF} = \frac{1}{\omega}\arctan\frac{1}{\omega RC}
+\end{equation}
+
+So from $t \geq t_{OFF}$, we have:
+
+\begin{equation}
+  v_o(t) = A\cos(\omega t_{OFF}) e^{-\frac{t-t_{OFF}}{RC}}
+\end{equation}
+
+At $t = t_{ON}$, the diodes goes ON again:
+
+\begin{equation}
+  v_o(t_{ON}) = A\cos(\omega t_{OFF}) e^{-\frac{t_{ON}-t_{OFF}}{RC}}
+\end{equation}
+
+We solve this equation with \textit{Octave}, and we get the following plot:
 
 
-An Octave script was prepared to solve this system numerically. The results are shown in Table \ref{tab:op_nodal_tab}.
-
-\begin{table}[b]
-  \centering
-  \begin{tabular}{|l|r|}
-    \hline
-    {\bf Name} & {\bf Value [A or V]} \\ \hline
-    \input{op_nodal_tab}
-  \end{tabular}
-  \caption{Results of Nodal Analysis. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
-  \label{tab:op_nodal_tab}
-\end{table}
-
-
-
-\section{Mesh Method}
+\section{Voltage Regulator}
 
 By analysing the circuit in terms of the meshes, we started by assuming that we have $4$ unknown quantities: $I_a, I_b, I_c, I_d$ (four meshes).
 Effortlessly, we realized that the current in the mesh of the lower right corner is defined by the current source $I_d$.
 Using the fact that the voltage-controlled current source presented in the mesh of $I_b$ only belongs to this mesh and that $I_b = K_b V_b$ (formula developed in \ref{restrict1}), there is no need in writing an equation for the loop of current $I_b$.
 As a result, we are left with 2 independent variables: $I_b$ and $I_c$ and the following equations:
 
-
-%equations
-\begin{equation}
-  (R_1 + R_2 + R_4) \frac{K_b R_3 -1}{K_b R_3}I_b  - R_3I_b  - R_4I_c = -Va
-  \label{mesh1}
-\end{equation}
-
-\begin{equation}
-  -R_4 \frac{K_b R_3 - 1}{K_b R3}I_b + (R_4  + R_6 + R_7 - K_c)I_c = 0
-  \label{mesh2}
-\end{equation}
-
-During the derivation of the previous equations, the next restrition equations were used:
-
-\begin{equation}
-  I_a = \frac{K_b R_3 -1}{K_b R_3} I_b
-  \label{restrict1}
-\end{equation}
-
-\begin{equation}
-  V_c = K_c I_c
-  \label{restrict2}
-\end{equation}
-
-By solving equations with a script of \textit{Octave}, we got the following results presented in the table \ref{tab:op_mesh_tab}
-
-From knowing the current of the meshes, we compute the currents and  potencial values in each branch and node respectively, by keeping in mind that was used the same reference node $V_0$.
-
-
-%signals-------------------->
-\begin{table}[h]
-  \centering
-  \begin{tabular}{|l|r|}
-    \hline
-    {\bf Name} & {\bf Value [A or V]} \\ \hline
-    \input{op_mesh_tab}
-  \end{tabular}
-  \caption{Results of Mesh Analysis. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt}}
-  \label{tab:op_mesh_tab}
-\end{table}
 
 
 %\lipsum[1-1]
