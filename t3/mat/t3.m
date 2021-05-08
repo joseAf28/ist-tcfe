@@ -10,7 +10,7 @@ R = 7e3; %Ohm
 C = 11e-6; %Farad
 
 
-VON=12.021610/18;
+VON=12.021610/18
 vlim =2*VON;
 
 B = A - vlim;
@@ -69,7 +69,6 @@ Vaverage = mean(vO)
 % vii = 6.475163e+00;
 % iir = vii/3000;
 
-% rd = (1.610751/iir)/18 %ohm determinada a partir do voltage regulator do spice
 
 vii = 6.475163e+00;
 iir = vii/3000; %Id
@@ -77,7 +76,6 @@ iir = vii/3000; %Id
 rd = (1.610751/iir)/18 %ohm determinada a partir do voltage regulator do spice
 Rvr = 3000; %ohm
 
-%or 26mV/Id ??
 
 vIncrement = vO-Vaverage;
 vri = 18*rd/(18*rd + Rvr)*vIncrement + 18*VON; %amplitude: uses 18 diodes in series
@@ -96,3 +94,10 @@ plot(t*1000, vri)
 title("Output voltage of Voltage Regulator v(t)")
 xlabel ("t[ms]")
 print ("voltageRegulator.eps", "-depsc");
+
+vri = vri - 18*VON;
+plot(t*1000, vri)
+title("Output voltage Deviation v(t)")
+xlabel ("t[ms]")
+print ("Deviation.eps", "-depsc");
+

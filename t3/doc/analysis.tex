@@ -32,8 +32,7 @@ Moreover, the output voltage of this bridge, $V_o$:
   \right.
 \] where $V_s$ is the voltage of the source
 
-In order to smooth the signal of the output voltage, we add a capacitor and a resistor in parallel
-WITH TERMINALS????????.
+In order to smooth the signal of the output voltage, terminal V2 and V3, we add a capacitor and a resistor in parallel
 
 So we have that initially the potential difference between the terminal of the capacitor is $V_o$. From the time instant $t_{OFF}$
 the capacitor starts to discharge through the resistor because is voltage is bigger than $V_o$ at this point, which smooths the output voltage.
@@ -67,8 +66,20 @@ We solve this equation with \textit{Octave}.
 \section{Voltage Regulator}
 
 By using the non linear behaviour of the diodes, we create a voltage regulator that uses 18 diodes.
-We use the diode model with an ideal diode+ voltage source + resistor. we consider
+We use the diode model with an ideal diode+ voltage source + resistor. we consider the resistance of incremental analysis of the diode
+$r_d = 41.460 Ohm$ and $V_{ON} = 0.66787 V$.
 
+Using Incremental analysis: $v = V_s + v_s$, where $V_s$ is the operating point and $v_s$ incremntal voltage.
+
+We use the following equation:
+
+\begin{equation}
+  v_o = \frac{18 r_d}{18 r_d + R} v_s
+\end{equation}
 %\lipsum[1-1]
+
+
+
+
 
 
