@@ -7,11 +7,11 @@
 
 ******************************************
 * input voltage source
-vS 0 1 0.0 sin(0 34.5 50)
+vS 0 1 0.0 sin(0 20 50)
 * vS 1 0 0 sin(0 5 400)
 
 
-Ci 2 3 8u
+Ci 2 3 12u
 Ri 2 3 5k
 
 * positive limiter
@@ -39,7 +39,10 @@ Dn15 15 16 default
 Dn16 16 17 default
 Dn17 17 18 default
 Dn18 18 19 default
-Dn19 19 2 default
+Dn19 19 20 default
+Dn20 20 21 default
+Dn21 21 2 default
+
 
 
 
@@ -75,11 +78,4 @@ echo "End"
 
 .endc
 
-
-* .measure tran yavg4 AVG v(4) from=20m to=120m
-* .measure tran yavg2 AVG v(2) from=20m to=120m
-
-* .measure tran YavgDiff param='yavg4 - yavg2'
-
-* .measure tran v4max MAX v(4, 2) from=20m to=120m
 
