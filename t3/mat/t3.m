@@ -6,8 +6,9 @@ w=2*pi*f;
 A = 20; %Volts
 
 
-R = 1e3; %Ohm
-C = 12e-6; %Farad
+R = 7e3; %Ohm
+C = 11e-6; %Farad
+
 
 VON=12.021610/18;
 vlim =2*VON;
@@ -84,6 +85,12 @@ vri = 18*rd/(18*rd + Rvr)*vIncrement + 18*VON; %amplitude: uses 18 diodes in ser
 ripple = max(vri) - min(vri)
 
 vriaverage = mean(vri)
+
+cost = 18 + 22 * 0.1
+vdev = mean(vri-12)
+
+merit = 1/ cost*(ripple + vdev + 1e-6)
+
 figure
 plot(t*1000, vri)
 title("Output voltage of Voltage Regulator v(t)")
