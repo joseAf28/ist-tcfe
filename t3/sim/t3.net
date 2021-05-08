@@ -11,8 +11,8 @@ vS 0 1 0.0 sin(0 20 50)
 * vS 1 0 0 sin(0 5 400)
 
 
-Ci 2 3 12u
-Ri 2 3 5k
+C1 2 3 12u
+R1 2 3 5k
 
 * positive limiter
 Dp1 0 3 default
