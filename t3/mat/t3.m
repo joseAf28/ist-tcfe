@@ -4,6 +4,8 @@ t=linspace(2e-2, 12e-2, 10000);
 f=50; %Hz
 w=2*pi*f;
 A = 20; %Volts
+
+
 R = 1e3; %Ohm
 C = 12e-6; %Farad
 
