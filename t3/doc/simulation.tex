@@ -1,27 +1,8 @@
 \section{Simulation Analysis}
 \label{sec:simulation}
 
-\subsection{Operating Point Analysis}
 
-By creating a script of \textit{Ngspice}, we got the voltages and currents in each node and branch of
-the circuit \ref{fig:circuit} respectively. Table~\ref{tab:op_tab} shows the simulated operating point results for the circuit
-under analysis.
-\hfill
-As can be seen, by comparing the results of the tables \ref{tab:op_nodal_tab} (nodal analysis) and \ref{tab:op_mesh_tab} (mesh analysis)
-with the table \ref{tab:op_tab}, we got the same results.
 
-\begin{table}[ht]
-  \centering
-  \begin{tabular}{|l|r|}
-    \hline
-    {\bf Name} & {\bf Value [A or V]} \\ \hline
-    \input{op_tab}
-  \end{tabular}
-  \caption{Operating point. A variable preceded by @ is of type {\em current}
-    and expressed in Ampere; other variables are of type {\it voltage} and expressed in
-    Volt. Note that r8 was a fictitous resistance used so that Ngspice would show the value of the current $I_{Vc}$}
-  \label{tab:op_tab}
-\end{table}
 
 
 %\lipsum[1-1]
