@@ -4,6 +4,9 @@
 In this section, we use two different simplified models that are able to describe the behaviour of the diode
 in order to study the AC/DC converter developed in the Simulation Analysis
 
+We use a voltage source of $V_s$ with amplitude of $20 V$, which corresponds to a $n = \frac{230}{20}$.
+The capacitor $C1 = 11uF$, $R1 = 7k\Omega$ and $R2 = 3k\Omega$
+
 
 \section{Envelope Detector}
 
@@ -67,7 +70,7 @@ We solve this equation with \textit{Octave}.
 
 By using the non linear behaviour of the diodes, we create a voltage regulator that uses 18 diodes.
 We use the diode model with an ideal diode+ voltage source + resistor. we consider the resistance of incremental analysis of the diode
-$r_d = 41.460 Ohm$ and $V_{ON} = 0.66787 V$.
+$r_d = 41.460 Ohm$ and $V_{ON} = 0.66787 V$. The $r_d$ was obtained by running the simulation of the voltage regulator.
 
 Using Incremental analysis: $v = V_s + v_s$, where $V_s$ is the operating point and $v_s$ incremntal voltage.
 
