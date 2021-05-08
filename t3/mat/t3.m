@@ -1,17 +1,16 @@
-%Envelope detector
+%Envelope detector--------------
 
-t=linspace(0, 10e-2, 10000);
+t=linspace(2e-2, 12e-2, 10000);
 f=50; %Hz
 w=2*pi*f;
-A = 34.5; %Volts
+A = 20; %Volts
 R = 1e3; %Ohm
-C = 8e-6; %Farad
+C = 12e-6; %Farad
 
-VON=0.75;
-vlim =3*VON;
+VON=12.021610/18;
+vlim =2*VON;
 
 B = A - vlim;
-
 
 vS = A * cos(w*t);
 vS0 = abs(vS);
@@ -28,9 +27,9 @@ for i=1:length(t)
 endfor
 
 plot(t*1000, vOhr)
-hold
 
-counter = 0;
+hold on
+
 tOFF = 1/w * atan(1/w/R/C);
 texp = linspace(0, 1e-2, 1000);
 
@@ -54,49 +53,30 @@ endfor
 endfor
 
 plot(t*1000, vO)
-title("Output voltage v_o(t)")
+title("Output voltage Envelope Detector v(t)")
 xlabel ("t[ms]")
 legend("rectified","envelope")
 print ("venvlope.eps", "-depsc");
 
-
+hold off
 
 Vaverage = mean(vO)
 
-vIncrement = vO-Vaverage;
+%Voltage regulator--------------
+vii = 6.475163e+00;
+iir = vii/3000;
 
-plot(t*1000, vIncrement)
-title("Output voltage v_o(t)")
-xlabel ("t[ms]")
-legend("rectified","envelope")
-print ("venvlope.eps", "-depsc");
-
-
-
-%Voltage regulator
-
-
-%ripple que vem do voltage regulator
-%Vs average voltage source of Envelope detector
-
-rd = 40.1743; %ohm determinada a partir do voltage regulator do spice
-
+rd = (1.610751/iir)/18 %ohm determinada a partir do voltage regulator do spice
 Rvr = 3000; %ohm
 
-
-vri = 16*rd/(16*rd + Rvr)*vIncrement + 0.75*16; %amplitude: uses 16 diodes in series
+vIncrement = vO-Vaverage;
+vri = 18*rd/(18*rd + Rvr)*vIncrement + 18*VON; %amplitude: uses 16 diodes in series
 
 ripple = max(vri) - min(vri)
 
 vriaverage = mean(vri)
 figure
 plot(t*1000, vri)
-title("Output voltage v_o(t)")
+title("Output voltage of Voltage Regulator v(t)")
 xlabel ("t[ms]")
-legend("rectified","envelope")
 print ("voltageRegulator.eps", "-depsc");
-
-%meu plot faço depois..........
-%cos(wt) somente com a parte positiva??
-
-
