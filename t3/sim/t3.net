@@ -11,14 +11,14 @@
 
 
 
-vS 0 23 0.0 sin(0 220 50)
+vS 0 23 0.0 sin(0 230 50)
 * vS 1 0 0 sin(0 5 400) 
 *vs 20
-G1 0 23 0 1 0.090909
-Ex 0 1 0 23 0.090909
+G1 0 23 0 1 0.0869565
+Ex 0 1 0 23 0.0869565
 
-C1 2 3 12u
-R1 2 3 5k
+C1 2 3 11u
+R1 2 3 7k 
 
 * positive limiter
 Dp1 0 3 default
@@ -80,6 +80,11 @@ print mean(v(4)-v(2))
 print mean(v(3)-v(2))
 print maximum(v(4)-v(2))-minimum(v(4)-v(2))
 print maximum(v(3)-v(2))-minimum(v(3)-v(2))
+echo "Cost and merit"
+print  (18+(22*0.1)) 
+print 1/ ( (18+(22*0.1)) * (maximum(v(4)-v(2))-minimum(v(4)-v(2)) + mean(v(4)-v(2)- 12)+1e-6) ) 
+
+
 echo "End"
 
 .endc
