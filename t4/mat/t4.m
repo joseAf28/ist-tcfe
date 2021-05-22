@@ -11,7 +11,7 @@ VBEON=0.7
 VCC=12
 RS=100
 
-%DC analysis sem approx grosseira
+%DC analysis gain stage
 
 RB=1/(1/RB1+1/RB2) %RB paralelo
 VEQ=RB2/(RB1+RB2)*VCC #Voltage thevanin
@@ -61,9 +61,21 @@ AVIsimple_DB = 20*log10(abs(AV1simple))
 ZI1 = 1/(1/RB+1/(((ro1+RC1+RE1)*(rpi1+RE1)+gm1*RE1*ro1*rpi1 - RE1^2)/(ro1+RC1+RE1)))
 ZO1 = 1/(1/ro1+1/RC1)
 
+AV2 = gm2/(gm2+gpi2+go2+ge2)
+ZI2 = (gm2+gpi2+go2+ge2)/gpi2/(gpi2+go2+ge2)
+ZO2 = 1/(gm2+gpi2+go2+ge2)
+
+
+%total
+gB = 1/(1/gpi2+ZO1)
+AV = (gB+gm2/gpi2*gB)/(gB+ge2+go2+gm2/gpi2*gB)*AV1
+AV_DB = 20*log10(abs(AV))
+ZI=ZI1
+ZO=1/(go2+gm2/gpi2*gB+ge2+gB)
+
 jj = 1;
 
-RE1 = 100;
+RE1 = 100
 
 TGain = zeros(1, 10);
 TGain_DB = zeros(1, 10);
