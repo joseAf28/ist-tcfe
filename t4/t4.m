@@ -39,6 +39,7 @@ logfreq = zeros(1, 100);
 ZO1_vec = zeros(1, 100);
 ZI1_vec = zeros(1, 100);
 
+%falta plot impedancias.....
 
 jj= 1;
 
