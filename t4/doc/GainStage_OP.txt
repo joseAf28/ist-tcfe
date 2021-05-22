@@ -1,0 +1,7 @@
+VEQ & 2.400000e+00\\ \hline
+IB1 & 5.004416e-05\\ \hline
+IC1 & 8.942891e-03\\ \hline
+VEQ & 8.992935e-03\\ \hline
+VE1 & 8.992935e-01\\ \hline
+V01 & 3.057109e+00\\ \hline
+VCE & 2.157816e+00\\ \hline
