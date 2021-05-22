@@ -65,6 +65,43 @@ AV2 = gm2/(gm2+gpi2+go2+ge2)
 ZI2 = (gm2+gpi2+go2+ge2)/gpi2/(gpi2+go2+ge2)
 ZO2 = 1/(gm2+gpi2+go2+ge2)
 
+file = fopen("../doc/GainStage_OP.txt", "w");
+fprintf(file, "VEQ & %e\\\\ \\\hline\n", VEQ);
+fprintf(file, "IB1 & %e\\\\ \\\hline\n", IB1);
+fprintf(file, "IC1 & %e\\\\ \\\hline\n", IC1);
+fprintf(file, "VEQ & %e\\\\ \\\hline\n", IE1);
+fprintf(file, "VE1 & %e\\\\ \\\hline\n", VE1);
+fprintf(file, "V01 & %e\\\\ \\\hline\n", VO1);
+fprintf(file, "VCE & %e\\\\ \\\hline\n", VCE);
+fclose(file);
+
+file = fopen("../doc/GainStage_AC.txt", "w");
+fprintf(file, "gm1 & %e\\\\ \\\hline\n", gm1);
+fprintf(file, "$r \pi 1 & %e\\\\ \\\hline\n", rpi1);
+fprintf(file, "r01 & %e\\\\ \\\hline\n", ro1);
+fprintf(file, "AV1 & %e\\\\ \\\hline\n", AV1);
+fprintf(file, "AV1_DB & %e\\\\ \\\hline\n", AVI_DB);
+fprintf(file, "ZI1& %e\\\\ \\\hline\n", ZI1);
+fprintf(file, "ZO1 & %e\\\\ \\\hline\n", ZO1);
+fclose(file);
+
+file = fopen("../doc/OutputStage_OP.txt", "w");
+fprintf(file, "VI2 & %e\\\\ \\\hline\n", VO1);
+fprintf(file, "IC2 & %e\\\\ \\\hline\n", IC2);
+fprintf(file, "IE2 & %e\\\\ \\\hline\n", IE2);
+fprintf(file, "VO2 & %e\\\\ \\\hline\n", VO2);
+fclose(file);
+
+file = fopen("../doc/OutputStage_AC.txt", "w");
+fprintf(file, "gm2 & %e\\\\ \\\hline\n", gm2);
+fprintf(file, "$r \pi 2$ & %e\\\\ \\\hline\n", 1/gpi2);
+fprintf(file, "r02 & %e\\\\ \\\hline\n", 1/go2);
+fprintf(file, "AV2 & %e\\\\ \\\hline\n", AV2);
+fprintf(file, "AV_DB & %e\\\\ \\\hline\n", 20*log10(AV2));
+fprintf(file, "ZI2 & %e\\\\ \\\hline\n", ZI2);
+fprintf(file, "ZO2 & %e\\\\ \\\hline\n", ZO2);
+fclose(file);
+
 
 %total
 gB = 1/(1/gpi2+ZO1)
@@ -72,6 +109,13 @@ AV = (gB+gm2/gpi2*gB)/(gB+ge2+go2+gm2/gpi2*gB)*AV1
 AV_DB = 20*log10(abs(AV))
 ZI=ZI1
 ZO=1/(go2+gm2/gpi2*gB+ge2+gB)
+
+file = fopen("../doc/Final.txt", "w");
+fprintf(file, "AV & %e\\\\ \\\hline\n", AV);
+fprintf(file, "AV_BD & %e\\\\ \\\hline\n", AV_DB);
+fprintf(file, "ZI & %e\\\\ \\\hline\n", ZI);
+fprintf(file, "ZO & %e\\\\ \\\hline\n", ZO);
+fclose(file);
 
 jj = 1;
 
