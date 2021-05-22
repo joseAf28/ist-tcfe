@@ -29,7 +29,7 @@ Q2 0 coll emit2 BC557A
 Rout emit2 vcc 100
 
 * output coupling capacitor
-Co emit2 out 2m
+Co emit2 out 1m
 
 * load
 RL out 0 8

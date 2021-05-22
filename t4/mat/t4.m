@@ -11,7 +11,7 @@ VBEON=0.7
 VCC=12
 RS=100
 
-<<<<<<< HEAD
+
 RB=1/(1/RB1+1/RB2)
 VEQ=RB2/(RB1+RB2)*VCC
 IB1=(VEQ-VBEON)/(RB+(1+BFN)*RE1)
@@ -21,9 +21,8 @@ VE1=RE1*IE1
 VO1=VCC-RC1*IC1
 VCE=VO1-VE1
 
-=======
->>>>>>> 1d5dbe3f71b170efba6a5fe49c87fec27c9d4ae4
-%DC analysis sem approx grosseira
+
+%DC analysis gain stage
 
 RB=1/(1/RB1+1/RB2) %RB paralelo
 VEQ=RB2/(RB1+RB2)*VCC #Voltage thevanin
@@ -73,9 +72,65 @@ AVIsimple_DB = 20*log10(abs(AV1simple))
 ZI1 = 1/(1/RB+1/(((ro1+RC1+RE1)*(rpi1+RE1)+gm1*RE1*ro1*rpi1 - RE1^2)/(ro1+RC1+RE1)))
 ZO1 = 1/(1/ro1+1/RC1)
 
+AV2 = gm2/(gm2+gpi2+go2+ge2)
+ZI2 = (gm2+gpi2+go2+ge2)/gpi2/(gpi2+go2+ge2)
+ZO2 = 1/(gm2+gpi2+go2+ge2)
+
+file = fopen("../doc/GainStage_OP.txt", "w");
+fprintf(file, "VEQ & %e\\\\ \\\hline\n", VEQ);
+fprintf(file, "IB1 & %e\\\\ \\\hline\n", IB1);
+fprintf(file, "IC1 & %e\\\\ \\\hline\n", IC1);
+fprintf(file, "VEQ & %e\\\\ \\\hline\n", IE1);
+fprintf(file, "VE1 & %e\\\\ \\\hline\n", VE1);
+fprintf(file, "V01 & %e\\\\ \\\hline\n", VO1);
+fprintf(file, "VCE & %e\\\\ \\\hline\n", VCE);
+fclose(file);
+
+file = fopen("../doc/GainStage_AC.txt", "w");
+fprintf(file, "gm1 & %e\\\\ \\\hline\n", gm1);
+fprintf(file, "$r \pi 1 & %e\\\\ \\\hline\n", rpi1);
+fprintf(file, "r01 & %e\\\\ \\\hline\n", ro1);
+fprintf(file, "AV1 & %e\\\\ \\\hline\n", AV1);
+fprintf(file, "AV1_DB & %e\\\\ \\\hline\n", AVI_DB);
+fprintf(file, "ZI1& %e\\\\ \\\hline\n", ZI1);
+fprintf(file, "ZO1 & %e\\\\ \\\hline\n", ZO1);
+fclose(file);
+
+file = fopen("../doc/OutputStage_OP.txt", "w");
+fprintf(file, "VI2 & %e\\\\ \\\hline\n", VO1);
+fprintf(file, "IC2 & %e\\\\ \\\hline\n", IC2);
+fprintf(file, "IE2 & %e\\\\ \\\hline\n", IE2);
+fprintf(file, "VO2 & %e\\\\ \\\hline\n", VO2);
+fclose(file);
+
+file = fopen("../doc/OutputStage_AC.txt", "w");
+fprintf(file, "gm2 & %e\\\\ \\\hline\n", gm2);
+fprintf(file, "$r \pi 2$ & %e\\\\ \\\hline\n", 1/gpi2);
+fprintf(file, "r02 & %e\\\\ \\\hline\n", 1/go2);
+fprintf(file, "AV2 & %e\\\\ \\\hline\n", AV2);
+fprintf(file, "AV_DB & %e\\\\ \\\hline\n", 20*log10(AV2));
+fprintf(file, "ZI2 & %e\\\\ \\\hline\n", ZI2);
+fprintf(file, "ZO2 & %e\\\\ \\\hline\n", ZO2);
+fclose(file);
+
+
+%total
+gB = 1/(1/gpi2+ZO1)
+AV = (gB+gm2/gpi2*gB)/(gB+ge2+go2+gm2/gpi2*gB)*AV1
+AV_DB = 20*log10(abs(AV))
+ZI=ZI1
+ZO=1/(go2+gm2/gpi2*gB+ge2+gB)
+
+file = fopen("../doc/Final.txt", "w");
+fprintf(file, "AV & %e\\\\ \\\hline\n", AV);
+fprintf(file, "AV_BD & %e\\\\ \\\hline\n", AV_DB);
+fprintf(file, "ZI & %e\\\\ \\\hline\n", ZI);
+fprintf(file, "ZO & %e\\\\ \\\hline\n", ZO);
+fclose(file);
+
 jj = 1;
 
-RE1 = 100;
+RE1 = 100
 
 TGain = zeros(1, 10);
 TGain_DB = zeros(1, 10);
