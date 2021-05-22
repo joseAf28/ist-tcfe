@@ -33,16 +33,27 @@ gm1=IC1/VT
 rpi1=BFN/gm1
 ro1=VAFN/IC1
 
+RE1 = 0;
+RSB=RB*RS/(RB+RS);
+AV1 = RSB/RS * RC1*(RE1-gm1*rpi1*ro1)/((ro1+RC1+RE1)*(RSB+rpi1+RE1)+gm1*RE1*ro1*rpi1 - RE1^2) #gain
+AVI_DB = 20*log10(abs(AV1))
+AV1simple = RB/(RB+RS) * gm1*RC1/(1+gm1*RE1)
+AVIsimple_DB = 20*log10(abs(AV1simple))
+
+ZI1 = 1/(1/RB+1/(((ro1+RC1+RE1)*(rpi1+RE1)+gm1*RE1*ro1*rpi1 - RE1^2)/(ro1+RC1+RE1)))
+ZX = ro1*((RSB+rpi1)*RE1/(RSB+rpi1+RE1))/(1/(1/ro1+1/(rpi1+RSB)+1/RE1+gm1*rpi1/(rpi1+RSB)))
+ZX = ro1*(   1/RE1+1/(rpi1+RSB)+1/ro1+gm1*rpi1/(rpi1+RSB)  )/(   1/RE1+1/(rpi1+RSB) )
+ZO1 = 1/(1/ZX+1/RC1)
+
+
 AVI_DB_vec = zeros(1, 100);
 AVI_vec = zeros(1, 100);
 logfreq = zeros(1, 100);
 ZO1_vec = zeros(1, 100);
 ZI1_vec = zeros(1, 100);
 
-%falta plot impedancias.....
-
 jj= 1;
-
+RE1 = 100;
 for freq = 10:100:10e6
 omega = 2*pi*freq;
 
@@ -71,7 +82,6 @@ ZI1_vec(jj) = ZI1;
 ZO1_vec(jj) = ZO1;
 
 jj = jj +1;
-
 endfor
 
 hAC1 = figure();
@@ -93,6 +103,17 @@ IE2 = (VCC-VEBON-VI2)/RE2
 IC2 = BFP/(BFP+1)*IE2
 VO2 = VCC - RE2*IE2
 
+gm2 = IC2/VT;
+go2 = IC2/VAFP;
+gpi2 = gm2/BFP;
+ge2 = 1/(RE2);
+
+%AC analysis2
+AV2 = gm2/(gm2+gpi2+go2+ge2)
+ZI2 = (gm2+gpi2+go2+ge2)/gpi2/(gpi2+go2+ge2)
+ZO2 = 1/(gm2+gpi2+go2+ge2)
+
+
 %coupling capacitor R2
 C2 = 1e-6;
 
@@ -105,12 +126,12 @@ jj = 1;
 for freq = 10:100:10e6
 
 omega = 2*pi*freq;
-ZC2 = 1/(I*omega*C2)
+ZC2 = 1/(I*omega*C2);
 
 gm2 = IC2/VT;
 go2 = IC2/VAFP;
 gpi2 = gm2/BFP;
-ge2 = 1/(RE2 + ZC2);
+ge2 = 1/(RE2);
 
 %AC analysis2
 AV2_vec(jj) = gm2/(gm2+gpi2+go2+ge2);
