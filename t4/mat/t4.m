@@ -1,103 +1,68 @@
-%Envelope detector--------------
+%gain stage
 
-t=linspace(2e-2, 12e-2, 10000);
-f=50; %Hz
-w=2*pi*f;
-A = 20; %Volts
+VT=25e-3
+BFN=178.7
+VAFN=69.7
+RE1=100
+RC1=1000
+RB1=80000
+RB2=20000
+VBEON=0.7
+VCC=12
+RS=100
 
-
-R = 7e3; %Ohm
-C = 11e-6; %Farad
-
-
-VON=12.021610/18
-vlim =2*VON;
-
-B = A - vlim;
-
-vS = A * cos(w*t);
-vS0 = abs(vS);
-vOhr = zeros(1, length(t));
-vO = zeros(1, length(t));
-
-figure
-for i=1:length(t)
-  if (vS0(i) > vlim)
-    vOhr(i) = vS0(i)-vlim;
-  else
-    vOhr(i) = 0;
-  endif
-endfor
-
-plot(t*1000, vOhr)
-
-hold on
-
-tOFF = 1/w * atan(1/w/R/C);
-texp = linspace(0, 1e-2, 1000);
+RB=1/(1/RB1+1/RB2)
+VEQ=RB2/(RB1+RB2)*VCC
+IB1=(VEQ-VBEON)/(RB+(1+BFN)*RE1)
+IC1=BFN*IB1
+IE1=(1+BFN)*IB1
+VE1=RE1*IE1
+VO1=VCC-RC1*IC1
+VCE=VO1-VE1
 
 
-function f = f(B, w, tOFF, tstart, R, C)
-f = B*cos(w*tOFF)*exp(-(tstart - tOFF)/R/C);
-endfunction
+gm1=IC1/VT
+rpi1=BFN/gm1
+ro1=VAFN/IC1
 
-for(j = 0:9)
-for i=1:length(texp)
-k = i + j*length(texp);
-    valueexp = f(B, w, tOFF, texp(i), R, C);
-  if texp(i) < tOFF
-    vO(k) = vOhr(i);
-  elseif valueexp > vOhr(i)
-    vO(k) = valueexp;
-  else 
-    vO(k) = vOhr(i);
-  endif
-endfor
-endfor
+AV1 = RC1*(RE1-gm1*rpi1*ro1)/((ro1+RC1+RE1)*(RB+rpi1+RE1)+gm1*RE1*ro1*rpi1 - RE1^2)
 
-plot(t*1000, vO)
-title("Output voltage Envelope Detector v(t)")
-xlabel ("t[ms]")
-legend("rectified","envelope")
-print ("venvlope.eps", "-depsc");
+AV1simple = gm1*RC1/(1+gm1*RE1)
 
-hold off
+RE1=0
+AV1 = RC1*(RE1-gm1*rpi1*ro1)/((ro1+RC1+RE1)*(RB+rpi1+RE1)+gm1*RE1*ro1*rpi1 - RE1^2)
+AV1simple = gm1*RC1/(1+gm1*RE1)
 
-Vaverage = mean(vO)
+RE1=100
 
-%Voltage regulator--------------
-% vii = 6.475163e+00;
-% iir = vii/3000;
+ZI1 = ((ro1+RC1+RE1)*(RB+rpi1+RE1)+gm1*RE1*ro1*rpi1 - RE1^2)/(ro1+RC1+RE1)
+
+ZX = ro1*((RB+rpi1)*RE1/(RB+rpi1+RE1))/(1/(1/ro1+1/(rpi1+RB)+1/RE1+gm1*rpi1/(rpi1+RB)))
+
+ZO1 = 1/(1/ZX+1/RC1)
 
 
-vii = 6.475163e+00;
-iir = vii/3000; %Id
 
-rd = (1.610751/iir)/18 %ohm determinada a partir do voltage regulator do spice
-Rvr = 3000; %ohm
+%ouput stage
+BFP = 227.3
+VAFP = 37.2
+RE2 = 100
+VEBON = 0.7
+VI2 = VO1
+IE2 = (VCC-VEBON-VI2)/RE2
+IC2 = BFP/(BFP+1)*IE2
+VO2 = VCC - RE2*IE2
 
 
-vIncrement = vO-Vaverage;
-vri = 18*rd/(18*rd + Rvr)*vIncrement + 18*VON; %amplitude: uses 18 diodes in series
+gm2 = IC2/VT
+go2 = IC2/VAFP
+gpi2 = gm2/BFP
+ge2 = 1/RE2
 
-ripple = max(vri) - min(vri)
+AV2 = gm2/(gm2+gpi2+go2+ge2)
 
-vriaverage = mean(vri)
 
-cost = 18 + 22 * 0.1
-vdev = mean(vri-12)
 
-merit = 1/ cost*(ripple + vdev + 1e-6)
+ZI2 = (gm2+gpi2+go2+ge2)/gpi2/(gpi2+go2+ge2)
 
-figure
-plot(t*1000, vri)
-title("Output voltage of Voltage Regulator v(t)")
-xlabel ("t[ms]")
-print ("voltageRegulator.eps", "-depsc");
-
-vri = vri - 18*VON;
-plot(t*1000, vri)
-title("Output voltage Deviation v(t)")
-xlabel ("t[ms]")
-print ("Deviation.eps", "-depsc");
-
+ZO2 = 1/(gm2+gpi2+go2+ge2)
