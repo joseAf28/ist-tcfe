@@ -58,6 +58,10 @@ plot vdb(out)
 plot vp(out)
 hardcopy vo2f.ps vdb(coll)
 
+meas ac result maxi vdb(out)
+
+meas ac f1 when vdb(out)=result-10 CROSS = 1
+
 *input impedance in kohm
 *print all
 
