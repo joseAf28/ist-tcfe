@@ -85,6 +85,8 @@ print maximum(vdb(coll))
 plot abs(v(in2)[40]/vin#branch[40]/(-1000))
 print v(in2)[40]/vin#branch[40]/(-1000)
 
+print maximum(vdb(out)*(f2-f1)/(9600.608*f1));
+
 *need a different setup to measure output impedance
 
 
