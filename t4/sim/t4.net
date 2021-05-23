@@ -69,7 +69,7 @@ echo vo1f_FIG
 
 plot vdb(out)
 plot vp(out)
-hardcopy vo2f.ps vdb(coll)
+hardcopy vo2f.ps vdb(out)
 echo vo2f_FIG
 
 *cutoffs

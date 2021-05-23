@@ -110,7 +110,7 @@ fprintf(file, "gm2 & %e\\\\ \\\hline\n", gm2);
 fprintf(file, "$r \pi 2$ & %e\\\\ \\\hline\n", 1/gpi2);
 fprintf(file, "r02 & %e\\\\ \\\hline\n", 1/go2);
 fprintf(file, "AV2 & %e\\\\ \\\hline\n", AV2);
-fprintf(file, "AV_DB & %e\\\\ \\\hline\n", 20*log10(AV2));
+fprintf(file, "$AV_{DB}$ & %e\\\\ \\\hline\n", 20*log10(AV2));
 fprintf(file, "ZI2 & %e\\\\ \\\hline\n", ZI2);
 fprintf(file, "ZO2 & %e\\\\ \\\hline\n", ZO2);
 fclose(file);
@@ -125,7 +125,7 @@ ZO=1/(go2+gm2/gpi2*gB+ge2+gB)
 
 file = fopen("../doc/Final.tex", "w");
 fprintf(file, "AV & %e\\\\ \\\hline\n", AV);
-fprintf(file, "AV_BD & %e\\\\ \\\hline\n", AV_DB);
+fprintf(file, "$AV_{DB}$ & %e\\\\ \\\hline\n", AV_DB);
 fprintf(file, "ZI & %e\\\\ \\\hline\n", ZI);
 fprintf(file, "ZO & %e\\\\ \\\hline\n", ZO);
 fclose(file);
