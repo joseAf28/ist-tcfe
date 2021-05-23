@@ -3,125 +3,112 @@
 
 
 \begin{figure*}[h]
-    \centering
-    \begin{subfigure}{0.23\textwidth}
-        \includegraphics[width=\linewidth, clip]{vo1.pdf}
-        \label{fig:output1}
-    \end{subfigure}
-    \begin{subfigure}{0.23\textwidth}
-        \includegraphics[width=\linewidth, clip]{vo1f.pdf}
-        \label{fig:output2}
-    \end{subfigure}
-    \caption{\small $V_Out - 12$ - measure of the output DC deviation + AC component (left - simulation; right - theoretical )}
-    \label{output_deviation}
+  \centering
+  \begin{subfigure}{0.23\textwidth}
+    \includegraphics[width=\linewidth, clip]{vo1.pdf}
+    \label{fig:output1}
+  \end{subfigure}
+  \begin{subfigure}{0.23\textwidth}
+    \includegraphics[width=\linewidth, clip]{vo1f.pdf}
+    \label{fig:output2}
+  \end{subfigure}
+  \caption{\small $V_Out - 12$ - measure of the output DC deviation + AC component (left - simulation; right - theoretical )}
+  \label{output_deviation}
 \end{figure*}
 
 \begin{figure*}[h]
-    \centering
-    \begin{subfigure}{0.23\textwidth}
-        \includegraphics[width=\linewidth, clip]{vo2f.pdf}
-        \label{fig:output1}
-    \end{subfigure}
-    \begin{subfigure}{0.23\textwidth}
-        \includegraphics[width=\linewidth, clip]{gainACtotal.eps}
-        \label{fig:output2}
-    \end{subfigure}
-    \caption{\small $V_Out - 12$ - measure of the output DC deviation + AC component (left - simulation; right - theoretical )}
-    \label{output_deviation}
+  \centering
+  \begin{subfigure}{0.23\textwidth}
+    \includegraphics[width=\linewidth, clip]{vo2f.pdf}
+    \label{fig:output1}
+  \end{subfigure}
+  \begin{subfigure}{0.23\textwidth}
+    \includegraphics[width=\linewidth, clip]{gainACtotal.eps}
+    \label{fig:output2}
+  \end{subfigure}
+  \caption{\small $V_Out - 12$ - measure of the output DC deviation + AC component (left - simulation; right - theoretical )}
+  \label{output_deviation}
 \end{figure*}
 
-% \begin{figure}
-%     \centering
-%     \begin{subfigure}{.5\textwidth}
-%         \centering
-%         \includegraphics[width=.4\linewidth]{vo1.pdf}
-%         \caption{A subfigure}
-%         \label{fig:sub1}
-%     \end{subfigure}%
-%     \begin{subfigure}{.5\textwidth}
-%         \centering
-%         \includegraphics[width=.4\linewidth]{gainACtotal.eps}
-%         \caption{A subfigure}
-%         \label{fig:sub2}
-%     \end{subfigure}
-%     \caption{A figure with two subfigures}
-%     \label{fig:test}
-% \end{figure}
-
 
 \begin{table}
-    \parbox{.45\linewidth}{
-        \centering
-        \begin{tabular}{|c|c|}
-            \hline
-            {\bf Name} & {\bf Value [A or V]} \\ \hline
-            \input{GainStage_OP.tex}
-        \end{tabular}
-        \label{tab:GainStage_OP}
-        \caption{Results of the DC analysis applied to the Gain Stage circuit}
-    }
-    \hfill
-    \parbox{.45\linewidth}{
-        \centering
-        \begin{tabular}{|c|c|}
-            {\bf Name} & {\bf Value [A or V]} \\ \hline
-            \input{op_tab.tex}
-            \hline
-        \end{tabular}
-        \label{tab:Spice_OP}
-        \caption{Results of the OP analysis applied to the whole circuit by using the Ngspice}
-    }
-    \hfill
-    \parbox{.45\linewidth}{
-        \centering
-        \begin{tabular}{|c|c|}
-            {\bf Name} & {\bf Value [A or V]} \\ \hline
-            \input{OutputStage_OP.tex}
-            \hline
-        \end{tabular}
-        \label{tab:OutputStage_OP}
-        \caption{Results of the DC analysis applied to the Output Stage circuit }
-    }
+  \parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{|c|c|}
+      \hline
+      {\bf Name} & {\bf Value [A or V]} \\ \hline
+      \input{GainStage_OP.tex}
+    \end{tabular}
+    \label{tab:GainStage_OP}
+    \caption{Results of the DC analysis applied to the Gain Stage circuit}
+  }
+  \hfill
+  \parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{|c|c|}
+      {\bf Name} & {\bf Value [A or V]} \\ \hline
+      \input{op_tab.tex}
+      \hline
+    \end{tabular}
+    \label{tab:Spice_OP}
+    \caption{Results of the OP analysis applied to the whole circuit by using the Ngspice}
+  }
+  \hfill
+  \parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{|c|c|}
+      {\bf Name} & {\bf Value [A or V]} \\ \hline
+      \input{OutputStage_OP.tex}
+      \hline
+    \end{tabular}
+    \label{tab:OutputStage_OP}
+    \caption{Results of the DC analysis applied to the Output Stage circuit }
+  }
 \end{table}
 
-Compare the Operating point both models......
+As we can see, the value of voltage across $R_E$ calculated in the theoretical part is $3.055\%$
+smaller than the one calculated with Ngspice and and that $VO1$ calculated in the theoretical part is $1.176\%$ bigger than
+the one calculated in NGspice.
 
-
+According to the the output stage, we can see that $VO2$ calculated in the theoretical part is $\approx 1.676\%$ bigger than the value we get from spice.
 
 \begin{table}
-    \parbox{.45\linewidth}{
-        \centering
-        \begin{tabular}{|c|c|}
-            \hline
-            {\bf Name} & {\bf Impedance or Gain in dB} \\ \hline
-            \input{GainStage_AC.tex}
-        \end{tabular}
-        \label{tab:GainStage_AC}
-        \caption{Results of the Incremental Analysis applied to the Gain Stage in the theoretical part}
-    }
-    \hfill
-    \parbox{.45\linewidth}{
-        \centering
-        \begin{tabular}{|c|c|}
-            {\bf Name} & {\bf Impedance or Gain in dB} \\ \hline
-            \input{OutputStage_AC.tex}
-            \hline
-        \end{tabular}
-        \label{tab:OutputStage_AC}
-        \caption{Results of the Incremental Analysis applied to the Output Stage in the theoretical part }
-    }
-    \hfill
-    \parbox{.45\linewidth}{
-        \centering
-        \begin{tabular}{|c|c|}
-            {\bf Name} & {\bf Value [A or V]} \\ \hline
-            \input{Final.tex}
-            \hline
-        \end{tabular}
-        \label{tab:Final}
-        \caption{Impedance of input and output of the Amplifier and total gain of the circuit}
-    }
+  \parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{|c|c|}
+      \hline
+      {\bf Name} & {\bf Impedance or Gain in dB} \\ \hline
+      \input{GainStage_AC.tex}
+    \end{tabular}
+    \label{tab:GainStage_AC}
+    \caption{Results of the Incremental Analysis applied to the Gain Stage in the theoretical part}
+  }
+  \hfill
+  \parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{|c|c|}
+      {\bf Name} & {\bf Impedance or Gain in dB} \\ \hline
+      \input{OutputStage_AC.tex}
+      \hline
+    \end{tabular}
+    \label{tab:OutputStage_AC}
+    \caption{Results of the Incremental Analysis applied to the Output Stage in the theoretical part }
+  }
+  \hfill
+  \parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{|c|c|}
+      {\bf Name} & {\bf Value [A or V]} \\ \hline
+      \input{Final.tex}
+      \hline
+    \end{tabular}
+    \label{tab:Final}
+    \caption{Impedance of input and output of the Amplifier and total gain of the circuit}
+  }
 \end{table}
+
+The difference aong values we got from Ngspice and Octave in the Operating Point influence the results we got in AC analysis.
+
 
 
 

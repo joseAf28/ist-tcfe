@@ -81,6 +81,10 @@ And so we calculate the gain in DB using the following formula:
 
 The plot we get is presented in section Simulation.
 
+As we can see, the behaviour of both plots for small frequencies is quite similar. However, for much bigger frequencies, the plots present very different
+behaviours. The Ngspice one as expected has a passband in gain. On the Octave one, we do not see this. The theoretical model predicts that the
+high cut off is $\infty$ which is of course not correct for the Amplifier.
+This behaviour is due to the fact that we use the for model transistor in AC signal presented in the lectures that do not include capacitors.
 
 
 
