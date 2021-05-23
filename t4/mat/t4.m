@@ -138,6 +138,8 @@ TGain = zeros(1, 10);
 TGain_DB = zeros(1, 10);
 logfreq = zeros(1, 10);
 
+TGain1_DB = zeros(1, 10);
+
 C1 = 1e-3;
 C2 = 7.5e-3;
 C3 =1e-3;
@@ -172,8 +174,18 @@ TGain(jj) = Vout*load/(load + ZC3)/vin;
 TGain_DB(jj) = 20*log10(abs(TGain(jj)));
 logfreq(jj) = t;
 
+TGain1 = (X(4)- X(5))*RC1/vin;
+TGain1_DB(jj) = 20*log10(abs(TGain1));
+
 jj = jj +1;
 endfor
+
+figure
+plot(logfreq, TGain1_DB, "b");
+title("Gain Amplifier");
+ylabel ("dB");
+xlabel ("frequency [Hz]");
+print ("gainAC1.eps", "-depsc");
 
 figure
 plot(logfreq, TGain_DB, "b");
@@ -181,4 +193,3 @@ title("Gain Amplifier");
 ylabel ("dB");
 xlabel ("frequency [Hz]");
 print ("gainACtotal.eps", "-depsc");
-

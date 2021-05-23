@@ -76,6 +76,8 @@ let cut = maximum(vdb(out))-3
 meas ac f1 WHEN vdb(out)=cut CROSS=1
 meas ac f2 WHEN vdb(out)=cut CROSS=LAST
 
+print maximum(vdb(out))
+print maximum(vdb(coll))
 
 *input impedance in kohm
 *print all
