@@ -8,15 +8,19 @@ Finally we measured the output voltage gain in the passband,
 the lower and upper 3dB cut off frequencies and the input and output
 impedances.
 
+
+The circuit studied had a cost of 9600.608 MU. Much of the cost can be 
+attributable to the capacitors used. 
+
+
 \begin{figure*}[h]
     \centering
     \begin{subfigure}{0.23\textwidth}
         \includegraphics[width=\linewidth, clip]{vo1.pdf}
         \label{fig:output1}
     \end{subfigure}
-    \caption{vin input Gain stage as function of time}
+    \caption{v output Gain stage as function of time}
 \end{figure*}
-
 
 
 \begin{figure*}[h]
@@ -84,11 +88,17 @@ impedances.
     }
 \end{table}
 
-As we can see, the value of voltage across $R_E$ calculated in the theoretical part is $3.055\%$
-smaller than the one calculated with Ngspice and and that $VO1$ calculated in the theoretical part is $1.176\%$ bigger than
-the one calculated in NGspice.
+As we can see, the value of voltage across $R_E$ calculated in the 
+theoretical part is $3.055\%$ smaller than the one calculated with 
+Ngspice and and that $VO1$ calculated in the theoretical part is 
+$1.176\%$ bigger than the one calculated in NGspice.
 
-According to the the output stage, we can see that $VO2$ calculated in the theoretical part is $\approx 1.676\%$ bigger than the value we get from spice.
+Comparing the theoretical and simulation gain we get the following errors:
+$E_{AV} = 24.43\%$ and $E_{AV1} = 41.76\%$
+
+According to the the output stage, we can see that $VO2$ calculated 
+in the theoretical part is $\approx 1.676\%$ bigger than the value 
+we get from spice.
 
 \begin{table}
     \parbox{.45\linewidth}{
@@ -125,8 +135,15 @@ According to the the output stage, we can see that $VO2$ calculated in the theor
     }
 \end{table}
 
-The difference aong values we got from Ngspice and Octave in the Operating Point influence the results we got in AC analysis.
+The difference among values we got from Ngspice and Octave in the 
+Operating Point influence the results we got in AC analysis.
 
 
+By using the coupling capacitor we can block the dc components and 
+decrease the cut off frequency. And by using the bypass capacitor we can 
+increase the gain of the gain stage which is possible because we bypass 
+a higher impedance component. 
 
-
+The purpose of the resistor $R_c$ is to regulate the amount of current 
+to stablish in the OP from which the output current from the circuit will change 
+across that value. 
