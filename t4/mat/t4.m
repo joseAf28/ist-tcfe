@@ -11,6 +11,17 @@ VBEON=0.7
 VCC=12
 RS=100
 
+
+RB=1/(1/RB1+1/RB2)
+VEQ=RB2/(RB1+RB2)*VCC
+IB1=(VEQ-VBEON)/(RB+(1+BFN)*RE1)
+IC1=BFN*IB1
+IE1=(1+BFN)*IB1
+VE1=RE1*IE1
+VO1=VCC-RC1*IC1
+VCE=VO1-VE1
+
+
 %DC analysis gain stage
 
 RB=1/(1/RB1+1/RB2) %RB paralelo
@@ -51,6 +62,8 @@ ge2 = 1/(RE2);
 
 RSB=RB*RS/(RB+RS)
 
+
+%incremental analysis
 RE1=0
 AV1 = RSB/RS * RC1*(RE1-gm1*rpi1*ro1)/((ro1+RC1+RE1)*(RSB+rpi1+RE1)+gm1*RE1*ro1*rpi1 - RE1^2)
 AVI_DB = 20*log10(abs(AV1))
@@ -65,7 +78,7 @@ AV2 = gm2/(gm2+gpi2+go2+ge2)
 ZI2 = (gm2+gpi2+go2+ge2)/gpi2/(gpi2+go2+ge2)
 ZO2 = 1/(gm2+gpi2+go2+ge2)
 
-file = fopen("../doc/GainStage_OP.txt", "w");
+file = fopen("../doc/GainStage_OP.tex", "w");
 fprintf(file, "VEQ & %e\\\\ \\\hline\n", VEQ);
 fprintf(file, "IB1 & %e\\\\ \\\hline\n", IB1);
 fprintf(file, "IC1 & %e\\\\ \\\hline\n", IC1);
@@ -75,24 +88,24 @@ fprintf(file, "V01 & %e\\\\ \\\hline\n", VO1);
 fprintf(file, "VCE & %e\\\\ \\\hline\n", VCE);
 fclose(file);
 
-file = fopen("../doc/GainStage_AC.txt", "w");
+file = fopen("../doc/GainStage_AC.tex", "w");
 fprintf(file, "gm1 & %e\\\\ \\\hline\n", gm1);
-fprintf(file, "$r \pi 1 & %e\\\\ \\\hline\n", rpi1);
+fprintf(file, "$r \pi 1$ & %e\\\\ \\\hline\n", rpi1);
 fprintf(file, "r01 & %e\\\\ \\\hline\n", ro1);
 fprintf(file, "AV1 & %e\\\\ \\\hline\n", AV1);
-fprintf(file, "AV1_DB & %e\\\\ \\\hline\n", AVI_DB);
+fprintf(file, "$AV1_{DB}$ & %e\\\\ \\\hline\n", AVI_DB);
 fprintf(file, "ZI1& %e\\\\ \\\hline\n", ZI1);
 fprintf(file, "ZO1 & %e\\\\ \\\hline\n", ZO1);
 fclose(file);
 
-file = fopen("../doc/OutputStage_OP.txt", "w");
+file = fopen("../doc/OutputStage_OP.tex", "w");
 fprintf(file, "VI2 & %e\\\\ \\\hline\n", VO1);
 fprintf(file, "IC2 & %e\\\\ \\\hline\n", IC2);
 fprintf(file, "IE2 & %e\\\\ \\\hline\n", IE2);
 fprintf(file, "VO2 & %e\\\\ \\\hline\n", VO2);
 fclose(file);
 
-file = fopen("../doc/OutputStage_AC.txt", "w");
+file = fopen("../doc/OutputStage_AC.tex", "w");
 fprintf(file, "gm2 & %e\\\\ \\\hline\n", gm2);
 fprintf(file, "$r \pi 2$ & %e\\\\ \\\hline\n", 1/gpi2);
 fprintf(file, "r02 & %e\\\\ \\\hline\n", 1/go2);
@@ -110,7 +123,7 @@ AV_DB = 20*log10(abs(AV))
 ZI=ZI1
 ZO=1/(go2+gm2/gpi2*gB+ge2+gB)
 
-file = fopen("../doc/Final.txt", "w");
+file = fopen("../doc/Final.tex", "w");
 fprintf(file, "AV & %e\\\\ \\\hline\n", AV);
 fprintf(file, "AV_BD & %e\\\\ \\\hline\n", AV_DB);
 fprintf(file, "ZI & %e\\\\ \\\hline\n", ZI);
@@ -126,8 +139,8 @@ TGain_DB = zeros(1, 10);
 logfreq = zeros(1, 10);
 
 C1 = 1e-3;
-C2 = 10e-3;
-C3 =2e-3;
+C2 = 7.5e-3;
+C3 =1e-3;
 
 vin = 10e-3;
 
@@ -162,11 +175,10 @@ logfreq(jj) = t;
 jj = jj +1;
 endfor
 
-
-hGain = figure();
-hACtotal = figure();
+figure
 plot(logfreq, TGain_DB, "b");
-print(hACtotal, "gainACtotal.eps", "-depsc");
-
-
+title("Gain Amplifier");
+ylabel ("dB");
+xlabel ("frequency [Hz]");
+print ("gainACtotal.eps", "-depsc");
 

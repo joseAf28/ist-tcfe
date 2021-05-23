@@ -6,5 +6,62 @@ Then, we joined the envelope detector with a voltage regulator until we had sati
 Finally, we added \textit{Ngspice} commands to calculate the main quality outputs: the average and the ripple. The results will be shown later, side-by-side with the theoretical analysis' results.
 
 
+% \begin{figure*}[h]
+%     \centering
+%     \begin{subfigure}{0.23\textwidth}
+%         \includegraphics[width=\linewidth, clip]{vo2f.pdf}
+%         \label{fig:output1}
+%     \end{subfigure}
+%     \begin{subfigure}{0.23\textwidth}
+%         \includegraphics[width=\linewidth, clip]{vo1f.pdf}
+%         \label{fig:output2}
+%     \end{subfigure}
+%     \caption{\small $V_Out - 12$ - measure of the output DC deviation + AC component (left - simulation; right - theoretical )}
+%     \label{output_deviation}
+% \end{figure*}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.4\linewidth]{vo1.pdf}
+        \caption{A subfigure}
+        \label{fig:sub1}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=.4\linewidth]{vo1f.pdf}
+        \caption{A subfigure}
+        \label{fig:sub2}
+    \end{subfigure}
+    \caption{A figure with two subfigures}
+    \label{fig:test}
+\end{figure}
+
+
+\begin{table}
+    \parbox{.45\linewidth}{
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            {\bf Name} & {\bf Value [A or V]} \\ \hline
+            \input{GainStage_AC.tex}
+        \end{tabular}
+        \label{tab:GainStage_AC}
+        \caption{Results of Nodal Analysis of the circuit for t < 0. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt}}
+    }
+    \hfill
+    \parbox{.45\linewidth}{
+        \centering
+        \begin{tabular}{|c|c|}
+            {\bf Name} & {\bf Value [A or V]} \\ \hline
+            \input{GainStage_OP.tex}
+            \hline
+        \end{tabular}
+        \label{tab:GainStage_OP}
+        \caption{Table with results from Ngspice to find out the voltages and currents in each node and branch. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+    }
+\end{table}
+
 
 
