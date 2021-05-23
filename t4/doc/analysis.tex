@@ -2,7 +2,7 @@
 \label{sec:analysis}
 
 In the following sections of the operating point and Incremental Analysis, we use the mathematical formulas presented in the slides
-and tha were provided in the Octave script.
+and that were provided in the Octave script.
 
 \subsection{Gain Stage}
 
@@ -39,7 +39,7 @@ The results of thid section are presented in a table in section Simulation too.
 So, as we can see the large difference between the values of the output impedances the circuit of
 the gain stage and the input impedance of the output stage garantees that we can connect them without
 a significant signal loss.
-In fact, the input impedance of the output stage is $\approx 9.7$ greter than the output impedance ot the gain stage,
+In fact, the input impedance of the output stage is $\approx 9.7$ greater than the output impedance ot the gain stage,
 which justifies what was said in the previous sentence.
 
 \subsection{Frequency Response}
@@ -48,7 +48,7 @@ In order to be able to understand the behaviour of the whole circuit in reponse 
 a range of frequencies from 10Hz to 1MHz.
 So we use the Bipolar transistor small signall model(AC) for the transistor and we add the coupling and the bypass capacitor as presented in
 Ngspice. The coupling capacitor of the gain stage is $Ci$, the coupling capacitor of the ouput stage is $Co$ and the bypass
-capacitor of the gain stage(is in parallel with the resistor of the emitter, $R_e$) id $Cb$.
+capacitor of the gain stage(is in parallel with the resistor of the emitter, $R_e$) is $Cb$.
 
 \[
   \begin{bmatrix}
@@ -81,6 +81,10 @@ And so we calculate the gain in DB using the following formula:
 
 The plot we get is presented in section Simulation.
 
+As we can see, the behaviour of both plots for small frequencies is quite similar. However, for much bigger frequencies, the plots present very different
+behaviours. The Ngspice one as expected has a passband in gain. On the Octave one, we do not see this. The theoretical model predicts that the
+high cut off is $\infty$ which is of course not correct for the Amplifier.
+This behaviour is due to the fact that we use the for model transistor in AC signal presented in the lectures that do not include capacitors.
 
 
 

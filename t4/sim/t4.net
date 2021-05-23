@@ -66,7 +66,6 @@ hardcopy vo1f.ps vdb(coll)
 echo vo1f_FIG
 
 
-
 plot vdb(out)
 plot vp(out)
 hardcopy vo2f.ps vdb(out)
@@ -77,12 +76,16 @@ let cut = maximum(vdb(out))-3
 meas ac f1 WHEN vdb(out)=cut CROSS=1
 meas ac f2 WHEN vdb(out)=cut CROSS=LAST
 
+print maximum(vdb(out))
+print maximum(vdb(coll))
 
 *input impedance in kohm
 *print all
 
 plot abs(v(in2)[40]/vin#branch[40]/(-1000))
 print v(in2)[40]/vin#branch[40]/(-1000)
+
+print maximum(vdb(out)*(f2-f1)/(9600.608*f1));
 
 *need a different setup to measure output impedance
 
