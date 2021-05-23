@@ -175,11 +175,10 @@ logfreq(jj) = t;
 jj = jj +1;
 endfor
 
-
-hGain = figure();
-hACtotal = figure();
+figure
 plot(logfreq, TGain_DB, "b");
-print(hACtotal, "gainACtotal.eps", "-depsc");
-
-
+title("Gain Amplifier");
+ylabel ("dB");
+xlabel ("frequency [Hz]");
+print ("gainACtotal.eps", "-depsc");
 
