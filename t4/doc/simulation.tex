@@ -1,17 +1,6 @@
 \section{Simulation Analysis}
 \label{sec:simulation}
 
-In this section we wrote a \textit{Ngspice} script to simulate the audio
-amplifier circuit, using the transistor models provided in the .net script
-(NPN for the gain stage and PNP for the output stage).
-Finally we measured the output voltage gain in the passband,
-the lower and upper 3dB cut off frequencies and the input and output
-impedances.
-
-
-The circuit studied had a cost of 9600.608 MU. Much of the cost can be 
-attributable to the capacitors used. 
-
 
 \begin{figure*}[h]
     \centering
@@ -19,21 +8,11 @@ attributable to the capacitors used.
         \includegraphics[width=\linewidth, clip]{vo1.pdf}
         \label{fig:output1}
     \end{subfigure}
-    \caption{v output Gain stage as function of time}
-\end{figure*}
-
-
-\begin{figure*}[h]
-    \centering
-    \begin{subfigure}{0.23\textwidth}
-        \includegraphics[width=\linewidth, clip]{gainAC1.eps}
-        \label{fig:output1}
-    \end{subfigure}
     \begin{subfigure}{0.23\textwidth}
         \includegraphics[width=\linewidth, clip]{vo1f.pdf}
         \label{fig:output2}
     \end{subfigure}
-    \caption{\small Gain in dB  in Gain Stage circut as function of frequency obtained from Octave; Gain in dB  in Gain Stage circut as function of frequency obtained from NGspice}
+    \caption{\small $V_Out - 12$ - measure of the output DC deviation + AC component (left - simulation; right - theoretical )}
     \label{output_deviation}
 \end{figure*}
 
@@ -44,13 +23,30 @@ attributable to the capacitors used.
         \label{fig:output1}
     \end{subfigure}
     \begin{subfigure}{0.23\textwidth}
-        \includegraphics[width=\linewidth, clip]{gainACtotal-eps-converted-to.pdf}
+        \includegraphics[width=\linewidth, clip]{gainACtotal.eps}
         \label{fig:output2}
     \end{subfigure}
-    \caption{\small Plot of the Gain in dB of the total circuit as function of frequency we got from Nsgice(left).
-        Plot of the Gain in dB of the total circuit as function of frequency we got from the Theoretical Part(right)}
+    \caption{\small $V_Out - 12$ - measure of the output DC deviation + AC component (left - simulation; right - theoretical )}
     \label{output_deviation}
 \end{figure*}
+
+% \begin{figure}
+%     \centering
+%     \begin{subfigure}{.5\textwidth}
+%         \centering
+%         \includegraphics[width=.4\linewidth]{vo1.pdf}
+%         \caption{A subfigure}
+%         \label{fig:sub1}
+%     \end{subfigure}%
+%     \begin{subfigure}{.5\textwidth}
+%         \centering
+%         \includegraphics[width=.4\linewidth]{gainACtotal.eps}
+%         \caption{A subfigure}
+%         \label{fig:sub2}
+%     \end{subfigure}
+%     \caption{A figure with two subfigures}
+%     \label{fig:test}
+% \end{figure}
 
 
 \begin{table}
@@ -88,17 +84,9 @@ attributable to the capacitors used.
     }
 \end{table}
 
-As we can see, the value of voltage across $R_E$ calculated in the 
-theoretical part is $3.055\%$ smaller than the one calculated with 
-Ngspice and and that $VO1$ calculated in the theoretical part is 
-$1.176\%$ bigger than the one calculated in NGspice.
+Compare the Operating point both models......
 
-Comparing the theoretical and simulation gain we get the following errors:
-$E_{AV} = 24.43\%$ and $E_{AV1} = 15.9\%$.
 
-According to the the output stage, we can see that $VO2$ calculated 
-in the theoretical part is $\approx 1.676\%$ bigger than the value 
-we get from spice.
 
 \begin{table}
     \parbox{.45\linewidth}{
@@ -135,15 +123,5 @@ we get from spice.
     }
 \end{table}
 
-The difference among values we got from Ngspice and Octave in the 
-Operating Point influence the results we got in AC analysis.
 
 
-By using the coupling capacitor we can block the dc components and 
-decrease the cut off frequency. And by using the bypass capacitor we can 
-increase the gain of the gain stage which is possible because we bypass 
-a higher impedance component. 
-
-The purpose of the resistor $R_c$ is to regulate the amount of current 
-to stablish in the OP from which the output current from the circuit will change 
-across that value. 
