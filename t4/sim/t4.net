@@ -35,15 +35,27 @@ Co emit2 out 1m
 RL out 0 8
 
 .op
+
 .end
 
 .control
+
+op
+
+echo "********************************************"
+echo  "Operating point"
+echo "********************************************"
+
+echo  "op_TAB"
+print all
+echo  "op_END"
 
 
 * time analysis
 tran 1e-5 1e-2
 plot v(coll)
 hardcopy vo1.ps vdb(coll)
+echo vo1_FIG
 
 
 * frequency analysis
@@ -51,12 +63,14 @@ ac dec 10 10 100MEG
 plot vdb(coll)
 plot vp(coll)
 hardcopy vo1f.ps vdb(coll)
+echo vo1f_FIG
 
 
 
 plot vdb(out)
 plot vp(out)
 hardcopy vo2f.ps vdb(coll)
+echo vo2f_FIG
 
 *cutoffs
 let cut = maximum(vdb(out))-3

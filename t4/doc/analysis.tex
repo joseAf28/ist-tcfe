@@ -1,76 +1,84 @@
 \section{Theoretical Analysis}
 \label{sec:analysis}
 
-
+In the following sections of the operating point and Incremntal Analysis, we use the mathematical formulas presented in the slides
+and tha were provided in the Octave script.
 
 \section{Gain Stage}
 
 
 Operating point
 
-\[
-  \left\{
-  \begin{array}{ll}
-    i = 0, if v < V_{ON}   \\
-    v = V_{ON}, if  i \geq \\
-  \end{array}
-  \right.
-\]
-
-Due to the fact we have a full wave rectifier, we have two diodes in series either the voltage source be positive or negative.
-Moreover, the output voltage of this bridge, $V_o$:
-
-\[
-  \left\{
-  \begin{array}{ll}
-    V_o = 0,  if  |V_s| < 2V_{ON}               \\
-    v = |V_s| - 2 V_{ON}, if |V_s| \geq 2V_{ON} \\
-  \end{array}
-  \right.
-\] where $V_s$ is the voltage of the source
-
-In order to smooth the signal of the output voltage, terminal V2 and V3, we add a capacitor and a resistor in parallel
-
-So we have that initially the potential difference between the terminal of the capacitor is $V_o$. From the time instant $t_{OFF}$
-the capacitor starts to discharge through the resistor because is voltage is bigger than $V_o$ at this point, which smooths the output voltage.
-During this period, the diodes are inversely polarized and they do not enable to pass charge.
+By studying the operating point of the gain stage, we got the results presented in table section Side by side Comaprison.
+The values of the tensions and currents in Operating Point were evaluated using the following equations:
 
 
 Incremental Analysis
 
-So during this interval of time, we have:
+In order to be able to analyse the behaviour of the output stage in the AC state, we use the Bipolar transistor small signall model(AC) presented in the lectures.
 
-\begin{equation}
-  i_R = - i_C \Leftrightarrow \frac{v_s}{R} = -C\frac{dv_s}{dt} \Leftrightarrow \frac{A}{R}\cos(\omega t_{OFF}) = C A \omega \sin(\omega t_{OFF})
-\end{equation}
-
-\begin{equation}
-  t_{OFF} = \frac{1}{\omega}\arctan\frac{1}{\omega RC}
-\end{equation}
-
-So from $t \geq t_{OFF}$, we have:
-
-\begin{equation}
-  v_o(t) = A\cos(\omega t_{OFF}) e^{-\frac{t-t_{OFF}}{RC}}
-\end{equation}
-
-At $t = t_{ON}$, the diodes goes ON again:
-
-\begin{equation}
-  v_o(t_{ON}) = A\cos(\omega t_{OFF}) e^{-\frac{t_{ON}-t_{OFF}}{RC}}
-\end{equation}
-
-We solve this equation with \textit{Octave}.
+The results of the we gain and the impedances of this stage are presented in a table in section Side by side Comaprison, where we do a comparison between both models.
 
 
 \section{Output Stage}
 
 Operating Point
 
-
+The results of this process are presented in a table in section Side by side Comaprison. where we do a comparison between both models.
 
 AC analysis
 
+In this section, we use the Bipolar transistor small signall model(AC) presented in the lectures as a model for the transistor.
+The results we got are presented in a table.
+
+\section{Final Results}
+
+The results of thid section are presented in a table in section Side by side Comaprison. too.
+
+So, as we can see the large difference between the values of the output impedances the circuit of
+the input stage and the input impedance of the output stage garantees that we can connect them without
+a significant signal loss.
+In fact, the input impedance of the output stage is $\approx 9.7$ greter than the output impedance ot the gain stage,
+which justifies what was said in the previous sentence.
+
+\section{Frequency Response}
+
+In order to be able to understand the behaviour of the whole circuit in reponse of to the input ac voltage source witha
+a range of frequencies from 10Hz to 1MHz.
+So we use the Bipolar transistor small signall model(AC) for the transistor and we add the coupling and the bypass capacitor as presented in
+Ngspice. The coupling capacitor of the gain stage is $Ci$, the coupling capacitor of the ouput stage is $Co$ and the bypass
+capacitor of the gain stage(is in parallel with the resistor of the emitter, $R_e$) id $Cb$.
+
+\[
+  \begin{bmatrix}
+    RS + Z_{C1} + RB & -RB                                  & 0                                     & 0                    & 0                           & 0      & 0               \\
+    -RB              & RB + r_{\pi 1} + Z_{Re \parallel Ci} & 0                                     & -Z_{Re \parallel Ci} & 0                           & 0      & 0               \\
+    0                & r_{\pi 1} gm1                        & 1                                     & 0                    & 0                           & 0      & 0               \\
+    0                & -Z_{Re     \parallel Ci} - r_{o1}    & Z_{Re \parallel Ci} + r_{o1} + R_{C1} & -R_{C1}              & 0                           & 0      & 0               \\
+    0                & 0                                    & 0                                     & -R_{C1}              & r_{\pi 2} + R_{C1} + Z_{eq} & 0      & -Z_{eq}         \\
+    0                & 0                                    & 0                                     & 0                    & r_{\pi 2} gm2               & 1      & 0               \\
+    0                & 0                                    & 0                                     & 0                    & -Z_{eq}                     & r_{o2} & Z_{eq} + r_{o2} \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    i_1 \\ i_2  \\ i_3 \\ i_5 \\ i_6 \\ i_7
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    v_{in} \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\ 0
+  \end{bmatrix}
+\]
+
+where $Z_{C1} = \frac{1}{j \omega Ci} \hspace{1cm} Z_{C2} = \frac{1}{j \omega Cb} \hspace{1cm} Z_{C3} = \frac{1}{j \omega Co}$
+and Zeq is the impedance of resistor Re in parallel with the equivalent impedance of the capacitor Co and the load,
+
+
+And so we calculate the gain in DB using the following formula:
+
+\begin{equation}
+  Gain_DB(f) =20 \log{abs\frac{(I(7) - I(5)) * Zeq \frac{R_{load}}{R_{load} + ZC3}}{vin}}
+\end{equation}
+
+The plot we get is presented in section Side by side Comaprison.
 
 
 
