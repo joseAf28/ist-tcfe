@@ -4,7 +4,7 @@
 In the following sections of the operating point and Incremntal Analysis, we use the mathematical formulas presented in the slides
 and tha were provided in the Octave script.
 
-\section{Gain Stage}
+\subsection{Gain Stage}
 
 
 Operating point
@@ -20,7 +20,8 @@ In order to be able to analyse the behaviour of the output stage in the AC state
 The results of the we gain and the impedances of this stage are presented in a table in section Side by side Comaprison, where we do a comparison between both models.
 
 
-\section{Output Stage}
+
+\subsection{Output Stage}
 
 Operating Point
 
@@ -31,7 +32,7 @@ AC analysis
 In this section, we use the Bipolar transistor small signall model(AC) presented in the lectures as a model for the transistor.
 The results we got are presented in a table.
 
-\section{Final Results}
+\subsection{Final Results}
 
 The results of thid section are presented in a table in section Side by side Comaprison. too.
 
@@ -41,7 +42,7 @@ a significant signal loss.
 In fact, the input impedance of the output stage is $\approx 9.7$ greter than the output impedance ot the gain stage,
 which justifies what was said in the previous sentence.
 
-\section{Frequency Response}
+\subsection{Frequency Response}
 
 In order to be able to understand the behaviour of the whole circuit in reponse of to the input ac voltage source witha
 a range of frequencies from 10Hz to 1MHz.
@@ -51,13 +52,13 @@ capacitor of the gain stage(is in parallel with the resistor of the emitter, $R_
 
 \[
   \begin{bmatrix}
-    RS + Z_{C1} + RB & -RB                                  & 0                                     & 0                    & 0                           & 0      & 0               \\
-    -RB              & RB + r_{\pi 1} + Z_{Re \parallel Ci} & 0                                     & -Z_{Re \parallel Ci} & 0                           & 0      & 0               \\
-    0                & r_{\pi 1} gm1                        & 1                                     & 0                    & 0                           & 0      & 0               \\
-    0                & -Z_{Re     \parallel Ci} - r_{o1}    & Z_{Re \parallel Ci} + r_{o1} + R_{C1} & -R_{C1}              & 0                           & 0      & 0               \\
-    0                & 0                                    & 0                                     & -R_{C1}              & r_{\pi 2} + R_{C1} + Z_{eq} & 0      & -Z_{eq}         \\
-    0                & 0                                    & 0                                     & 0                    & r_{\pi 2} gm2               & 1      & 0               \\
-    0                & 0                                    & 0                                     & 0                    & -Z_{eq}                     & r_{o2} & Z_{eq} + r_{o2} \\
+    R_{S} + Z_{C1} + R_{B} & -R_{B }                                 & 0                                     & 0                    & 0                           & 0      & 0               \\
+    -R_{B}                 & R_{B} + r_{\pi 1} + Z_{Re \parallel Ci} & 0                                     & -Z_{Re \parallel Ci} & 0                           & 0      & 0               \\
+    0                      & r_{\pi 1} gm1                           & 1                                     & 0                    & 0                           & 0      & 0               \\
+    0                      & -Z_{Re     \parallel Ci} - r_{o1}       & Z_{Re \parallel Ci} + r_{o1} + R_{C1} & -R_{C1}              & 0                           & 0      & 0               \\
+    0                      & 0                                       & 0                                     & -R_{C1}              & r_{\pi 2} + R_{C1} + Z_{eq} & 0      & -Z_{eq}         \\
+    0                      & 0                                       & 0                                     & 0                    & r_{\pi 2} gm2               & 1      & 0               \\
+    0                      & 0                                       & 0                                     & 0                    & -Z_{eq}                     & r_{o2} & Z_{eq} + r_{o2} \\
   \end{bmatrix}
   \begin{bmatrix}
     i_1 \\ i_2  \\ i_3 \\ i_5 \\ i_6 \\ i_7
