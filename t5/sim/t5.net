@@ -53,10 +53,31 @@ Vcc vcc 0 5.0
 Vee vee 0 -5.0
 Vin in 0 0 ac 1.0 sin(0 10m 1k)
 
-X1 0 inv_in vcc vee out uA741
+RerroDC serie 0 1G
+RerroDC2 serie1 0 1G
+Cp 1 serie 1u
+C1 serie serie1 1u
+Ct serie1 inv 1u
 
-R1 in inv_in 1000
-R2 inv_in out 10000
+RerroDC3 serie2 0 1G
+RerroDC4 serie3 0 1G
+Cs 1 serie2 220n
+Cr serie2 serie3 220n
+C2 serie3 out 220n
+
+
+X1 0 inv vcc vee out uA741
+
+R1 in 1 1k
+R9 in 1 1k
+R3 in 1 1k
+R4 in 1 10k
+R5 in 1 10k
+R6 in 1 10k
+R7 inv out 100k
+R8 inv out 100k
+R2 inv out 100k
+*R3 1 0 10k
 
 * load
 RL out 0 8
@@ -86,3 +107,4 @@ print v(in)[40]/R1[i]/1000
 *need a different setup to measure output impedance
 
 .endc 
+
