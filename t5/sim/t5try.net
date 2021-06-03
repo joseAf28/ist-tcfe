@@ -53,14 +53,24 @@ Vcc vcc 0 5.0
 Vee vee 0 -5.0
 Vin in 0 0 ac 1.0 sin(0 10m 1k)
 
-C1 1 inv 50u
-C2 inv 2 50n
+RerroDC serie 0 1G
+RerroDC2 serie1 0 1G
+Cp 1 serie 1u
+C1 serie serie1 220n
+Ct serie1 inv 220n
 
-X1 0 inv vcc vee 3 uA741
+RerroDC3 serie2 0 1G
+RerroDC4 serie3 0 1G
+Cs 1 serie2 1u
+Cr serie2 serie3 1u
+C2 serie3 out 220n
 
-R1 in 1 1000
-R2 inv 2 20000
-R3 3 out 10000
+
+X1 0 inv vcc vee out uA741
+
+R1 in 1 1k
+R2 inv out 100k
+R3 1 0 1k
 
 * load
 RL out 0 8
