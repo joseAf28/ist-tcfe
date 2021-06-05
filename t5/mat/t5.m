@@ -45,6 +45,7 @@
 % ZI=ZI1
 % ZO=1/(go2+gm2/gpi2*gB+ge2+gB)
 
+
 % file = fopen("../doc/Final.tex", "w");
 % fprintf(file, "AV & %e\\\\ \\\hline\n", AV);
 % fprintf(file, "$AV_{DB}$ & %e\\\\ \\\hline\n", AV_DB);

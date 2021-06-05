@@ -77,7 +77,7 @@ R6 in 1 10k
 R7 inv out 100k
 R8 inv out 100k
 R2 inv out 100k
-*R3 1 0 10k
+*R3 1 0 333
 
 * load
 RL out 0 8
