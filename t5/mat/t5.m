@@ -62,8 +62,8 @@ R1k = 1e3;
 R10k = 10e3;
 R100k = 100e3;
 
-invR1 = 3./R1k + 3./R10k;
-invR2 = 3./R100k;
+invR1 = 3./R1k + 3./R100k;
+invR2 = 3./R10k;
 
 invC1 = 3./Cmax;
 invC2 = 3./Cmin;
@@ -98,7 +98,7 @@ X = A\B;
 Vout = X(2);
 TGain(jj) = Vout*vin;
 TGain_DB(jj) = 20*log10(abs(TGain(jj)));
-phase(jj) = atan(TGain(jj));
+phase(jj) = arg(TGain(jj));
 logfreq(jj) = t;
 
 jj = jj +1;
@@ -138,4 +138,12 @@ B = [vin/R1; 0];
 X = A\B;
 
 current_in = -(vin -X(1))/R1
-zinput = vin/current_in
+zinput = vin/current_in/1000.
+
+
+file = fopen("../doc/ResultsTheoretical.tex", "w");
+fprintf(file, "$Z_{input}$ & %e\\\\ \\\hline\n", zinput);
+fprintf(file, "$Z_{output}$ & %e\\\\ \\\hline\n", 0);
+fprintf(file, "Max $Gain_{dB}$ & %e\\\\ \\\hline\n", Gmax);
+fprintf(file, "Central frequency [Hz] & %e\\\\ \\\hline\n", freqmax);
+fclose(file);
