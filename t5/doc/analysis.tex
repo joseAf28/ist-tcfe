@@ -108,31 +108,47 @@ Because of the difficulty in solving the system of equation found in the section
 
 In plot \ref{fig:argT}, we have the phase, obtained by taking the $arg(T(\omega))$, as function of $log(\omega)$ for the range of $0.1Hz$ to $1MHz$.
 
-\begin{figure}[h] \centering
-  \includegraphics[width=1.\linewidth]{gain.eps}
-  \caption{Graph of the magnitude of the gain (dB) as a function of log(f) in Hz}
-  \label{fig:absT}
-\end{figure}
+\begin{figure*}[h]
+  \centering
+  \begin{subfigure}{0.5\textwidth}
+      \includegraphics[width=\linewidth, clip]{gain.eps}
+      \label{fig:output1}
+  \end{subfigure}
+  \begin{subfigure}{0.4\textwidth}
+      \includegraphics[width=\linewidth, clip]{gain.pdf}
+      \label{fig:output2}
+  \end{subfigure}
+  \caption{\small }
+  \label{output_deviation}
+\end{figure*}
+
 
 In plot \ref{fig:absT} we have the magnitude, calculated from $20*log_{10}(abs(T(\omega)))$ as function of $log(\omega)$ for the same range of frequencies as given before.
 
-\begin{figure}[h] \centering
-  \includegraphics[width=1.\linewidth]{phase.eps}
-  \caption{Graph of the phase  of T($\omega$) as function of log(f) }
-  \label{fig:argT}
-\end{figure}
+\begin{figure*}[h]
+  \centering
+  \begin{subfigure}{0.5\textwidth}
+      \includegraphics[width=\linewidth, clip]{phase.eps}
+      \label{fig:output1}
+  \end{subfigure}
+  \begin{subfigure}{0.4\textwidth}
+      \includegraphics[width=\linewidth, clip]{phase.pdf}
+      \label{fig:output2}
+  \end{subfigure}
+  \caption{\small  )}
+  \label{output_deviation}
+\end{figure*}
 
 
-\begin{table}
+\begin{table}[h]
   \parbox{.45\linewidth}{
     \centering
-    \begin{tabular}{|c|c|}
+    \begin{tabular}{|c|c|c|}
       \hline
-      {\bf Name} & {\bf Value [A or V]} \\ \hline
       \input{ResultsTheoretical.tex}
     \end{tabular}
     \label{tab:TheoreticalResults}
-    \caption{Theoretical Results of Nodal Analysis of the circuit used to determine the equivalent resistance seen by the capacitor. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+    \caption{ }
   }
   \hfill
   %   \parbox{.45\linewidth}{

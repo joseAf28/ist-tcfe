@@ -56,12 +56,9 @@ ac dec 10 10 100MEG
 *input impedance in kohm
 *print all
 
-<<<<<<< HEAD:t4/sim/calcZout.net
-=======
 plot abs(v(in2)/vin#branch/(-1000))
 print v(in2)[40]/vin#branch[40]/(-1000)
 
->>>>>>> 322aa190fd8dc4f4e30d079abdc9dd407ba1cdd9:t4/t4.net
 *need a different setup to measure output impedance
 print abs(1/vtest#branch[40])
 
