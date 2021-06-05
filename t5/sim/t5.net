@@ -92,7 +92,6 @@ print all
 * time analysis
 tran 1e-5 1e-2
 plot v(out)
-hardcopy vo1.ps vdb(out)
 
 
 * frequency analysis
@@ -102,7 +101,10 @@ plot vp(out)
 plot v(in)
 plot Vin#branch
 plot v(in)/Vin#branch
-hardcopy vo1f.ps vdb(out)
+hardcopy gain.ps vdb(out)
+echo gain_FIG
+hardcopy phase.ps vp(out)
+echo phase_FIG
 
 *Central frequency
 let m = maximum(vdb(out))
