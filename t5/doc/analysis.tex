@@ -86,11 +86,11 @@ In order to evaluate the frequency response of the circuit in the asked nodes, w
     -\frac{1}{ZC1}                               & -\frac{1}{R2}  \\
   \end{bmatrix}
   \begin{bmatrix}
-    I_{c'} \\ I_b \\ I_a \\ I_d
+    VIN \\ VOUT
   \end{bmatrix}
   =
   \begin{bmatrix}
-    0 \\ 0 \\ 0 \\ 1
+    \frac{VIN}{R1} \\ 0
   \end{bmatrix}
 \]
 
@@ -108,39 +108,22 @@ Because of the difficulty in solving the system of equation found in the section
 
 In plot \ref{fig:argT}, we have the phase, obtained by taking the $arg(T(\omega))$, as function of $log(\omega)$ for the range of $0.1Hz$ to $1MHz$.
 
-\begin{figure*}[h]
-  \centering
-  \begin{subfigure}{0.5\textwidth}
-      \includegraphics[width=\linewidth, clip]{gain.eps}
-      \label{fig:output1}
-  \end{subfigure}
-  \begin{subfigure}{0.4\textwidth}
-      \includegraphics[width=\linewidth, clip]{gain.pdf}
-      \label{fig:output2}
-  \end{subfigure}
-  \caption{\small }
-  \label{output_deviation}
-\end{figure*}
-
+\begin{figure}[h] \centering
+  \includegraphics[width=1.\linewidth]{gain.eps}
+  \caption{Graph of the magnitude of the gain (dB) as a function of log(f) in Hz}
+  \label{fig:absT}
+\end{figure}
 
 In plot \ref{fig:absT} we have the magnitude, calculated from $20*log_{10}(abs(T(\omega)))$ as function of $log(\omega)$ for the same range of frequencies as given before.
 
-\begin{figure*}[h]
-  \centering
-  \begin{subfigure}{0.5\textwidth}
-      \includegraphics[width=\linewidth, clip]{phase.eps}
-      \label{fig:output1}
-  \end{subfigure}
-  \begin{subfigure}{0.4\textwidth}
-      \includegraphics[width=\linewidth, clip]{phase.pdf}
-      \label{fig:output2}
-  \end{subfigure}
-  \caption{\small  )}
-  \label{output_deviation}
-\end{figure*}
+\begin{figure}[h] \centering
+  \includegraphics[width=1.\linewidth]{phase.eps}
+  \caption{Graph of the phase  of T($\omega$) as function of log(f) }
+  \label{fig:argT}
+\end{figure}
 
 
-\begin{table}[h]
+\begin{table}
   \parbox{.45\linewidth}{
     \centering
     \begin{tabular}{|c|c|c|}
@@ -148,7 +131,7 @@ In plot \ref{fig:absT} we have the magnitude, calculated from $20*log_{10}(abs(T
       \input{ResultsTheoretical.tex}
     \end{tabular}
     \label{tab:TheoreticalResults}
-    \caption{ }
+    \caption{Theoretical Results of Nodal Analysis of the circuit used to determine the equivalent resistance seen by the capacitor. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
   }
   \hfill
   %   \parbox{.45\linewidth}{
