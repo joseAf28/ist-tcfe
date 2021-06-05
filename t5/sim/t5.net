@@ -101,14 +101,19 @@ plot vdb(out)
 plot vp(out)
 hardcopy vo1f.ps vdb(out)
 
-*input impedance in kohm
-print v(in)[40]/R1[i]/1000
-
 *Central frequency
 let m = maximum(vdb(out))
 print m
 meas ac fc WHEN vdb(out)=m CROSS=1
 
+
+*AS IMPEDANCIAS T^EM DE SER `A FREQ fc (descobrir como fazer isso)
+
+*input impedance in kohm
+print v(in)[40]/Vin#branch[40]/1000
+
+*output impedance in kohm
+print v(out)[40]/Vin#branch[40]/1000
 
 *need a different setup to measure output impedance
 
