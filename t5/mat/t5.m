@@ -140,10 +140,16 @@ X = A\B;
 current_in = -(vin -X(1))/R1
 zinput = vin/current_in/1000.
 
+spiceZin = -0.135285 + I*0.1156956
+spiceZout = -2.65141e-3 - I*2.17355e-2
+spiceGain = 18.27262
+spiceFreq = 1000.15
+
 
 file = fopen("../doc/ResultsTheoretical.tex", "w");
-fprintf(file, "$Z_{input}$ & %e\\\\ \\\hline\n", zinput);
-fprintf(file, "$Z_{output}$ & %e\\\\ \\\hline\n", 0);
-fprintf(file, "Max $Gain_{dB}$ & %e\\\\ \\\hline\n", Gmax);
-fprintf(file, "Central frequency [Hz] & %e\\\\ \\\hline\n", freqmax);
+fprintf(file, "$Variable$ & Theory (octave) & Simulation (ngspice) \\\\ \\\hline \n")
+fprintf(file, "$Z_{input} [k \\\Omega]$ & %e + %ei & %e + %ei \\\\ \\\hline\n", zinput, zinput/(1*I), spiceZin, spiceZin/(1*I));
+fprintf(file, "$Z_{output} [k \\\Omega]$ & %e & %e + %ei \\\\ \\\hline\n", 0, spiceZout, spiceZout/(1*I) );
+fprintf(file, "Max $Gain [dB]$ & %e & %e \\\\ \\\hline\n", Gmax, spiceGain);
+fprintf(file, "Central frequency [Hz] & %e & %e \\\\ \\\hline\n", freqmax, spiceFreq);
 fclose(file);
