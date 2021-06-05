@@ -61,24 +61,6 @@ By solving these equations with a script of \textit{Octave}, we got the followin
 By looking at first glance, the results do not seem right. In order to try and get a better understading of what was going on, we used an alternative method to find the equivalent resistance: we replace the capacitor with an indepedent voltage source of $1 A$ in order to do the calculation of the equivalent resistance easier.
 We run mesh analysis in the circuit with the elementar currents shown in \ref{fig:circuit}. The results are shown in the following system of equations:
 
-\[
-  \begin{bmatrix}
-    0 & 1-K_b R3 & K_b R_3         & 0                     \\
-    0 & 0        & -R_4            & R_6 + R_7 - K_d + R_4 \\
-    0 & 0        & R_1 + R_3 + R_4 & -R_4                  \\
-    1 & 0        & 0               & 0                     \\
-  \end{bmatrix}
-  \begin{bmatrix}
-    I_{c'} \\ I_b \\ I_a \\ I_d
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    0 \\ 0 \\ 0 \\ 1
-  \end{bmatrix}
-\]
-
-\hfill
-
 
 As can be easily seen, the first three equations are linearly independent of each other and the last equations is disconnect from the other ones. So, $I_2 = I_3 = I_4 = 0$. As result, from the last equation, we know that
 the equivalent resistance is equal to $R_5$.
@@ -100,22 +82,19 @@ In order to evaluate the frequency response of the circuit in the asked nodes, w
 
 \[
   \begin{bmatrix}
-    - \frac{1}{R_1} & \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3}                                & 0              & 0                              & 0             \\
-    0               & K_b + \frac{1}{R_2}                           & -\frac{1}{R_3} & - K_b                                         & 0              & 0                              & 0             \\
-    0               & 0                                             & 0              & 0                                             & 0              & -\frac{1}{R_6} - \frac{1}{R_7} & \frac{1}{R_7} \\
-    0               & K_b                                           & 0              & -K_b - \frac{1}{R_5}                          & \frac{1}{R_5}  & 0                              & 0             \\
-    0               & -\frac{1}{R_3}                                & 0              & \frac{1}{R_3} + \frac{1}{R_4} + \frac{1}{R_5} & -\frac{1}{R_5} & -\frac{1}{R_7}                 & \frac{1}{R_7} \\
-    0               & 0                                             & 0              & 1                                             & 0              & \frac{K_d}{R_6}                & -1            \\
-    1               & 0                                             & 0              & 0                                             & 0              & 0                              & 0             \\
+    \frac{1}{R1} + \frac{1}{ZC1} + \frac{1}{ZC2} & -\frac{1}{ZC2} \\
+    -\frac{1}{ZC1}                               & -\frac{1}{R2}  \\
   \end{bmatrix}
   \begin{bmatrix}
-    V_1 \\ V_2  \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
+    I_{c'} \\ I_b \\ I_a \\ I_d
   \end{bmatrix}
   =
   \begin{bmatrix}
-    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\ V_s
+    0 \\ 0 \\ 0 \\ 1
   \end{bmatrix}
 \]
+
+\hfill
 
 
 \begin{equation}
