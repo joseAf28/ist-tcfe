@@ -139,11 +139,3 @@ X = A\B;
 
 current_in = -(vin -X(1))/R1
 zinput = vin/current_in
-
-
-file = fopen("../doc/ResultsTheoretical.tex", "w");
-fprintf(file, "$Z_{input}$ & %e\\\\ \\\hline\n", zinput);
-fprintf(file, "$Z_{output}$ & %e\\\\ \\\hline\n", 0);
-fprintf(file, "Max $Gain_{dB}$ & %e\\\\ \\\hline\n", Gmax);
-fprintf(file, "Central frequency [Hz] & %e\\\\ \\\hline\n", freqmax);
-fclose(file);
