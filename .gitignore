@@ -34,6 +34,8 @@ acm.pdf
 acp.pdf
 solution.pdf
 trans.pdf
+gain.pdf
+phase.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
