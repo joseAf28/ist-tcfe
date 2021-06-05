@@ -1,6 +1,20 @@
 \section{Simulation Analysis}
 \label{sec:simulation}
 
+<<<<<<< HEAD
+In this section we wrote a \textit{Ngspice} script to simulate the audio
+amplifier circuit, using the transistor models provided in the .net script
+(NPN for the gain stage and PNP for the output stage).
+Finally we measured the output voltage gain in the passband,
+the lower and upper 3dB cut off frequencies and the input and output
+impedances.
+
+
+The circuit studied had a cost of 9600.608 MU. Much of the cost can be
+attributable to the capacitors used.
+
+=======
+>>>>>>> 5909f6b92fd93d663fc350cb0c7bd830fa884b0e
 
 \begin{figure*}[h]
     \centering
@@ -84,9 +98,22 @@
     }
 \end{table}
 
+<<<<<<< HEAD
+As we can see, the value of voltage across $R_E$ calculated in the
+theoretical part is $3.055\%$ smaller than the one calculated with
+Ngspice and and that $VO1$ calculated in the theoretical part is
+$1.176\%$ bigger than the one calculated in NGspice.
+=======
 Compare the Operating point both models......
+>>>>>>> 5909f6b92fd93d663fc350cb0c7bd830fa884b0e
 
 
+<<<<<<< HEAD
+According to the the output stage, we can see that $VO2$ calculated
+in the theoretical part is $\approx 1.676\%$ bigger than the value
+we get from spice.
+=======
+>>>>>>> 5909f6b92fd93d663fc350cb0c7bd830fa884b0e
 
 \begin{table}
     \parbox{.45\linewidth}{
@@ -123,5 +150,20 @@ Compare the Operating point both models......
     }
 \end{table}
 
+<<<<<<< HEAD
+The difference among values we got from Ngspice and Octave in the
+Operating Point influence the results we got in AC analysis.
 
 
+By using the coupling capacitor we can block the dc components and
+decrease the cut off frequency. And by using the bypass capacitor we can
+increase the gain of the gain stage which is possible because we bypass
+a higher impedance component.
+
+The purpose of the resistor $R_c$ is to regulate the amount of current
+to stablish in the OP from which the output current from the circuit will change
+across that value.
+=======
+
+
+>>>>>>> 5909f6b92fd93d663fc350cb0c7bd830fa884b0e
