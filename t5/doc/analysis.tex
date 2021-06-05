@@ -1,121 +1,33 @@
 \section{Theoretical Analysis}
 \label{sec:analysis}
 
-In this section, the circuit $RC$ shown in Figure~\ref{fig:circuit} is analysed
-theoretically.
+\subsection{OP AMP model}
 
-
-
-%b = [Id; -Va/R1; Va/R1; Id]
-
-\[
-  \begin{bmatrix}
-    - \frac{1}{R_1} & \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3}                                & 0              & 0                              & 0             \\
-    0               & K_b + \frac{1}{R_2}                           & -\frac{1}{R_3} & - K_b                                         & 0              & 0                              & 0             \\
-    0               & 0                                             & 0              & 0                                             & 0              & -\frac{1}{R_6} - \frac{1}{R_7} & \frac{1}{R_7} \\
-    0               & K_b                                           & 0              & -K_b - \frac{1}{R_5}                          & \frac{1}{R_5}  & 0                              & 0             \\
-    0               & -\frac{1}{R_3}                                & 0              & \frac{1}{R_3} + \frac{1}{R_4} + \frac{1}{R_5} & -\frac{1}{R_5} & -\frac{1}{R_7}                 & \frac{1}{R_7} \\
-    0               & 0                                             & 0              & 1                                             & 0              & \frac{K_d}{R_6}                & -1            \\
-    1               & 0                                             & 0              & 0                                             & 0              & 0                              & 0             \\
-  \end{bmatrix}
-  \begin{bmatrix}
-    V_1 \\ V_2  \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\ V_s
-  \end{bmatrix}
-\]
-
-\hfill
-
-% \begin{table}
-%   \parbox{.45\linewidth}{
-%     \centering
-%     \begin{tabular}{|c|c|}
-%       \hline
-%       {\bf Name} & {\bf Value [A or V]} \\ \hline
-%       \input{op_nodal1_tab}
-%     \end{tabular}
-%     \label{tab:op_tabNodalTeo1}
-%     \caption{Results of Nodal Analysis of the circuit for t < 0. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt}}
-%   }
-%   \hfill
-%   \parbox{.45\linewidth}{
-%     \centering
-%     \begin{tabular}{|c|c|}
-%       {\bf Name} & {\bf Value [A or V]} \\ \hline
-%       \input{op_tab}
-%       \hline
-%     \end{tabular}
-%     \label{tab:op_tabNodalSpice1}
-%     \caption{Table with results from Ngspice to find out the voltages and currents in each node and branch. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
-%   }
-% \end{table}
-
-
-
-By solving these equations with a script of \textit{Octave}, we got the following results presented in table \ref{tab:op_tabReqTeo}.
-
-
-By looking at first glance, the results do not seem right. In order to try and get a better understading of what was going on, we used an alternative method to find the equivalent resistance: we replace the capacitor with an indepedent voltage source of $1 A$ in order to do the calculation of the equivalent resistance easier.
-We run mesh analysis in the circuit with the elementar currents shown in \ref{fig:circuit}. The results are shown in the following system of equations:
-
-\[
-  \begin{bmatrix}
-    0 & 1-K_b R3 & K_b R_3         & 0                     \\
-    0 & 0        & -R_4            & R_6 + R_7 - K_d + R_4 \\
-    0 & 0        & R_1 + R_3 + R_4 & -R_4                  \\
-    1 & 0        & 0               & 0                     \\
-  \end{bmatrix}
-  \begin{bmatrix}
-    I_{c'} \\ I_b \\ I_a \\ I_d
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    0 \\ 0 \\ 0 \\ 1
-  \end{bmatrix}
-\]
-
-\hfill
-
-
-As can be easily seen, the first three equations are linearly independent of each other and the last equations is disconnect from the other ones. So, $I_2 = I_3 = I_4 = 0$. As result, from the last equation, we know that
-the equivalent resistance is equal to $R_5$.
-
-
-From the previous calculations, we have as forced solution in $v_6$:
-
-\begin{equation}
-  v_{6f} = \Re (\tilde{V_6} e^{j 2\pi f t}) = 0.5809432*cos(2 \pi f t - 1.718634)
-  \label{forcedSolution}
-\end{equation}
-
+In the theoretical part, we use the ideal model of the OP-AMP. So, we consider the input impedance equals to $\infty \Omega$, the ouput impedance
+equals to $0 \Omega$, and the gain equal to $\infty$. As a consequence, the differences of voltage of the non inverting input $v_{+}$ and The
+inverting input $v_{-}$ is equal to zero and we have a \textit{virtual ground} in the non inverting input.
 
 
 \subsection{Frequency response}
 
-In order to evaluate the frequency response of the circuit in the asked nodes, we have to find a way of evaluating the following equation:
-
+In order to obtain, the transfer function, we use nodal analysis method to obtain the following system of equations:
 
 \[
   \begin{bmatrix}
-    - \frac{1}{R_1} & \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3}                                & 0              & 0                              & 0             \\
-    0               & K_b + \frac{1}{R_2}                           & -\frac{1}{R_3} & - K_b                                         & 0              & 0                              & 0             \\
-    0               & 0                                             & 0              & 0                                             & 0              & -\frac{1}{R_6} - \frac{1}{R_7} & \frac{1}{R_7} \\
-    0               & K_b                                           & 0              & -K_b - \frac{1}{R_5}                          & \frac{1}{R_5}  & 0                              & 0             \\
-    0               & -\frac{1}{R_3}                                & 0              & \frac{1}{R_3} + \frac{1}{R_4} + \frac{1}{R_5} & -\frac{1}{R_5} & -\frac{1}{R_7}                 & \frac{1}{R_7} \\
-    0               & 0                                             & 0              & 1                                             & 0              & \frac{K_d}{R_6}                & -1            \\
-    1               & 0                                             & 0              & 0                                             & 0              & 0                              & 0             \\
+    \frac{1}{R_1} + \frac{1}{Z_{C1}} + \frac{1}{Z_{C2}} & -\frac{1}{Z_{C2}} \\
+    -\frac{1}{Z_{C1}}                                   & -\frac{1}{R_2}    \\
   \end{bmatrix}
   \begin{bmatrix}
-    V_1 \\ V_2  \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
+    V_{1} \\ V_{out}
   \end{bmatrix}
   =
   \begin{bmatrix}
-    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\ V_s
+    \frac{V_{in}}{R_1} \\ 0
   \end{bmatrix}
 \]
+
+\hfill
+
 
 
 \begin{equation}
@@ -123,46 +35,61 @@ In order to evaluate the frequency response of the circuit in the asked nodes, w
   \label{frequencyR}
 \end{equation}
 
-where in function \ref{frequencyR} we have $\widetilde{V_{out}} = \tilde{V_6}$ and $\widetilde{V_{out}} = \tilde{V_c}$ as been asked.
+We use Octave to solve this system of equations numerically for a differences range of frequencies of the input signal.
 
-Because of the difficulty in solving the system of equation found in the section of \textit{Forced Solution} to arrange the function \ref{frequencyR} explicitly, we find out the solution numerically using Octave.
+In plot \ref{fig:output1}, we have the phase, obtained by taking the $arg(T(\omega))$, as function of log (f) in Hz.
 
-In plot \ref{fig:argT}, we have the phase, obtained by taking the $arg(T(\omega))$, as function of $log(\omega)$ for the range of $0.1Hz$ to $1MHz$.
-
-\begin{figure*}[h]
-  \centering
-  \begin{subfigure}{0.5\textwidth}
-      \includegraphics[width=\linewidth, clip]{gain.eps}
-      \label{fig:output1}
-  \end{subfigure}
-  \begin{subfigure}{0.4\textwidth}
-      \includegraphics[width=\linewidth, clip]{gain.pdf}
-      \label{fig:output2}
-  \end{subfigure}
-  \caption{\small }
-  \label{output_deviation}
-\end{figure*}
-
-
-In plot \ref{fig:absT} we have the magnitude, calculated from $20*log_{10}(abs(T(\omega)))$ as function of $log(\omega)$ for the same range of frequencies as given before.
+Input Impedance Output Impedance
 
 \begin{figure*}[h]
   \centering
   \begin{subfigure}{0.5\textwidth}
-      \includegraphics[width=\linewidth, clip]{phase.eps}
-      \label{fig:output1}
+    \includegraphics[width=\linewidth, clip]{phase.eps}
+    \label{fig:output1}
   \end{subfigure}
   \begin{subfigure}{0.4\textwidth}
-      \includegraphics[width=\linewidth, clip]{phase.pdf}
-      \label{fig:output2}
+    \includegraphics[width=\linewidth, clip]{phase.pdf}
+    \label{fig:output2}
   \end{subfigure}
   \caption{\small  )}
   \label{output_deviation}
 \end{figure*}
 
 
+In plot \ref{fig:argTOct} we have the magnitude, calculated from $20*log_{10}(abs(T(\omega)))$ as function of log(f) .
+
+\begin{figure*}[h]
+  \centering
+  \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=\linewidth, clip]{gain.eps}
+    \label{fig:argTOct}
+  \end{subfigure}
+  \begin{subfigure}{0.4\textwidth}
+    \includegraphics[width=\linewidth, clip]{gain.pdf}
+    \label{fig:argTSpi}
+  \end{subfigure}
+  \caption{\small }
+  \label{}
+\end{figure*}
+
+\subsection{Input and Output Impedance and Central Frequency}
+
+To evaluate the frequency of the input signal whose gain is maximized, we applied the \textit{max} function of Octave to the array in which
+we have the valus of the magnitude of the gain. The value we get is presented in the table \ref*{tab:TheoreticalResults}.
+
+In order to calculate the input impedance of the circuit in central frequency,
+we use the following formula with a frequency of the input signal we get before:
+
+\begin{equation}
+  Z_{input} = \frac{V_[in]}{\frac{V_{in} - V_1}{R_1}} \frac{1}{1000} k \Omega
+\end{equation}
+
+Due to the teoretical model used for the OP-AMP, we have an $Z_{output} = 0$.
+
+
 \begin{table}[h]
-  \parbox{.45\linewidth}{
+  % \parbox{.45\linewidth}{
+  {
     \centering
     \begin{tabular}{|c|c|c|}
       \hline
@@ -171,28 +98,5 @@ In plot \ref{fig:absT} we have the magnitude, calculated from $20*log_{10}(abs(T
     \label{tab:TheoreticalResults}
     \caption{ }
   }
-  \hfill
-  %   \parbox{.45\linewidth}{
-  %     \centering
-  %     \begin{tabular}{|c|c|}
-  %       {\bf Name} & {\bf Value [A or V]} \\ \hline
-  %       \input{opb_tab}
-  %       \hline
-  %     \end{tabular}
-  %     \label{tab:op_tabReqSpice}
-  %     \caption{Ngspice results of Nodal Analysis of the circuit used to determine the equivalent resistance seen by the capacitor. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
-  %   }
 \end{table}
 
-
-% As we can see, the phase and the magnitude of $T_{Vs}$ is constant as imposed by the source.
-% From the plots of $T_{Vc}$, we see that the response of the capacitor for frequencies smaller than the frequency $f_c = \frac{1}{R_{eq}C} = 318.674 Hz$, the output voltage is almost equal to input voltage and that the signals have the same phase.
-% For frequencies much bigger than $f_c$, the $V_{out} \rightarrow 0$, as seen  in \ref{fig:absT} and the signal is $-180$ degrees ou of phase.
-% For frequencies in a near range of $f_c$, we have an abrupt decline in $V_{out}$ and phase.
-
-% In regard to $T_{V6}$, we have that the magnitude of its transfer function dcreases to a constant value, magnitude of the phasor in $v_8$, which is expected due to the fact that the impedance fo the capacitor decreases in module as $\omega$ increases
-
-
-
-% These differences are due to the fact that in $T_{V6}$ we see how the magnitude of the output voltage between node 0 and node 6(the output voltage has the influence of resistors too). While in
-% $T_{Vc}$ we are seeing how the volatge across the capacitor changes with the frequency(acts as a low pass filter).
