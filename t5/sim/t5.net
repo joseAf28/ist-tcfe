@@ -117,7 +117,7 @@ meas ac fc WHEN vdb(out)=m CROSS=LAST
 
 *input impedance in kohm
 let mini = minimum(Vin#branch)
-print v(in)[40]/mini/1000
+print -v(in)[40]/mini/1000
 
 *output impedance in kohm
 * print abs(v(out)[40]/Vtest#branch[40]/1000)
