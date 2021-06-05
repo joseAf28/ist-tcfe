@@ -5,12 +5,6 @@ In this section, the circuit $RC$ shown in Figure~\ref{fig:circuit} is analysed
 theoretically.
 
 
-\subsection{Nodal Method}
-
-We start by doing the nodal analysis of the circuit in order to find out the potentials and currents for all nodes and branches respectively for $t < 0$,
-where there was a steady state for the circuit and $V_s = 5.18382634375 V$ . By noticing that the node 0 is used as the $0 V$ reference node, we get the following system of equations:
-
-
 
 %b = [Id; -Va/R1; Va/R1; Id]
 
@@ -35,90 +29,31 @@ where there was a steady state for the circuit and $V_s = 5.18382634375 V$ . By 
 
 \hfill
 
-\begin{table}
-  \parbox{.45\linewidth}{
-    \centering
-    \begin{tabular}{|c|c|}
-      \hline
-      {\bf Name} & {\bf Value [A or V]} \\ \hline
-      \input{op_nodal1_tab}
-    \end{tabular}
-    \label{tab:op_tabNodalTeo1}
-    \caption{Results of Nodal Analysis of the circuit for t < 0. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt}}
-  }
-  \hfill
-  \parbox{.45\linewidth}{
-    \centering
-    \begin{tabular}{|c|c|}
-      {\bf Name} & {\bf Value [A or V]} \\ \hline
-      \input{op_tab}
-      \hline
-    \end{tabular}
-    \label{tab:op_tabNodalSpice1}
-    \caption{Table with results from Ngspice to find out the voltages and currents in each node and branch. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
-  }
-\end{table}
+% \begin{table}
+%   \parbox{.45\linewidth}{
+%     \centering
+%     \begin{tabular}{|c|c|}
+%       \hline
+%       {\bf Name} & {\bf Value [A or V]} \\ \hline
+%       \input{op_nodal1_tab}
+%     \end{tabular}
+%     \label{tab:op_tabNodalTeo1}
+%     \caption{Results of Nodal Analysis of the circuit for t < 0. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt}}
+%   }
+%   \hfill
+%   \parbox{.45\linewidth}{
+%     \centering
+%     \begin{tabular}{|c|c|}
+%       {\bf Name} & {\bf Value [A or V]} \\ \hline
+%       \input{op_tab}
+%       \hline
+%     \end{tabular}
+%     \label{tab:op_tabNodalSpice1}
+%     \caption{Table with results from Ngspice to find out the voltages and currents in each node and branch. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+%   }
+% \end{table}
 
 
-
-An Octave script was prepared to solve this system numerically. The results are shown in Table \ref{tab:op_tabNodalTeo1}.
-
-
-
-
-\subsection{Determination of the Equivalent Resistance seen by the Capacitor}
-
-In order to determine the equivalent resistance, we start by switching off the independent source $V_s$ of the circuit. If there were only independent sources, we could calculate the equivalent resistance
-as an association of resistors. However, due to the fact we have the dependent sources, we can't switch them off as done with the independent source, so we have to replace the capacitor with an independent voltage source with a tension of $V6-V8 = V_{68} = 8.768729 V$ (result of the previous section)
-and run nodal analysis, as used before,
-to determine the currents and voltages in every branch and node respectively. As a consequence, the potential in node $1$ and node $0$ are $V_0 = V_1 = 0 V$
-
-We get the following system of equations:
-
-\[
-  \begin{bmatrix}
-    -\frac{1}{R_1}                                & 0              & -\frac{1}{R_4} & 0 & -\frac{1}{R_6}                & 0              \\
-    \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3} & 0 & 0                             & 0              \\
-    -K_b - \frac{1}{R_2}                          & \frac{1}{R_2}  & K_b            & 0 & 0                             & 0              \\
-    0                                             & 0              & 0              & 0 & \frac{1}{K_d} + \frac{1}{R_7} & -\frac{1}{R_7} \\
-    0                                             & 0              & 1              & 0 & \frac{K_d}{R_6}               & -1             \\
-    0                                             & 0              & 0              & 1 & 0                             & -1             \\
-  \end{bmatrix}
-  \begin{bmatrix}
-    V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    0 \\ 0 \\ 0 \\ 0  \\ 0 \\ V_{68}
-  \end{bmatrix}
-\]
-
-\hfill
-
-
-\begin{table}
-  \parbox{.45\linewidth}{
-    \centering
-    \begin{tabular}{|c|c|}
-      \hline
-      {\bf Name} & {\bf Value [A or V]} \\ \hline
-      \input{op_nodal5_tab}
-    \end{tabular}
-    \label{tab:op_tabReqTeo}
-    \caption{Theoretical Results of Nodal Analysis of the circuit used to determine the equivalent resistance seen by the capacitor. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
-  }
-  \hfill
-  \parbox{.45\linewidth}{
-    \centering
-    \begin{tabular}{|c|c|}
-      {\bf Name} & {\bf Value [A or V]} \\ \hline
-      \input{opb_tab}
-      \hline
-    \end{tabular}
-    \label{tab:op_tabReqSpice}
-    \caption{Ngspice results of Nodal Analysis of the circuit used to determine the equivalent resistance seen by the capacitor. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
-  }
-\end{table}
 
 By solving these equations with a script of \textit{Octave}, we got the following results presented in table \ref{tab:op_tabReqTeo}.
 
@@ -149,92 +84,6 @@ As can be easily seen, the first three equations are linearly independent of eac
 the equivalent resistance is equal to $R_5$.
 
 
-
-%\lipsum[1-1]
-
-\subsection{Natural solution of v6(t)}
-
-By noticing that at $t = 0$ the voltage source changes its behaviour and that the potential difference across the capacitor must changes in a continuous way (the electric potential is a continuous funcion, even  if the electric field is discontinuous)
-we get the following results:
-
-The time constant is given by $\tau = R_{eq}C$.
-From the general natural solution of an RC circuit:
-
-\begin{equation}
-  v6 (t) = v_6(\infty) + (v_6(0) - v_6(\infty)) e^{-\frac{t}{R_{eq}C}}
-\end{equation}
-
-
-By noticing from now on the independent source is switched off and that as $t \rightarrow \infty$, the energy of the circuit is dissipated by the resistors, the $V_c(\infty) = 0$
-At $t = 0$, we get that $V_6 = 8.768729V$, as seen in the previous section.
-
-So, we have as natural solution of the system in volts:
-
-\begin{equation}
-  v6 (t) = 8.768729*e^{-\frac{t}{R_{eq}C}}
-  \label{eqNaturalSol}
-\end{equation}
-
-By running this function in \textit{Octave}, we get the following plot \ref{eqNaturalSol}
-
-\begin{figure}[h] \centering
-  \includegraphics[width=0.6\linewidth]{v6n.eps}
-  \caption{Natural solution of $v_6(t)$ }
-  \label{fig:naturalSolution}
-\end{figure}
-
-
-\subsection{Forced solution of v6(t)}
-
-In order to find the forced solution, we start by transforming the AC voltage of the source to a phasor.
-
-\begin{equation}
-  V_s = sin(2\pi f t) = \Re (e^{j(2\pi f t - \frac{\pi}{2})}) \implies \tilde{V_s} = e^{-j \frac{\pi}{2}} = -j
-\end{equation}
-
-As a result of using phasors, we have to use the impedance of each element, quantity that relates the phasor voltage and the current phasor: $Z = \frac{\tilde{V}}{\tilde{I}} $
-
-It is known that impedance of a resistor $Z_r = R_c$ (it is just a real number). The capacitor impedance is given by the following impedance $Z_c = \frac{1}{j\omega C}$.
-The fact the it is just an imaginary number, it tells that the capacitor does not dissipate energy out of the circuit.
-
-By using the nodal analysis in a similar way as used before, we get the following system of equations:
-
-\[
-  \begin{bmatrix}
-    - \frac{1}{R_1} & \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3}                                & 0                          & 0                              & 0                          \\
-    0               & K_b + \frac{1}{R_2}                           & -\frac{1}{R_3} & - K_b                                         & 0                          & 0                              & 0                          \\
-    0               & 0                                             & 0              & 0                                             & 0                          & -\frac{1}{R_6} - \frac{1}{R_7} & \frac{1}{R_7}              \\
-    0               & K_b                                           & 0              & -K_b - \frac{1}{R_5}                          & \frac{1}{R_5} + j\omega C  & 0                              & -j\omega C                 \\
-    0               & -\frac{1}{R_3}                                & 0              & \frac{1}{R_3} + \frac{1}{R_4} + \frac{1}{R_5} & -\frac{1}{R_5} - j\omega C & -\frac{1}{R_7}                 & \frac{1}{R_7} + j \omega C \\
-    0               & 0                                             & 0              & 1                                             & 0                          & \frac{K_d}{R_6}                & -1                         \\
-    1               & 0                                             & 0              & 0                                             & 0                          & 0                              & 0                          \\
-  \end{bmatrix}
-  \begin{bmatrix}
-    V_1 \\ V_2 \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\ -j
-  \end{bmatrix}
-\]
-
-\hfill
-
-
-The results of the complex amplitudes are shwon in the following table:
-
-\begin{table}[b]
-  \centering
-  \begin{tabular}{|l|c|}
-    \hline
-    {\bf Name} & {\bf Phasor} \\ \hline
-    \input{op_nodal2_tab}
-  \end{tabular}
-  \caption{Complex amplitudes in the nodes of the circuit}
-  \label{tab:op_tabNodal}
-\end{table}
-
-
 From the previous calculations, we have as forced solution in $v_6$:
 
 \begin{equation}
@@ -243,31 +92,31 @@ From the previous calculations, we have as forced solution in $v_6$:
 \end{equation}
 
 
-\subsection{General Solution of v6(t)}
-
-By doing a linear combination of the natural and the forced solutions found in the previous sections, we have as general solution the following function:
-
-\begin{equation}
-  v_6(t) = 8.768729*e^{-\frac{t}{R_{eq}C}} + 0.5809432*cos(2 \pi f t - 1.718634)
-  \label{finalSolution}
-\end{equation}
-
-By using \textit{Octave} to plot this function, we get the plot \ref{fig:generalFinal}:
-
-\begin{figure}[h] \centering
-  \includegraphics[width=0.6\linewidth]{v6_vs.eps}
-  \caption{Plot of general solution of v6(t) and vs(t) }
-  \label{fig:generalFinal}
-\end{figure}
-
-
-As can be seen , the plot of $v_6(t)$ has a discontinuity at $t = 0$.
-This occurs to satisfy the restriction imposed by the conservation of the energy  of the electric field across the capacitor(seen here in the form of a potential difference).
-
 
 \subsection{Frequency response}
 
 In order to evaluate the frequency response of the circuit in the asked nodes, we have to find a way of evaluating the following equation:
+
+
+\[
+  \begin{bmatrix}
+    - \frac{1}{R_1} & \frac{1}{R_1} + \frac{1}{R_2} + \frac{1}{R_3} & -\frac{1}{R_2} & -\frac{1}{R_3}                                & 0              & 0                              & 0             \\
+    0               & K_b + \frac{1}{R_2}                           & -\frac{1}{R_3} & - K_b                                         & 0              & 0                              & 0             \\
+    0               & 0                                             & 0              & 0                                             & 0              & -\frac{1}{R_6} - \frac{1}{R_7} & \frac{1}{R_7} \\
+    0               & K_b                                           & 0              & -K_b - \frac{1}{R_5}                          & \frac{1}{R_5}  & 0                              & 0             \\
+    0               & -\frac{1}{R_3}                                & 0              & \frac{1}{R_3} + \frac{1}{R_4} + \frac{1}{R_5} & -\frac{1}{R_5} & -\frac{1}{R_7}                 & \frac{1}{R_7} \\
+    0               & 0                                             & 0              & 1                                             & 0              & \frac{K_d}{R_6}                & -1            \\
+    1               & 0                                             & 0              & 0                                             & 0              & 0                              & 0             \\
+  \end{bmatrix}
+  \begin{bmatrix}
+    V_1 \\ V_2  \\ V_3 \\ V_5 \\ V_6 \\ V_7 \\ V_8
+  \end{bmatrix}
+  =
+  \begin{bmatrix}
+    0 \\ 0 \\ 0 \\ 0 \\ 0  \\ 0 \\ V_s
+  \end{bmatrix}
+\]
+
 
 \begin{equation}
   T(\omega) = \frac{\widetilde{V_{out}}}{\widetilde{V_{in}}}
@@ -281,28 +130,53 @@ Because of the difficulty in solving the system of equation found in the section
 In plot \ref{fig:argT}, we have the phase, obtained by taking the $arg(T(\omega))$, as function of $log(\omega)$ for the range of $0.1Hz$ to $1MHz$.
 
 \begin{figure}[h] \centering
-  \includegraphics[width=0.6\linewidth]{argT.eps}
-  \caption{Graph of the phase (degrees) as a function of log($\omega$)}
-  \label{fig:argT}
+  \includegraphics[width=1.\linewidth]{gain.eps}
+  \caption{Graph of the magnitude of the gain (dB) as a function of log(f) in Hz}
+  \label{fig:absT}
 \end{figure}
 
 In plot \ref{fig:absT} we have the magnitude, calculated from $20*log_{10}(abs(T(\omega)))$ as function of $log(\omega)$ for the same range of frequencies as given before.
 
 \begin{figure}[h] \centering
-  \includegraphics[width=0.6\linewidth]{absT.eps}
-  \caption{Graph of the magnitude in dB of T($\omega$) as function of log($\omega$) }
-  \label{fig:absT}
+  \includegraphics[width=1.\linewidth]{phase.eps}
+  \caption{Graph of the phase  of T($\omega$) as function of log(f) }
+  \label{fig:argT}
 \end{figure}
 
 
-As we can see, the phase and the magnitude of $T_{Vs}$ is constant as imposed by the source.
-From the plots of $T_{Vc}$, we see that the response of the capacitor for frequencies smaller than the frequency $f_c = \frac{1}{R_{eq}C} = 318.674 Hz$, the output voltage is almost equal to input voltage and that the signals have the same phase.
-For frequencies much bigger than $f_c$, the $V_{out} \rightarrow 0$, as seen  in \ref{fig:absT} and the signal is $-180$ degrees ou of phase.
-For frequencies in a near range of $f_c$, we have an abrupt decline in $V_{out}$ and phase.
+\begin{table}
+  \parbox{.45\linewidth}{
+    \centering
+    \begin{tabular}{|c|c|}
+      \hline
+      {\bf Name} & {\bf Value [A or V]} \\ \hline
+      \input{ResultsTheoretical.tex}
+    \end{tabular}
+    \label{tab:TheoreticalResults}
+    \caption{Theoretical Results of Nodal Analysis of the circuit used to determine the equivalent resistance seen by the capacitor. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+  }
+  \hfill
+  %   \parbox{.45\linewidth}{
+  %     \centering
+  %     \begin{tabular}{|c|c|}
+  %       {\bf Name} & {\bf Value [A or V]} \\ \hline
+  %       \input{opb_tab}
+  %       \hline
+  %     \end{tabular}
+  %     \label{tab:op_tabReqSpice}
+  %     \caption{Ngspice results of Nodal Analysis of the circuit used to determine the equivalent resistance seen by the capacitor. A variable that begins  with \textit{I} names a \textit{current} in \textit{Ampere}; the ones that start with \textit{V} name a \textit{voltage} in \textit{Volt} }
+  %   }
+\end{table}
 
-In regard to $T_{V6}$, we have that the magnitude of its transfer function dcreases to a constant value, magnitude of the phasor in $v_8$, which is expected due to the fact that the impedance fo the capacitor decreases in module as $\omega$ increases
+
+% As we can see, the phase and the magnitude of $T_{Vs}$ is constant as imposed by the source.
+% From the plots of $T_{Vc}$, we see that the response of the capacitor for frequencies smaller than the frequency $f_c = \frac{1}{R_{eq}C} = 318.674 Hz$, the output voltage is almost equal to input voltage and that the signals have the same phase.
+% For frequencies much bigger than $f_c$, the $V_{out} \rightarrow 0$, as seen  in \ref{fig:absT} and the signal is $-180$ degrees ou of phase.
+% For frequencies in a near range of $f_c$, we have an abrupt decline in $V_{out}$ and phase.
+
+% In regard to $T_{V6}$, we have that the magnitude of its transfer function dcreases to a constant value, magnitude of the phasor in $v_8$, which is expected due to the fact that the impedance fo the capacitor decreases in module as $\omega$ increases
 
 
 
-These differences are due to the fact that in $T_{V6}$ we see how the magnitude of the output voltage between node 0 and node 6(the output voltage has the influence of resistors too). While in
-$T_{Vc}$ we are seeing how the volatge across the capacitor changes with the frequency(acts as a low pass filter).
+% These differences are due to the fact that in $T_{V6}$ we see how the magnitude of the output voltage between node 0 and node 6(the output voltage has the influence of resistors too). While in
+% $T_{Vc}$ we are seeing how the volatge across the capacitor changes with the frequency(acts as a low pass filter).
