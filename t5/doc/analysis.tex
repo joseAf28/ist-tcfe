@@ -1,7 +1,13 @@
 \section{Theoretical Analysis}
 \label{sec:analysis}
 
-\subsection{OP AMP model}
+In this circuit, we have a multiple negative feedback applied via the equivalent resistor R2 and the
+and the equivalent capacitor C2.
+
+Moreover, the capcitor C2 blocks the input signals with low frequency and the capacitor C1
+blocks the input signal with high frequencies.
+
+\subsection{OP-AMP model}
 
 In the theoretical part, we used the ideal model of the OP-AMP. So, we considered the input impedance equal to $\infty \Omega$, the ouput impedance
 equal to $0 \Omega$, and the gain equal to $\infty$. As a consequence, the difference of voltage between the non inverting input $v_{+}$ and the
@@ -20,7 +26,6 @@ In order to obtain the transfer function, we used nodal analysis to obtain the f
   \begin{bmatrix}
     V_{1} \\ V_{out}
   \end{bmatrix}
-  =
   \begin{bmatrix}
     \frac{V_{in}}{R_1} \\ 0
   \end{bmatrix}
@@ -28,7 +33,19 @@ In order to obtain the transfer function, we used nodal analysis to obtain the f
 
 \hfill
 
-%frase antes transfer function
+where
+\begin{equation}
+  C1 = \frac{1}{\frac{3}{10^{-6} F}} \hspace{1cm} C2 = \frac{1}{\frac{3}{220*10^{-9} F}}
+\end{equation}
+
+and
+
+\begin{equation}
+  R1 = \frac{1}{\frac{3}{1 k \Omega} + \frac{3}{100 k \Omega}} \hspace{1cm} R2 = \frac{1}{\frac{3}{10 k\Omega}}
+\end{equation}
+
+
+To calculate the transfer function, we use the Octave script to calculate the next formula for the range of frequencies:
 
 \begin{equation}
   T(\omega) = \frac{\widetilde{V_{out}}}{\widetilde{V_{in}}}
@@ -36,8 +53,8 @@ In order to obtain the transfer function, we used nodal analysis to obtain the f
 \end{equation}
 
 We used Octave to solve this system of equations numerically for a range of frequencies of the input signal. The results will be shown in section \ref{sec:side}:
- in plot \ref{fig:argTOct}, in the left, we have the magnitude, calculated from $20*log_{10}(abs(T(j\omega)))$ as function of log(f). 
- In plot \ref{fig:output1}, in the left, we have the phase, obtained by taking the $arg(T(\omega))$, as function of log (f) in Hz.
+in plot \ref{fig:argTOct}, in the left, we have the magnitude, calculated from $20*log_{10}(abs(T(j\omega)))$ as function of log(f).
+In plot \ref{fig:output1}, in the left, we have the phase, obtained by taking the $arg(T(\omega))$, as function of log (f) in Hz.
 
 \subsection{Input and Output Impedance and Central Frequency}
 
