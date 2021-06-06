@@ -145,11 +145,15 @@ spiceZout = -2.65141e-3 - I*2.17355e-2
 spiceGain = 18.27262
 spiceFreq = 1000.15
 
+Zin_dev = abs(zinput - spiceZin)/abs(spiceZin)*100;
+Zout_dev = 100;
+Gain_dev = abs(Gmax-spiceGain)/abs(spiceGain)*100;
+Freq_dev = abs(freqmax - spiceFreq)/abs(spiceFreq)*100;
 
 file = fopen("../doc/ResultsTheoretical.tex", "w");
-fprintf(file, "$Variable$ & Theory (octave) & Simulation (ngspice) \\\\ \\\hline \n")
-fprintf(file, "$Z_{input} [k \\\Omega]$ & %e + %ei & %e + %ei \\\\ \\\hline\n", zinput, zinput/(1*I), spiceZin, spiceZin/(1*I));
-fprintf(file, "$Z_{output} [k \\\Omega]$ & %e & %e + %ei \\\\ \\\hline\n", 0, spiceZout, spiceZout/(1*I) );
-fprintf(file, "Max $Gain [dB]$ & %e & %e \\\\ \\\hline\n", Gmax, spiceGain);
-fprintf(file, "Central frequency [Hz] & %e & %e \\\\ \\\hline\n", freqmax, spiceFreq);
+fprintf(file, "$Variable$ & Theory (octave) & Simulation (ngspice) & Deviation ($\\\%%$) \\\\ \\\hline \n")
+fprintf(file, "$Z_{input} [k \\\Omega]$ & %e + %ei & %e + %ei & %.2f\\\\ \\\hline\n", zinput, zinput/(1*I), spiceZin, spiceZin/(1*I), Zin_dev);
+fprintf(file, "$Z_{output} [k \\\Omega]$ & %e & %e + %ei & %.2f \\\\ \\\hline\n", 0, spiceZout, spiceZout/(1*I), Zout_dev);
+fprintf(file, "Max $Gain [dB]$ & %e & %e & %.2f \\\\ \\\hline\n", Gmax, spiceGain, Gain_dev);
+fprintf(file, "Central frequency [Hz] & %e & %e & %.2f \\\\ \\\hline\n", freqmax, spiceFreq, Freq_dev);
 fclose(file);
