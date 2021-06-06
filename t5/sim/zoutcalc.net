@@ -105,9 +105,14 @@ plot Vtest#branch
 
 *AS IMPEDANCIAS T^EM DE SER `A FREQ fc (descobrir como fazer isso)
 
+<<<<<<< HEAD:t5/sim/zoutcalc.net
 *output impedance in kohm
 let m = maximum(Vtest#branch)
 print v(out)[40]/m/1000
+=======
+*input impedance in kohm
+*print v(in)[40]/R1[i]/1000
+>>>>>>> 31f3d34ee65ee29d194f0b14957a4dc922b4092f:t5/t5.net
 
 *need a different setup to measure output impedance
 
