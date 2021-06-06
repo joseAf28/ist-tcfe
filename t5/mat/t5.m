@@ -150,6 +150,16 @@ Zout_dev = 100;
 Gain_dev = abs(Gmax-spiceGain)/abs(spiceGain)*100;
 Freq_dev = abs(freqmax - spiceFreq)/abs(spiceFreq)*100;
 
+linear_gain = power(10,((spiceGain)/20));
+objective_gain = power(10,(40/20));
+gain_dif = abs(objective_gain - linear_gain)/objective_gain
+freq_dif = abs(1000 - spiceFreq)/1000
+
+cost = 13659.952;
+
+merit = 1/(cost*(gain_dif+freq_dif+power(10,-6)))
+
+
 file = fopen("../doc/ResultsTheoretical.tex", "w");
 fprintf(file, "$Variable$ & Theory (octave) & Simulation (ngspice) & Deviation ($\\\%%$) \\\\ \\\hline \n")
 fprintf(file, "$Z_{input} [k \\\Omega]$ & %e + %ei & %e + %ei & %.2f\\\\ \\\hline\n", zinput, zinput/(1*I), spiceZin, spiceZin/(1*I), Zin_dev);
