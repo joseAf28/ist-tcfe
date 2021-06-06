@@ -82,7 +82,7 @@ R2 = 1./invR2;
 
 vin = 1.;
 
-for t = 1:0.005:6
+for t = 1:0.005:8
 
 omega = 2*pi*power(10, t);
 ZC1 = 1./(I*omega*C1);
@@ -137,10 +137,10 @@ B = [vin/R1; 0];
 
 X = A\B;
 
-current_in = -(vin -X(1))/R1
+current_in = (vin -X(1))/R1
 zinput = vin/current_in/1000.
 
-spiceZin = -0.135285 + I*0.1156956
+spiceZin = 0.135285 - I*0.1156956
 spiceZout = -2.65141e-3 - I*2.17355e-2
 spiceGain = 18.27262
 spiceFreq = 1000.15
