@@ -108,6 +108,8 @@ plot Vtest#branch
 *output impedance in kohm
 let m = maximum(Vtest#branch)
 print v(out)[40]/m/1000
+*input impedance in kohm
+*print v(in)[40]/R1[i]/1000
 
 *need a different setup to measure output impedance
 
