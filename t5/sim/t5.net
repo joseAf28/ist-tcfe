@@ -112,9 +112,6 @@ print m
 let m = m - 0.001
 meas ac fc WHEN vdb(out)=m CROSS=LAST
 
-
-*AS IMPEDANCIAS T^EM DE SER `A FREQ fc (descobrir como fazer isso)
-
 *input impedance in kohm
 let mini = minimum(Vin#branch)
 print -v(in)[40]/mini/1000
